@@ -1,8 +1,8 @@
 using System.Text.Json;
 
-static class ShowAcces
+static class ShowsAccess
 {
-    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Showss.json"));
+    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/shows.json"));
 
 
     public static List<ShowModel> LoadAll()
