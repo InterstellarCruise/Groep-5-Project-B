@@ -57,6 +57,18 @@ class ShowsLogic
 
     }
 
+    public static ShowModel ChooseShow(List<ShowModel> shows, string movie)
+    {
+        string[] input = movie.Split(' ');
+        Console.WriteLine(Convert.ToInt32(input[0]));
+        Console.WriteLine(input[1]);
+
+        //Put the chosen movie into a variable called show.
+        ShowModel show = shows.Find(i => i.RoomId == Convert.ToInt32(input[0]) && i.Time == input[1]);
+        return show;
+
+    }
+
     public ShowModel GetById(int id)
     {
         return _shows.Find(i => i.Id == id);
