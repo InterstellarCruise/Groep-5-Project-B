@@ -8,25 +8,31 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Barrie\\.nuget\\packages\\": {}
+    "C:\\Users\\angel\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Barrie\\Desktop\\HR\\OODP\\Project-B-GitHub\\Groep-5-Project-B\\Project.csproj",
+      "projectUniqueName": "C:\\Users\\angel\\Desktop\\HR\\OODP\\Project-B\\Groep-5-Project-B\\Project.csproj",
       "projectName": "Project",
-      "projectPath": "C:\\Users\\Barrie\\Desktop\\HR\\OODP\\Project-B-GitHub\\Groep-5-Project-B\\Project.csproj",
-      "packagesPath": "C:\\Users\\Barrie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Barrie\\Desktop\\HR\\OODP\\Project-B-GitHub\\Groep-5-Project-B\\obj\\",
+      "projectPath": "C:\\Users\\angel\\Desktop\\HR\\OODP\\Project-B\\Groep-5-Project-B\\Project.csproj",
+      "packagesPath": "C:\\Users\\angel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\angel\\Desktop\\HR\\OODP\\Project-B\\Groep-5-Project-B\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Barrie\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\angel\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://www.myget.org/F/discord-net/api/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {

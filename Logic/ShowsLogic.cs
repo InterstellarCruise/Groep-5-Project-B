@@ -40,20 +40,27 @@ class ShowsLogic
 
     }
 
+    public static bool MoviesByDate(List<ShowModel> shows, string date, bool emptyOrNot)
+    {
+        foreach (ShowModel show in shows)
+        {
+
+            if (show.Date == date)
+            {
+                emptyOrNot = true;
+                FilmsLogic filmsLogic = new FilmsLogic();
+                FilmModel film = filmsLogic.GetById(show.FilmId);
+                Console.WriteLine($"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}.");
+            }
+        }
+        return emptyOrNot;
+
+    }
+
     public ShowModel GetById(int id)
     {
         return _shows.Find(i => i.Id == id);
     }
-
-    // public AccountModel CheckLogin(string email, string password)
-    // {
-    //     if (email == null || password == null)
-    //     {
-    //         return null;
-    //     }
-    //     CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
-    //     return CurrentAccount;
-    // }
 }
 
 

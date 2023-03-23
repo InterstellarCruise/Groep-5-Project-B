@@ -6,19 +6,9 @@ static class DatePicker
         string date = Console.ReadLine();
         List<ShowModel> shows = ShowsAccess.LoadAll();
 
-        //Display every show thats from the given date.
         bool emptyOrNot = false;
-        foreach (ShowModel show in shows)
-        {
-
-            if (show.Date == date)
-            {
-                emptyOrNot = true;
-                FilmsLogic filmsLogic = new FilmsLogic();
-                FilmModel film = filmsLogic.GetById(show.FilmId);
-                Console.WriteLine($"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}.");
-            }
-        }
+        //Display every show thats from the given date.
+        emptyOrNot = ShowsLogic.MoviesByDate(shows, date, emptyOrNot);
 
         //Check to see if theres any shows at that date or not.
         //if so to be able to choose a show otherwise ask for another date.
