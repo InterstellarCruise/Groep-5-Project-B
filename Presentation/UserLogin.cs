@@ -21,7 +21,7 @@ static class UserLogin
             Console.WriteLine("Invalid input\n-----------------------------");
             Start();
         }
-        
+
     }
     public static void Dologin()
     {
@@ -34,10 +34,25 @@ static class UserLogin
         if (acc != null)
         {
             Console.WriteLine("\nWelcome back " + acc.FullName);
-            Console.WriteLine("Your email number is " + acc.EmailAddress);
 
-            //Write some code to go back to the menu
-            //Menu.Start();
+            if (acc.EmailAddress == "admin")
+            {
+                
+                int milliseconds = 2000;
+                Thread.Sleep(milliseconds);
+                Console.Clear();
+                Menu.LoggedIn = true;
+                MenuAdmin.Start();
+            }
+            else
+            {   
+                int milliseconds = 2000;
+                Thread.Sleep(milliseconds);
+                Console.Clear();
+                Menu.LoggedIn = true;
+                Menu.Start();
+            }
+
         }
         else
         {
@@ -51,14 +66,14 @@ static class UserLogin
                 Console.Clear();
                 Start();
             }
-            else if (choice == "2") 
+            else if (choice == "2")
             {
                 int milliseconds = 2000;
                 Thread.Sleep(milliseconds);
                 Console.Clear();
                 Menu.Start();
             }
-            
+
         }
     }
     public static void Doregister()

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Barrie\\Desktop\\HR\\OODP\\Project-B-GitHub\\Groep-5-Project-B\\Project.csproj": {}
+    "C:\\Users\\diana\\Documents\\Project B\\Groep-5-Project-B\\Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Barrie\\Desktop\\HR\\OODP\\Project-B-GitHub\\Groep-5-Project-B\\Project.csproj": {
+    "C:\\Users\\diana\\Documents\\Project B\\Groep-5-Project-B\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Barrie\\Desktop\\HR\\OODP\\Project-B-GitHub\\Groep-5-Project-B\\Project.csproj",
+        "projectUniqueName": "C:\\Users\\diana\\Documents\\Project B\\Groep-5-Project-B\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "C:\\Users\\Barrie\\Desktop\\HR\\OODP\\Project-B-GitHub\\Groep-5-Project-B\\Project.csproj",
-        "packagesPath": "C:\\Users\\Barrie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Barrie\\Desktop\\HR\\OODP\\Project-B-GitHub\\Groep-5-Project-B\\obj\\",
+        "projectPath": "C:\\Users\\diana\\Documents\\Project B\\Groep-5-Project-B\\Project.csproj",
+        "packagesPath": "C:\\Users\\diana\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\diana\\Documents\\Project B\\Groep-5-Project-B\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Barrie\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\diana\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.407\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -4,9 +4,6 @@ using static System.Net.Mime.MediaTypeNames;
 static class Menu
 {
 
-    //This shows the menu. You can call back to this method to show the menu again
-    //after another presentation method is completed.
-    //You could edit this to show different menus depending on the user's role
     public static bool LoggedIn = false;
     static public void Start()
     {
@@ -16,16 +13,18 @@ static class Menu
     }
     public static void Display()
     {
+        if (LoggedIn == false)
+        {
         Console.WriteLine("[1] login/register\n-----------------------------");
         Console.WriteLine("[2] Shows\n-----------------------------");
         Console.WriteLine("[3] Cinema information\n-----------------------------");
-        if (LoggedIn == false)
-        {
-            Console.WriteLine("[Q] Quit\n-----------------------------");
+        Console.WriteLine("[Q] Quit\n-----------------------------");
         }
         else
         {
-            Console.WriteLine("[4] Account\n-----------------------------");
+            Console.WriteLine("[1] Account\n-----------------------------");
+            Console.WriteLine("[2] Shows\n-----------------------------");
+            Console.WriteLine("[3] Cinema information\n-----------------------------");
             Console.WriteLine("[Q] Quit\n-----------------------------");
         }
     }
@@ -66,7 +65,11 @@ static class Menu
         {
             if (input == "1")
             {
-                UserLogin.Start();
+                Console.WriteLine("This feature is not yet implemented\n");
+                int milliseconds = 3000;
+                Thread.Sleep(milliseconds);
+                Console.Clear();
+                Start();
             }
             else if (input == "2")
             {
