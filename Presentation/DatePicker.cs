@@ -6,19 +6,9 @@ static class DatePicker
         string date = Console.ReadLine();
         List<ShowModel> shows = ShowsAccess.LoadAll();
 
-        //Display every show thats from the given date.
         bool emptyOrNot = false;
-        foreach (ShowModel show in shows)
-        {
-
-            if (show.Date == date)
-            {
-                emptyOrNot = true;
-                FilmsLogic filmsLogic = new FilmsLogic();
-                FilmModel film = filmsLogic.GetById(show.FilmId);
-                Console.WriteLine($"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}.");
-            }
-        }
+        //Display every show thats from the given date.
+        emptyOrNot = ShowsLogic.MoviesByDate(shows, date, emptyOrNot);
 
         //Check to see if theres any shows at that date or not.
         //if so to be able to choose a show otherwise ask for another date.
@@ -37,12 +27,7 @@ static class DatePicker
     {
         Console.WriteLine("To select the specific show you want to see the details of, or reserve seats for. Type (Room number + Time):");
         string movie = Console.ReadLine() + " " + date;
-        string[] input = movie.Split(' ');
-        Console.WriteLine(Convert.ToInt32(input[0]));
-        Console.WriteLine(input[1]);
-
-        //Put the chosen movie into a variable called show.
-        ShowModel show = shows.Find(i => i.RoomId == Convert.ToInt32(input[0]) && i.Time == input[1]);
+        ShowModel show = ShowsLogic.ChooseShow(shows, movie);
 
         //Checks if show exists or not, if not ask again, if yes give specific data to the display page of that show/movie..
         if (show == null)
