@@ -5,7 +5,6 @@ static class DatePicker
         Console.WriteLine("Type a date you want to see the shows from like: year-month-day");
         string date = Console.ReadLine();
         List<ShowModel> shows = ShowsAccess.LoadAll();
-
         bool emptyOrNot = false;
         //Display every show thats from the given date.
         emptyOrNot = ShowsLogic.MoviesByDate(shows, date, emptyOrNot);
@@ -28,7 +27,6 @@ static class DatePicker
         Console.WriteLine("To select the specific show you want to see the details of, or reserve seats for. Type (Room number + Time):");
         string movie = Console.ReadLine() + " " + date;
         ShowModel show = ShowsLogic.ChooseShow(shows, movie);
-
         //Checks if show exists or not, if not ask again, if yes give specific data to the display page of that show/movie..
         if (show == null)
         {
@@ -39,7 +37,5 @@ static class DatePicker
         {
             MoviePicker.Start(movie);
         }
-
     }
-
 }
