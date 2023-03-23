@@ -10,16 +10,16 @@ static class Menu
     public static bool LoggedIn = false;
     static public void Start()
     {
-            Display();
-            string input = Console.ReadLine();
-            Choices(input);
+        Display();
+        string input = Console.ReadLine();
+        Choices(input);
     }
     public static void Display()
     {
         Console.WriteLine("[1] login/register\n-----------------------------");
         Console.WriteLine("[2] Shows\n-----------------------------");
         Console.WriteLine("[3] Cinema information\n-----------------------------");
-        if (LoggedIn == false) 
+        if (LoggedIn == false)
         {
             Console.WriteLine("[Q] Quit\n-----------------------------");
         }
@@ -39,11 +39,7 @@ static class Menu
             }
             else if (input == "2")
             {
-                Console.WriteLine("This feature is not yet implemented\n");
-                int milliseconds = 3000;
-                Thread.Sleep(milliseconds);
-                Console.Clear();
-                Start();
+                DatePicker.Start();
             }
             else if (input == "3")
             {
@@ -106,6 +102,6 @@ static class Menu
                 Start();
             }
         }
-        
+
     }
 }
