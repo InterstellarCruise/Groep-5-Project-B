@@ -43,11 +43,8 @@ static class Menu
             }
             else if (input == "3")
             {
-                Console.WriteLine("This feature is not yet implemented\n");
-                int milliseconds = 3000;
-                Thread.Sleep(milliseconds);
                 Console.Clear();
-                Start();
+                CinemaInfo.start();
             }
             else if (input == "Q" || input == "q")
             {
