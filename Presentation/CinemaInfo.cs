@@ -13,11 +13,26 @@ static class CinemaInfo
         // Console.WriteLine("\n");
         Console.WriteLine("Press 'B' to go back.");
         string input = Console.ReadLine();
+        back(input);
+
+
+    }
+    public static void back(string input)
+    {
+
         if (input.ToUpper() == "B")
         {
             Console.Clear();
             Menu.Start();
         }
+        else
+        {
+            Console.WriteLine("Invalid input");
+            int milliseconds = 1000;
+            Thread.Sleep(milliseconds);
+            Console.Clear();
+            start();
 
+        }
     }
 }
