@@ -12,6 +12,7 @@ static class CinemaInfo
         Console.WriteLine("--------------------------------");
         // Console.WriteLine("\n");
         Console.WriteLine("Press 'B' to go back.");
+        Console.WriteLine("--------------------------------");
         string input = Console.ReadLine();
         back(input);
 

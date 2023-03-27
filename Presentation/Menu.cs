@@ -35,10 +35,12 @@ static class Menu
         {
             if (input == "1")
             {
+                Console.Clear();
                 UserLogin.Start();
             }
             else if (input == "2")
             {
+                Console.Clear();
                 DatePicker.Start();
             }
             else if (input == "3")

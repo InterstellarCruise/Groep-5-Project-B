@@ -2,8 +2,18 @@ static class DatePicker
 {
     static public void Start()
     {
+        Console.WriteLine("Date picker for shows.\n");
+        Console.WriteLine("--------------------------------");
         Console.WriteLine("Type a date you want to see the shows from like: year-month-day");
+        Console.WriteLine("--------------------------------");
+        Console.WriteLine("Press 'B' to go to the homepage.");
+        Console.WriteLine("--------------------------------");
         string date = Console.ReadLine();
+        if (date.ToUpper() == "B")
+        {
+            Console.Clear();
+            Menu.Start();
+        }
         List<ShowModel> shows = ShowsAccess.LoadAll();
 
         bool emptyOrNot = false;
@@ -19,6 +29,9 @@ static class DatePicker
         else
         {
             Console.WriteLine("No movies for this date, please choose another date \n");
+            int milliseconds = 1500;
+            Thread.Sleep(milliseconds);
+            Console.Clear();
             Start();
         }
     }
