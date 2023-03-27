@@ -68,15 +68,12 @@ class ShowsLogic
         ShowModel show = null;
         try
         {
-            Console.WriteLine(Convert.ToInt32(input[0]));
             show = shows.Find(i => i.RoomId == Convert.ToInt32(input[0]) && i.Time == input[1]);
         }
         catch (Exception)
         {
-            Console.WriteLine("test");
             shows = null;
         }
-        Console.WriteLine(input[1]);
         return show;
 
     }
