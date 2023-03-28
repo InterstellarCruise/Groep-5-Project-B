@@ -56,9 +56,18 @@ class AccountsLogic
 
     public void NewAcc(string email, string password, string fullname)
     {
-        int index = _accounts.Count + 1;
-        AccountModel newacc = new AccountModel(index, email, password, fullname);
-        UpdateList(newacc);
+        var account = _accounts.FirstOrDefault(a => a.EmailAddress == email);
+        if (account == null)
+        {
+            int index = _accounts.Count + 1;
+            AccountModel newacc = new AccountModel(index, email, password, fullname);
+            UpdateList(newacc);
+        }
+        else
+        {
+            UserLogin.DuplicateEmail(email);
+        }
+
     }
 }
 
