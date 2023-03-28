@@ -73,6 +73,63 @@ class ShowsLogic
     {
         return _shows.Find(i => i.Id == id);
     }
+
+    public void GetAllShows()
+    {  
+        foreach(var i in _shows)
+        {
+           Console.WriteLine($"Show: {i.Id}, Date: {i.Date}, Film-Id: {i.FilmId}");
+        }
+    }
+
+    public void ShowSpecifShow(int id)
+    {
+        foreach(var i in _shows)
+        {
+            if(id == i.Id)
+            {
+                int film_id = i.FilmId;
+
+                var film = new FilmsLogic();
+                film.ShowFilm(film_id);
+                Console.WriteLine($"Show: {i.Id}, Date: {i.Date}, Time: {i.Time}, Room: {i.RoomId}");
+            }
+        }
+    }
+
+    public void ShowToFilm(int id, int choice)
+    {
+        foreach(var i in _shows)
+        {
+            if(id == i.Id)
+            {
+                int film_id = i.FilmId;
+                var film = new FilmsLogic();
+                film.ChangeFilmFeatures(film_id, choice);
+            }
+        }
+    }
+
+    public void ChangeShowFeatures(int id, int choice)
+    {
+        if(choice == 1)
+        {
+            _shows.Find(i => i.Id == id);
+            Console.WriteLine("Please fill in a new date");
+            string newDate = Console.ReadLine();
+            
+        }
+
+        if(choice == 2)
+        {
+
+        }
+        
+        if(choice == 7)
+        {
+
+        }
+    }
 }
 
 

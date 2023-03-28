@@ -7,7 +7,7 @@ static class UserLogin
     {
         Console.WriteLine("\nLogin [1] or register [2]\n-----------------------------");
         string choice_string = Console.ReadLine();
-        int choice = int.Parse(choice_string);
+        int choice = Convert.ToInt32(choice_string);
         if (choice == 1)
         {
             Dologin();
@@ -37,7 +37,7 @@ static class UserLogin
 
             if (acc.EmailAddress == "admin")
             {
-                
+
                 int milliseconds = 2000;
                 Thread.Sleep(milliseconds);
                 Console.Clear();
@@ -45,7 +45,7 @@ static class UserLogin
                 MenuAdmin.Start();
             }
             else
-            {   
+            {
                 int milliseconds = 2000;
                 Thread.Sleep(milliseconds);
                 Console.Clear();
