@@ -27,22 +27,22 @@ static class MoviePicker
                 Console.WriteLine(film.Name);
                 Console.WriteLine(film.Description);
                 Console.WriteLine(film.AgeLimit);
-                Console.WriteLine("if you have read the age limit and are agreeing to the terms and conditions you may login to verify your account[1] /n .if not please fo back to menu[2]");
-                string answer = Console.ReadLine();
-                if(answer == "1")
+                List<MenuItem> items = new List<MenuItem>();
+                if (!Menu.LoggedIn)
                 {
-                    movielogin();
+                    items.Add(new MenuItem("if you have read the age limit and are agreeing to the terms and conditions you may login to verify your account", movielogin));
                 }
                 else
                 {
-                    int milliseconds = 2000;
-                    Thread.Sleep(milliseconds);
-                    Console.Clear();
-                    Menu.Start();
+                    items.Add(new MenuItem("Make reservation", Menu.NotImplemented));
                 }
-
-
-        }
+                items.Add(new MenuItem("Main menu", Menu.Start));
+                MenuBuilder menu = new MenuBuilder(items);
+                int milliseconds = 2000;
+                Thread.Sleep(milliseconds);
+                Console.Clear();
+                menu.DisplayMenu();
+            }
         }
 
      static void movielogin()
@@ -56,7 +56,7 @@ static class MoviePicker
         AccountModel acc = accountLogic.CheckLogin(email, password);
         if (acc != null)
         {
-            Console.WriteLine("\ngreat your reservation has been made" + acc.FullName);
+            Console.WriteLine("\ngreat your reservation has been made " + acc.FullName);
             if(acc.FullName == "Admin")
             {
                 Menu.LoggedIn = true;
