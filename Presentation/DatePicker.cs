@@ -40,6 +40,7 @@ static class DatePicker
     public static void showChoose(List<ShowModel> shows, string date, bool emptyOrNot)
     {
         Console.Clear();
+        Console.WriteLine($"Movies plaing on {date}\n");
         ShowsLogic.MoviesByDate(shows, date, emptyOrNot);
         Console.WriteLine("\nTo select the specific show you want to see the details of, or reserve seats for. Type (Room number + Time):");
         string movie = Console.ReadLine() + " " + date;
@@ -52,6 +53,7 @@ static class DatePicker
             int milliseconds = 1500;
             Thread.Sleep(milliseconds);
             Console.Clear();
+            Console.WriteLine($"Movies plaing on {date}\n");
             showChoose(shows, date, emptyOrNot);
         }
         else
