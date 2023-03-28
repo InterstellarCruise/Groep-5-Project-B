@@ -9,18 +9,23 @@ class ShowModel
     [JsonPropertyName("filmId")]
     public int FilmId { get; set; }
 
-    [JsonPropertyName("dateTime")]
-    public string DateTime { get; set; }
+    [JsonPropertyName("roomId")]
+    public int RoomId { get; set; }
 
-    public ShowModel(int id, int filmId, string dateTime)
+    [JsonPropertyName("date")]
+    public string Date { get; set; }
+
+    [JsonPropertyName("time")]
+    public string Time { get; set; }
+
+
+    public ShowModel(int id, int filmId, int roomId, string date, string time)
     {
         Id = id;
         FilmId = filmId;
-        DateTime = dateTime;
+        RoomId = roomId;
+        Date = date;
+        Time = time;
     }
 
 }
-
-
-
-

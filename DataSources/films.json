@@ -1,0 +1,45 @@
+[
+    {
+        "id": 1,
+        "name": "DR Strange",
+        "description": "DR Strange will kill a lot of monsters",
+        "ageLimit": 12,
+        "genres": [
+            "Action",
+            "Adventure",
+            "Horror"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "John Wick",
+        "description": "John Wick pew pew",
+        "ageLimit": 16,
+        "genres": [
+            "Action",
+            "Adventure"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Harry Potter",
+        "description": "Something with wizards",
+        "ageLimit": 16,
+        "genres": [
+            "Action",
+            "Adventure"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "idk man",
+        "description": "random text",
+        "ageLimit": 18,
+        "genres": [
+            "Action",
+            "Adventure",
+            "Thriller",
+            "Horror"
+        ]
+    }
+]
