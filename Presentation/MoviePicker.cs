@@ -57,14 +57,22 @@ static class MoviePicker
         if (acc != null)
         {
             Console.WriteLine("\ngreat your reservation has been made" + acc.FullName);
+            if(acc.FullName == "Admin")
+            {
+                Menu.LoggedIn = true;
+                Menu.AdminLogged = true;
+                Menu.Start();
+            }
+            else
+            {
+                Menu.LoggedIn = true;
+                Menu.Start();
+            }
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);
             Console.Clear();
-            Menu.Start();
+            
 
-
-            //Write some code to go back to the menu
-            //Menu.Start();
         }
         else
         {
