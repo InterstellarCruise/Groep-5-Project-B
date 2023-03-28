@@ -2,6 +2,7 @@ public static class AdminFeatures
 {
     public static void Start()
     {
-        Console.WriteLine("Hello");
+        Console.WriteLine("No admin features yet");
+        Menu.NotImplemented();
     }
 }
