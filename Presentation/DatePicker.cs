@@ -17,6 +17,7 @@ static class DatePicker
         {
 
             Console.WriteLine("Type a date you want to see the shows from like: year-month-day");
+            Console.WriteLine("Type 'B' to go back");
             Console.WriteLine("--------------------------------");
             string date = Console.ReadLine();
             if (date.ToUpper() == "B")
