@@ -2,7 +2,6 @@ public static class AdminFeatures
 {
     public static void Start()
     {
-<<<<<<< HEAD
         Display();
         string input = Console.ReadLine();
         Choices(input);
@@ -43,9 +42,5 @@ public static class AdminFeatures
             Console.WriteLine("Invalid input");
             Start();
         }
-=======
-        Console.WriteLine("No admin features yet");
-        Menu.NotImplemented();
->>>>>>> main
     }
 }

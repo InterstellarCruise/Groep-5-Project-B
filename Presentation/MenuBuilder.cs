@@ -17,7 +17,7 @@
             {
                 if (i == selectedIndex)
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.WriteLine(_items[i].DisplayText);
                     Console.ResetColor();
                 }
