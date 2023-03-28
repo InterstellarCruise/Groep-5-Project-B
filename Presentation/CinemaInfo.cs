@@ -2,6 +2,7 @@ static class CinemaInfo
 {
     public static void start()
     {
+        Console.Clear();
         Console.WriteLine("Information about the cinema \n");
         Console.WriteLine("--------------------------------");
         Console.WriteLine("Cinema name: (idk)");
