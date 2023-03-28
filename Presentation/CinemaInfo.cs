@@ -6,9 +6,9 @@ static class CinemaInfo
         Console.WriteLine("--------------------------------");
         Console.WriteLine("Cinema name: (idk)");
         Console.WriteLine("--------------------------------");
-        Console.WriteLine("Cinema Location: (idk)");
-        Console.WriteLine("--------------------------------");
         Console.WriteLine("Cinema description: (idk)");
+        Console.WriteLine("--------------------------------");
+        Console.WriteLine("Cinema Location: Wijnhaven 107, 3011 WN in Rotterdam");
         Console.WriteLine("--------------------------------");
         // Console.WriteLine("\n");
         Console.WriteLine("Press 'B' to go back.");
