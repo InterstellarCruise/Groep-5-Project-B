@@ -13,7 +13,7 @@ static class MoviePicker
         int room = Convert.ToInt32(data[0]);
 
 
-        Console.WriteLine($"Room: {data[0]}, Date: {data[2]}, Time: {data[1]},");
+
         ShowsLogic filmsLogic = new ShowsLogic();
         List<ShowModel> shows = ShowsAccess.LoadAll();
     
