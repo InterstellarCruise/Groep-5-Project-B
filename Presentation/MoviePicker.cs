@@ -24,9 +24,9 @@ static class MoviePicker
                 FilmsLogic filmsLogic_picker = new FilmsLogic();
                 List<FilmModel> films = FilmsAccess.LoadAll();
                 var film = filmsLogic_picker.GetById(show.FilmId);
-                Console.WriteLine(film.Name);
-                Console.WriteLine(film.Description);
-                Console.WriteLine(film.AgeLimit);
+                Console.WriteLine($"\n-----------------------------\nMovie name: {film.Name}");
+                Console.WriteLine($"Description: {film.Description}");
+                Console.WriteLine($"Age limit: {film.AgeLimit}\n-----------------------------");
                 List<MenuItem> items = new List<MenuItem>();
                 if (!Menu.LoggedIn)
                 {
@@ -56,49 +56,37 @@ static class MoviePicker
         AccountModel acc = accountLogic.CheckLogin(email, password);
         if (acc != null)
         {
-            Console.WriteLine("\ngreat your reservation has been made " + acc.FullName);
+            Console.WriteLine("\nWelcome back " + acc.FullName);
             if(acc.FullName == "Admin")
             {
-                Menu.LoggedIn = true;
                 Menu.AdminLogged = true;
-                Menu.Start();
             }
-            else
-            {
-                Menu.LoggedIn = true;
-                Menu.Start();
-            }
+            Menu.LoggedIn = true;
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);
             Console.Clear();
-            
-
-        }
+            List<MenuItem> items = new List<MenuItem>();
+            items.Add(new MenuItem("Make reservation", Menu.NotImplemented));
+            items.Add(new MenuItem("Main menu", Menu.Start));
+            MenuBuilder menu = new MenuBuilder(items);
+            menu.DisplayMenu();
+            }
         else
         {
-            Console.WriteLine("\nNo account found with that email and password\n-----------------------------");
-            Console.WriteLine("[1] Try aigan \n[2] Main menu");
-            string choice = Console.ReadLine();
-            if (choice == "1")
-            {
-                int milliseconds = 2000;
-                Thread.Sleep(milliseconds);
-                Console.Clear();
-                movielogin();
-            }
-            else if (choice == "2") 
-            {
-                int milliseconds = 2000;
-                Thread.Sleep(milliseconds);
-                Console.Clear();
-                Menu.Start();
-            }
-            
+            Console.WriteLine("\n-----------------------------\nNo account found with that email and password");
+            int milliseconds = 2000;
+            Thread.Sleep(milliseconds);
+            List<MenuItem> items = new List<MenuItem>();
+            items.Add(new MenuItem("Try aigan", movielogin));
+            items.Add(new MenuItem("Main menu", Menu.Start));
+            MenuBuilder menu = new MenuBuilder(items);
+            menu.DisplayMenu();
+        }
+
         }
     }
 
 
         
         
-    }
 }
