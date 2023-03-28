@@ -3,10 +3,12 @@
     public static int selectedIndex = 0;
     private List<MenuItem> _items = new List<MenuItem>();
     private bool _running = true;
+    private bool AdminLogged;
     public MenuBuilder(List<MenuItem> items)
     {
         _items = items;
         selectedIndex = 0;
+        AdminLogged = Menu.AdminLogged;
     }
     public void DisplayMenu()
     {
@@ -17,9 +19,19 @@
             {
                 if (i == selectedIndex)
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(_items[i].DisplayText);
-                    Console.ResetColor();
+                    if (!AdminLogged)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.WriteLine(_items[i].DisplayText);
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(_items[i].DisplayText);
+                        Console.ResetColor();
+                    }
+                    
                 }
                 else
                 {
