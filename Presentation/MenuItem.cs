@@ -1,7 +1,7 @@
 ﻿public class MenuItem
 {
     public string DisplayText;
-    Action Action;
+    public Action Action;
     public MenuItem(string displayText, Action action)
     {
         DisplayText = displayText;
