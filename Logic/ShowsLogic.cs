@@ -8,6 +8,8 @@ using System.Text.Json;
 class ShowsLogic
 {
     private List<ShowModel> _shows;
+    public static string Lines = "--------------------------------";
+    public static Dictionary<string, string> ShowInfo = new Dictionary<string, string> { };
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -50,8 +52,13 @@ class ShowsLogic
                 emptyOrNot = true;
                 FilmsLogic filmsLogic = new FilmsLogic();
                 FilmModel film = filmsLogic.GetById(show.FilmId);
-                Console.WriteLine("--------------------------------");
-                Console.WriteLine($"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}.");
+                string key = $"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}.";
+                string value = $"{show.RoomId} {show.Time} {show.Date}";
+                if (!ShowInfo.ContainsKey(key))
+                {
+                    ShowInfo.Add(key, value);
+                }
+                
             }
         }
         return emptyOrNot;
@@ -83,6 +90,7 @@ class ShowsLogic
         return _shows.Find(i => i.Id == id);
     }
 }
+
 
 
 

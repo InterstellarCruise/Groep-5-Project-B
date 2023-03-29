@@ -44,15 +44,6 @@ class FilmsLogic
     {
         return _films.Find(i => i.Id == id);
     }
-    // public AccountModel CheckLogin(string email, string password)
-    // {
-    //     if (email == null || password == null)
-    //     {
-    //         return null;
-    //     }
-    //     CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
-    //     return CurrentAccount;
-    // }
 }
 
 

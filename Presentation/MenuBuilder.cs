@@ -19,7 +19,13 @@
             {
                 if (i == selectedIndex)
                 {
-                    if (!AdminLogged)
+                    if (_items[i].Action == null)
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine(_items[i].DisplayText);
+                        Console.ResetColor();
+                    }
+                    else if (!AdminLogged)
                     {
                         Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.WriteLine(_items[i].DisplayText);
@@ -31,6 +37,7 @@
                         Console.WriteLine(_items[i].DisplayText);
                         Console.ResetColor();
                     }
+                    
                     
                 }
                 else
@@ -51,8 +58,18 @@
             }
             else if (key.Key == ConsoleKey.Enter)
             {
-                _items[selectedIndex].Execute();
-                _running = false;
+                if (_items[selectedIndex].RoomTimeDate != null)
+                {
+                    MoviePicker.movie = _items[selectedIndex].RoomTimeDate;
+                }
+                if (_items[selectedIndex].Action != null)
+                {
+                    _items[selectedIndex].Execute();
+                    _running = false;
+                }
+                
+                
+                
             }
         }
     }
