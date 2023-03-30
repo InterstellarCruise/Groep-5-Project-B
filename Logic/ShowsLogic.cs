@@ -49,7 +49,7 @@ public class ShowsLogic
             {
                 emptyOrNot = true;
                 FilmsLogic filmsLogic = new FilmsLogic();
-                FilmModel film = filmsLogic.GetById(show.FilmId);
+                FilmModel film = filmsLogic.GetById(show.Id);
                 Console.WriteLine("--------------------------------");
                 Console.WriteLine($"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}.");
             }
