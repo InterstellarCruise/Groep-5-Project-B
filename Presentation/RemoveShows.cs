@@ -21,6 +21,8 @@ public static class RemoveShows
         // FilmModel film = filmLogic.GetById(id);
         // filmLogic.DeleteShow(film);
         Console.WriteLine("The show has been removed");
+        int miliseconds = 3000;
+        Thread.Sleep(miliseconds);
         Menu.Start();
     }
 

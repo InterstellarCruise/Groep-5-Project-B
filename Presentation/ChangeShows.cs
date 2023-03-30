@@ -139,11 +139,13 @@ public static class ChangeShows
         if (show == null)
         {
             Console.WriteLine("There is no show with this ID");
+            int miliseconds = 2000;
+            Thread.Sleep(miliseconds);
+            Console.Clear();
+            AdminFeatures.Start();
         }
         
     }
-
-
 }
 
 
