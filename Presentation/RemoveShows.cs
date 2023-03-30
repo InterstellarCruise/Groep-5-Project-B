@@ -23,7 +23,7 @@ public static class RemoveShows
         Console.WriteLine("The show has been removed");
         int miliseconds = 3000;
         Thread.Sleep(miliseconds);
-        Menu.Start();
+        AdminFeatures.Start();
     }
 
 }
