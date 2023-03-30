@@ -89,6 +89,13 @@ class ShowsLogic
     {
         return _shows.Find(i => i.Id == id);
     }
+
+    public void DeleteShow(ShowModel show)
+    {
+        
+        _shows.Remove(show);
+        ShowsAccess.WriteAll(_shows);
+    }
 }
 
 
