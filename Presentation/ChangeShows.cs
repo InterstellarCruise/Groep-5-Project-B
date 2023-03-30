@@ -105,7 +105,7 @@ public static class ChangeShows
 
     public static void EditDescription()
     {
-        Console.WriteLine("\n-------------------------------\nEnter a new descrption\n");
+        Console.WriteLine("\n-------------------------------\nEnter a new description\n");
         string descrption = Console.ReadLine();
         film.Description = descrption;
         filmLogic.UpdateList(film);

@@ -13,7 +13,7 @@ class FilmsLogic
     //This can be used to get the current logged in account from anywhere in the program
     //private set, so this can only be set by the class itself
 
-    // static public FilmModel? CurrentFilm { get; private set; }
+    static public FilmModel? CurrentFilm { get; private set; }
 
     public FilmsLogic()
     {
@@ -43,6 +43,12 @@ class FilmsLogic
     public FilmModel GetById(int id)
     {
         return _films.Find(i => i.Id == id);
+    }
+    public void DeleteFilm(FilmModel film)
+    {
+
+        _films.Remove(film);
+        FilmsAccess.WriteAll(_films);
     }
 }
 
