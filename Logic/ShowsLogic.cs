@@ -5,15 +5,15 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-class ShowsLogic
+public class ShowsLogic
 {
-    private List<ShowModel> _shows;
+    private List<ShowModel> _shows = new List<ShowModel>();
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
     //private set, so this can only be set by the class itself
 
-    // static public FilmModel? CurrentFilm { get; private set; }
+    static public ShowModel? CurrentShow { get; private set; }
 
     public ShowsLogic()
     {
@@ -82,6 +82,13 @@ class ShowsLogic
     {
         return _shows.Find(i => i.Id == id);
     }
+
+     public void DeleteShow(ShowModel show)
+    {
+        _shows.Remove(show);
+        ShowsAccess.WriteAll(_shows);
+    }
+
 }
 
 

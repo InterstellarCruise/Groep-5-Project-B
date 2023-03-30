@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "filmId": 3,
+        "filmId": 1,
         "roomId": 1,
         "date": "2023-08-12",
         "time": "14:00"
@@ -29,7 +29,7 @@
     },
     {
         "id": 5,
-        "filmId": 1,
+        "filmId": 5,
         "roomId": 3,
         "date": "2023-03-15",
         "time": "15:30"

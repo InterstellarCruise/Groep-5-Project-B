@@ -5,7 +5,7 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-class FilmsLogic
+public class FilmsLogic
 {
     private List<FilmModel> _films;
 
@@ -53,6 +53,27 @@ class FilmsLogic
     //     CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
     //     return CurrentAccount;
     // }
+
+    public void ShowFilm(int id)
+    {
+        foreach(var i in _films)
+        {
+            if(id == i.Id)
+            {
+                Console.WriteLine($"\nMovie Name: {i.Name}\nDescription: {i.Description}\nAge limit: {i.AgeLimit}");
+                foreach(var gen in i.Genre)
+                {
+                    Console.WriteLine($"Genres: {gen}");
+                }
+            }
+        }
+    }
+
+    public void ChangeFilmFeatures(int id, int choice)
+    {
+        Console.WriteLine("Hello");
+    }
+
 }
 
 
