@@ -7,13 +7,13 @@ using System.Text.Json;
 //This class is not static so later on we can use inheritance and interfaces
 public class FilmsLogic
 {
-    private List<FilmModel> _films;
+    private List<FilmModel> _films  = new List<FilmModel>();
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
     //private set, so this can only be set by the class itself
 
-    // static public FilmModel? CurrentFilm { get; private set; }
+    static public FilmModel? CurrentFilm { get; private set; }
 
     public FilmsLogic()
     {
@@ -69,10 +69,11 @@ public class FilmsLogic
         }
     }
 
-    public void ChangeFilmFeatures(int id, int choice)
-    {
-        Console.WriteLine("Hello");
-    }
+    // public void DeleteShow(FilmModel film)
+    // {
+    //     _films.Remove(film);
+    //     ShowsAccess.WriteAll(_films);
+    // }
 
 }
 

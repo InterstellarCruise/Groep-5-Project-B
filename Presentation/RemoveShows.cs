@@ -38,6 +38,8 @@ public static class RemoveShows
         int id = Convert.ToInt32(Console.ReadLine());
         ShowModel show = showLogic.GetById(id);
         showLogic.DeleteShow(show);
+        // FilmModel film = filmLogic.GetById(id);
+        // filmLogic.DeleteShow(film);
         Console.WriteLine("The show has been removed");
         Menu.Start();
     }
