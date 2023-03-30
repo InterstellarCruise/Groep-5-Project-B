@@ -1,5 +1,8 @@
 static class DatePicker
 {
+    public static List<ShowModel> Shows = ShowsAccess.LoadAll();
+    public static bool emptyOrNot = false;
+    public static string Date = "";
     static public void Start()
     {
         MenuBuilder menu = new MenuBuilder(Items());
@@ -20,24 +23,23 @@ static class DatePicker
             Console.WriteLine("Type a date you want to see the shows from like: year-month-day");
             Console.WriteLine("Type 'B' to go back");
             Console.WriteLine("--------------------------------");
-            string date = Console.ReadLine();
-            if (date.ToUpper() == "B")
+            Date = Console.ReadLine();
+            if (Date.ToUpper() == "B")
             {
                 Console.Clear();
                 Menu.Start();
             }
-            List<ShowModel> shows = ShowsAccess.LoadAll();
-            bool emptyOrNot = false;
+            
             //Display every show thats from the given date.
             Console.Clear();
             // Console.WriteLine($"Movies on the date: {date} \n");
-            emptyOrNot = ShowsLogic.MoviesByDate(shows, date, emptyOrNot);
+            emptyOrNot = ShowsLogic.MoviesByDate(Shows, Date, emptyOrNot);
             Console.WriteLine("\n");
             //Check to see if theres any shows at that date or not.
             //if so to be able to choose a show otherwise ask for another date.
             if (emptyOrNot == true)
             {
-                showChoose(shows, date, emptyOrNot);
+                showChoose();
             }
             else
             {
@@ -49,32 +51,22 @@ static class DatePicker
             }
         }
     }
-
-
-    public static void showChoose(List<ShowModel> shows, string date, bool emptyOrNot)
+    public static void showChoose()
     {
         Console.Clear();
-        Console.WriteLine($"Movies plaing on {date}\n");
-        ShowsLogic.MoviesByDate(shows, date, emptyOrNot);
-        Console.WriteLine("\nTo select the specific show you want to see the details of, or reserve seats for. Type (Room number + Time):");
-        string movie = Console.ReadLine() + " " + date;
-        ShowModel show = ShowsLogic.ChooseShow(shows, movie);
-
-        //Checks if show exists or not, if not ask again, if yes give specific data to the display page of that show/movie..
-        if (show == null)
+        Console.WriteLine($"Movies playing on {Date}\n");
+        ShowsLogic.MoviesByDate(Shows, Date, emptyOrNot);
+        List<MenuItem> items = new List<MenuItem>();
+        for (int i = 0; i < ShowsLogic.ShowInfo.Count;i++)
         {
-            Console.WriteLine("At this room / time combination is no movie, try again.");
-            int milliseconds = 1500;
-            Thread.Sleep(milliseconds);
-            Console.Clear();
-            Console.WriteLine($"Movies plaing on {date}\n");
-            showChoose(shows, date, emptyOrNot);
-        }
-        else
-        {
-            MoviePicker.Start(movie);
-        }
+            string showinfo = ShowsLogic.ShowInfo.Keys.ElementAt(i);
 
+            MenuItem item = new MenuItem($"{ShowsLogic.Lines}\n{showinfo}", MoviePicker.Start);
+            item.RoomTimeDate = ShowsLogic.ShowInfo.Values.ElementAt(i);
+            items.Add(item);
+        }
+        items.Add(new MenuItem("\nBack", Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
     }
-
 }

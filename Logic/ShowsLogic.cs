@@ -5,15 +5,17 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-public class ShowsLogic
+class ShowsLogic
 {
-    private List<ShowModel> _shows = new List<ShowModel>();
+    private List<ShowModel> _shows;
+    public static string Lines = "--------------------------------";
+    public static Dictionary<string, string> ShowInfo = new Dictionary<string, string> { };
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
     //private set, so this can only be set by the class itself
 
-    static public ShowModel? CurrentShow { get; private set; }
+    // static public FilmModel? CurrentFilm { get; private set; }
 
     public ShowsLogic()
     {
@@ -49,9 +51,14 @@ public class ShowsLogic
             {
                 emptyOrNot = true;
                 FilmsLogic filmsLogic = new FilmsLogic();
-                FilmModel film = filmsLogic.GetById(show.Id);
-                Console.WriteLine("--------------------------------");
-                Console.WriteLine($"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}.");
+                FilmModel film = filmsLogic.GetById(show.FilmId);
+                string key = $"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}.";
+                string value = $"{show.RoomId} {show.Time} {show.Date}";
+                if (!ShowInfo.ContainsKey(key))
+                {
+                    ShowInfo.Add(key, value);
+                }
+                
             }
         }
         return emptyOrNot;
@@ -82,14 +89,8 @@ public class ShowsLogic
     {
         return _shows.Find(i => i.Id == id);
     }
-
-    public void DeleteShow(ShowModel show)
-    {
-        _shows.Remove(show);
-        ShowsAccess.WriteAll(_shows);
-    }
-
 }
+
 
 
 
