@@ -19,19 +19,27 @@ public static class AdminFeatures
     {
         if (input == "1")
         {
+            int milliseconds = 2000;
+            Thread.Sleep(milliseconds);
+            Console.Clear();
+            Menu.LoggedIn = true;
             ChangeShows.Start();
         }
         else if (input == "2")
         {
-            Console.WriteLine("This feature is not yet implemented\n");
-            int milliseconds = 3000;
+            int milliseconds = 2000;
             Thread.Sleep(milliseconds);
             Console.Clear();
-            Start();
+            Menu.LoggedIn = true;
+            RemoveShows.Start();
         }
         else if (input == "3")
         {
-            MenuAdmin.Start();
+            int milliseconds = 2000;
+            Thread.Sleep(milliseconds);
+            Console.Clear();
+            Menu.LoggedIn = true;
+            Menu.Start();
         }
         else if (input.ToUpper() == "Q")
         {

@@ -5,7 +5,7 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-class FilmsLogic
+public class FilmsLogic
 {
     private List<FilmModel> _films;
 

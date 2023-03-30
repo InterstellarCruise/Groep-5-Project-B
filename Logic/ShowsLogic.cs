@@ -5,9 +5,9 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-class ShowsLogic
+public class ShowsLogic
 {
-    private List<ShowModel> _shows;
+    private List<ShowModel> _shows = new List<ShowModel>();
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -83,62 +83,12 @@ class ShowsLogic
         return _shows.Find(i => i.Id == id);
     }
 
-    public void GetAllShows()
-    {  
-        foreach(var i in _shows)
-        {
-           Console.WriteLine($"Show: {i.Id}, Date: {i.Date}, Film-Id: {i.FilmId}");
-        }
-    }
-
-    public void ShowSpecifShow(int id)
+     public void DeleteShow(ShowModel show)
     {
-        foreach(var i in _shows)
-        {
-            if(id == i.Id)
-            {
-                int film_id = i.FilmId;
-
-                var film = new FilmsLogic();
-                film.ShowFilm(film_id);
-                Console.WriteLine($"Show: {i.Id}, Date: {i.Date}, Time: {i.Time}, Room: {i.RoomId}");
-            }
-        }
+        _shows.Remove(show);
+        ShowsAccess.WriteAll(_shows);
     }
 
-    public void ShowToFilm(int id, int choice)
-    {
-        foreach(var i in _shows)
-        {
-            if(id == i.Id)
-            {
-                int film_id = i.FilmId;
-                var film = new FilmsLogic();
-                film.ChangeFilmFeatures(film_id, choice);
-            }
-        }
-    }
-
-    public void ChangeShowFeatures(int id, int choice)
-    {
-        if(choice == 1)
-        {
-            _shows.Find(i => i.Id == id);
-            Console.WriteLine("Please fill in a new date");
-            string newDate = Console.ReadLine();
-            
-        }
-
-        if(choice == 2)
-        {
-
-        }
-        
-        if(choice == 7)
-        {
-
-        }
-    }
 }
 
 
