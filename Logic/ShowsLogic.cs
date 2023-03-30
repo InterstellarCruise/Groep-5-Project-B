@@ -8,6 +8,8 @@ using System.Text.Json;
 class ShowsLogic
 {
     private List<ShowModel> _shows;
+    public static string Lines = "--------------------------------";
+    public static Dictionary<string, string> ShowInfo = new Dictionary<string, string> { };
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -50,7 +52,13 @@ class ShowsLogic
                 emptyOrNot = true;
                 FilmsLogic filmsLogic = new FilmsLogic();
                 FilmModel film = filmsLogic.GetById(show.FilmId);
-                Console.WriteLine($"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}.");
+                string key = $"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}.";
+                string value = $"{show.RoomId} {show.Time} {show.Date}";
+                if (!ShowInfo.ContainsKey(key))
+                {
+                    ShowInfo.Add(key, value);
+                }
+                
             }
         }
         return emptyOrNot;
@@ -60,11 +68,19 @@ class ShowsLogic
     public static ShowModel ChooseShow(List<ShowModel> shows, string movie)
     {
         string[] input = movie.Split(' ');
-        Console.WriteLine(Convert.ToInt32(input[0]));
-        Console.WriteLine(input[1]);
+
+
 
         //Put the chosen movie into a variable called show.
-        ShowModel show = shows.Find(i => i.RoomId == Convert.ToInt32(input[0]) && i.Time == input[1]);
+        ShowModel show = null;
+        try
+        {
+            show = shows.Find(i => i.RoomId == Convert.ToInt32(input[0]) && i.Time == input[1]);
+        }
+        catch (Exception)
+        {
+            shows = null;
+        }
         return show;
 
     }
@@ -73,7 +89,15 @@ class ShowsLogic
     {
         return _shows.Find(i => i.Id == id);
     }
+
+    public void DeleteShow(ShowModel show)
+    {
+        
+        _shows.Remove(show);
+        ShowsAccess.WriteAll(_shows);
+    }
 }
+
 
 
 

@@ -1,4 +1,4 @@
-static class UserLogin
+public static class UserLogin
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
 
@@ -8,7 +8,9 @@ static class UserLogin
         List<MenuItem> items = new List<MenuItem>();
         items.Add(new MenuItem("Login", Dologin));
         items.Add(new MenuItem("Register", Doregister));
+        items.Add(new MenuItem("Back", Menu.Start));
         items.Add(new MenuItem("Quit", Menu.Quit));
+
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();
     }
@@ -22,7 +24,7 @@ static class UserLogin
         AccountModel acc = accountsLogic.CheckLogin(email, password);
         if (acc != null)
         {
-            Console.WriteLine("\n-----------------------------\nWelcome back " + acc.FullName);
+            Console.WriteLine("-----------------------------\nWelcome back " + acc.FullName);
             if (acc.FullName == "Admin")
             {
                 Menu.AdminLogged = true;
@@ -35,7 +37,7 @@ static class UserLogin
         }
         else
         {
-            Console.WriteLine("\n-----------------------------\nNo account found with that email and password");
+            Console.WriteLine("-----------------------------\nNo account found with that email and password");
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);
             List<MenuItem> items = new List<MenuItem>();

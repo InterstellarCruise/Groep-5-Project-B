@@ -33,8 +33,8 @@ static class Menu
         {
             items.Add(new MenuItem("Account", NotImplemented));
         }
-        items.Add(new MenuItem("Shows", NotImplemented));
-        items.Add(new MenuItem("Cinema Info", NotImplemented));
+        items.Add(new MenuItem("Shows", DatePicker.Start));
+        items.Add(new MenuItem("Cinema Info", CinemaInfo.start));
         if (AdminLogged)
         {
             items.Add(new MenuItem("Admin Features", AdminFeatures.Start));
