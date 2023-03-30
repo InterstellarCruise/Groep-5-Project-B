@@ -2,35 +2,15 @@ public static class RemoveShows
 {
     static ShowsLogic showLogic = new ShowsLogic();
     static FilmsLogic filmLogic = new FilmsLogic();
+    private static string _warning = "WARNING\nThis may have grave consequences.\nAre you sure you want to proceed with this action?\n";
     public static void Start()
     {
-        Console.WriteLine("WARNING");
-        Console.WriteLine("This may have grave consequences.");
-        Console.WriteLine("Are you sure you want to proceed with this action?");
-        Console.WriteLine("[1]: Yes\n-----------------------------");
-        Console.WriteLine("[2]: No\n-----------------------------");
-        int ans = Convert.ToInt32(Console.ReadLine());
-        if (ans == 1)
-        {
-            int milliseconds = 2000;
-            Thread.Sleep(milliseconds);
-            Console.Clear();
-            Menu.LoggedIn = true;
-            DeleteItem();
-        }
-        else if (ans == 2)
-        {
-            int milliseconds = 2000;
-            Thread.Sleep(milliseconds);
-            Console.Clear();
-            Menu.LoggedIn = true;
-            Menu.Start();
-        }
-        else
-        {
-            Console.WriteLine("Wrong input please try again.");
-            Start();
-        }
+        List<MenuItem> items = new List<MenuItem>();
+        items.Add(new MenuItem(_warning, null));
+        items.Add(new MenuItem("Yes", DeleteItem));
+        items.Add(new MenuItem("No", AdminFeatures.Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
     }
     public static void DeleteItem()
     {

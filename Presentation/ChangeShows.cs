@@ -3,164 +3,122 @@ public static class ChangeShows
 
     static ShowsLogic showLogic = new ShowsLogic();
     static FilmsLogic filmLogic = new FilmsLogic();
+    private static ShowModel _show = new ShowModel(0, 0, 0, null, null);
+    private static FilmModel _film = new FilmModel(0, null, null, 0, null);
+    private static string CurrentShow = "";
+    public static ShowModel show
+    {
+        get { return _show; }
+        set { _show = value; }
+    }
+    public static FilmModel film
+    {
+        get { return _film; }
+        set { _film = value; }
+    }
     public static void Start()
     {
-
-        ShowModel show = SearchByID();
+        SearchByID();
+        MenuDisplay();
+    }   
+    public static void MenuDisplay()
+    {
         if (show != null)
         {
-            FilmModel film = filmLogic.GetById(show.Id);
-            ShowInformation(show, film);
-            Console.WriteLine("What do you want to edit about the show?");
-            Console.WriteLine("[1]: Date\n-----------------------------");
-            Console.WriteLine("[2]: Time\n-----------------------------");
-            Console.WriteLine("[3]: Title\n-----------------------------");
-            Console.WriteLine("[4]: Description\n-----------------------------");
-            Console.WriteLine("[5]: Age Limit\n-----------------------------");
-            Console.WriteLine("[6]: Go back\n-----------------------------");
-            int ans = Convert.ToInt32(Console.ReadLine());
-            if (ans == 1)
-            {
-                int milliseconds = 3000;
-                Thread.Sleep(milliseconds);
-                Console.Clear();
-                EditDate(show);
+            film = filmLogic.GetById(show.Id);
+            ShowInformation();
 
-            }
-            else if (ans == 2)
-            {
-                int milliseconds = 3000;
-                Thread.Sleep(milliseconds);
-                Console.Clear();
-                EditTTime(show);
-
-            }
-            else if (ans == 3)
-            {
-                int milliseconds = 3000;
-                Thread.Sleep(milliseconds);
-                Console.Clear();
-                EditTitle(film);
-
-            }
-            else if (ans == 4)
-            {
-                int milliseconds = 3000;
-                Thread.Sleep(milliseconds);
-                Console.Clear();
-                EditDescription(film);
-
-            }
-            else if (ans == 5)
-            {
-                int milliseconds = 3000;
-                Thread.Sleep(milliseconds);
-                Console.Clear();
-                EditAgeLimit(film);
-
-            }
-            else if (ans == 6)
-            {
-                int milliseconds = 3000;
-                Thread.Sleep(milliseconds);
-                Console.Clear();
-                Menu.Start();
-
-            }
-            else
-            {
-                Console.WriteLine("Wrong input");
-                int milliseconds = 3000;
-                Thread.Sleep(milliseconds);
-                Console.Clear();
-                Start();
-            }
-
-        }
-        else
-        {
-            Console.WriteLine("No show found with this ID");
-            Menu.Start();
+            List<MenuItem> items = new List<MenuItem>();
+            items.Add(new MenuItem(CurrentShow, null));
+            items.Add(new MenuItem("Date", EditDate));
+            items.Add(new MenuItem("Time", EditTTime));
+            items.Add(new MenuItem("Title", EditTitle));
+            items.Add(new MenuItem("Description", EditDescription));
+            items.Add(new MenuItem("Age Limit", EditAgeLimit));
+            items.Add(new MenuItem("Back", AdminFeatures.Start));
+            items.Add(new MenuItem("Main menu", Menu.Start));
+            MenuBuilder menu = new MenuBuilder(items);
+            menu.DisplayMenu();
         }
     }
 
-    public static void EditTitle(FilmModel film)
+    public static void EditTitle()
     {
-        Console.WriteLine("Enter a new title");
+        Console.WriteLine("\n-------------------------------\nEnter a new title");
         string title = Console.ReadLine();
         film.Name = title;
         filmLogic.UpdateList(film);
-        ShowModel show = showLogic.GetById(film.Id);
+        show = showLogic.GetById(film.Id);
         Console.WriteLine("\nThe title has been updated, here is the result:\n");
-        ShowInformation(show, film);
+        ShowInformation();
         int milliseconds = 3000;
         Thread.Sleep(milliseconds);
         Console.Clear();
-        Menu.Start();
+        MenuDisplay();
     }
 
-    public static void EditDate(ShowModel show)
+    public static void EditDate()
     {
-        Console.WriteLine("Enter a new date (Format: year-month-day)");
+        Console.WriteLine("\n-------------------------------\nEnter a new date (Format: year-month-day)");
         string date = Console.ReadLine();
         show.Date = date;
         showLogic.UpdateList(show);
-        FilmModel film = filmLogic.GetById(show.Id);
+        film = filmLogic.GetById(show.Id);
         Console.WriteLine("\nThe date has been updated, here is the new result:\n");
-        ShowInformation(show, film);
+        ShowInformation();
         int milliseconds = 3000;
         Thread.Sleep(milliseconds);
         Console.Clear();
-        Menu.Start();
+        MenuDisplay();
     }
 
-    public static void EditTTime(ShowModel show)
+    public static void EditTTime()
     {
-        Console.WriteLine("Enter a new time (Format: hour:minute)");
+        Console.WriteLine("\n-------------------------------\nEnter a new time (Format: hour:minute)");
         string time = Console.ReadLine();
         show.Time = time;
         showLogic.UpdateList(show);
-        FilmModel film = filmLogic.GetById(show.Id);
+        film = filmLogic.GetById(show.Id);
         Console.WriteLine("\nThe time has been updated, here is the new result:\n");
-        ShowInformation(show, film);
+        ShowInformation();
         int milliseconds = 3000;
         Thread.Sleep(milliseconds);
         Console.Clear();
-        Menu.Start();
+        MenuDisplay();
     }
 
-    public static void EditAgeLimit(FilmModel film)
+    public static void EditAgeLimit()
     {
-        Console.WriteLine("Enter a new age limit");
+        Console.WriteLine("\n-------------------------------\nEnter a new age limit");
         int ageLimit = Convert.ToInt32(Console.ReadLine());
         film.AgeLimit = ageLimit;
         filmLogic.UpdateList(film);
-        ShowModel show = showLogic.GetById(film.Id);
+        show = showLogic.GetById(film.Id);
         Console.WriteLine("\nThe age limit has been updated, here is the new result:\n");
-        ShowInformation(show, film);
+        ShowInformation();
         int milliseconds = 3000;
         Thread.Sleep(milliseconds);
         Console.Clear();
-        Menu.Start();
+        MenuDisplay();
     }
 
 
-    public static void EditDescription(FilmModel film)
+    public static void EditDescription()
     {
-        Console.WriteLine("\nEnter a new descrption\n");
+        Console.WriteLine("\n-------------------------------\nEnter a new descrption\n");
         string descrption = Console.ReadLine();
         film.Description = descrption;
         filmLogic.UpdateList(film);
-        ShowModel show = showLogic.GetById(film.Id);
+        show = showLogic.GetById(film.Id);
         Console.WriteLine("\nThe description has been updated, here is the new result:\n");
-        ShowInformation(show, film);
+        ShowInformation();
         int milliseconds = 3000;
         Thread.Sleep(milliseconds);
         Console.Clear();
-        Menu.Start();
+        MenuDisplay();
     }
 
-    public static void ShowInformation(ShowModel show, FilmModel film)
+    public static void ShowInformation()
     {
         Console.WriteLine($"Show ID: {show.Id}");
         Console.WriteLine($"Date: {show.Date}");
@@ -168,19 +126,21 @@ public static class ChangeShows
         Console.WriteLine($"Film Title: {film.Name}");
         Console.WriteLine($"Film Description: {film.Description}");
         Console.WriteLine($"Film AgeLimit: {film.AgeLimit}");
+        CurrentShow = $"Show ID: {show.Id} \nDate: {show.Date} \nTime: {show.Time} \nFilm Title: {film.Name} \nFilm Description: {film.Description} \nFilm Age Limit: {film.AgeLimit} \n-------------------------------";
+
 
     }
 
-    public static ShowModel SearchByID()
+    public static void SearchByID()
     {
         Console.WriteLine("Enter the ID of the show you want to view");
         int id = Convert.ToInt32(Console.ReadLine());
-        ShowModel show = showLogic.GetById(id);
+        show = showLogic.GetById(id);
         if (show == null)
         {
             Console.WriteLine("There is no show with this ID");
         }
-        return show;
+        
     }
 
 
