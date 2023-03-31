@@ -18,7 +18,7 @@ public static class UserLogin
     {
         Console.WriteLine("\nWelcome to the login page\n-----------------------------");
         Console.WriteLine("Please enter your email address");
-        string email = Console.ReadLine();
+        string email = Console.ReadLine().ToLower();
         Console.WriteLine("Please enter your password");
         string password = Console.ReadLine();
         AccountModel acc = accountsLogic.CheckLogin(email, password);
