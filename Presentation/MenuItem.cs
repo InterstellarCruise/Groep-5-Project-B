@@ -1,19 +1,21 @@
-﻿public class MenuItem
+﻿using System;
+
+public class MenuItem
 {
     public string DisplayText;
     public Action Action;
-    private string _roomTimeDate;
+    public Chair chair;
     public string RoomTimeDate
-    {
-        get { return _roomTimeDate; }
-        set { _roomTimeDate = value; }
-    }
+    { get; set; }
 
+    public MenuItem(Chair chair1, Action action) : this(chair1.RowNumber(), action) => chair = chair1;
     public MenuItem(string displayText, Action action)
     {
         DisplayText = displayText;
         Action = action;
-        _roomTimeDate = "";
+        RoomTimeDate = "";
+
     }
+
     public void Execute() => Action();
 }

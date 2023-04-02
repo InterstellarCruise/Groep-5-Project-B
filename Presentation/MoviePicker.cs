@@ -42,7 +42,7 @@ static class MoviePicker
                 }
                 else
                 {
-                    items.Add(new MenuItem("Make reservation", Menu.NotImplemented));
+                    items.Add(new MenuItem("Make reservation", Reservation.Main));
                 }
                 items.Add(new MenuItem("Back", DatePicker.showChoose));
                 items.Add(new MenuItem("Main menu", Menu.Start));
@@ -55,14 +55,39 @@ static class MoviePicker
     {
         
         Console.WriteLine("\nWelcome to the login page\n-----------------------------");
-        Console.WriteLine("Please enter your email address");
-        string email = Console.ReadLine();
+        string email = "";
+        do
+        {
+            Console.WriteLine("Please enter your email address");
+            email = Console.ReadLine().ToLower();
+            if (!email.ToLower().Contains("@") && email != "admin")
+            {
+                Console.WriteLine("\nPlease enter a valid email address\n-----------------------------");
+            }
+        } while (email != "admin" && !email.ToLower().Contains("@"));
         Console.WriteLine("Please enter your password");
-        string password = Console.ReadLine();
-        AccountModel acc = accountLogic.CheckLogin(email, password);
+        var password = string.Empty;
+        ConsoleKey key;
+        do
+        {
+            var keyInfo = Console.ReadKey(intercept: true);
+            key = keyInfo.Key;
+
+            if (key == ConsoleKey.Backspace && password.Length > 0)
+            {
+                Console.Write("\b \b");
+                password = password[0..^1];
+            }
+            else if (!char.IsControl(keyInfo.KeyChar))
+            {
+                Console.Write("*");
+                password += keyInfo.KeyChar;
+            }
+        } while (key != ConsoleKey.Enter);
+            AccountModel acc = accountLogic.CheckLogin(email, password);
         if (acc != null)
         {
-            Console.WriteLine("-----------------------------\nWelcome back " + acc.FullName);
+            Console.WriteLine("\n-----------------------------\nWelcome back " + acc.FullName);
             if(acc.FullName == "Admin")
             {
                 Menu.AdminLogged = true;
@@ -73,7 +98,7 @@ static class MoviePicker
             Console.Clear();
             List<MenuItem> items = new List<MenuItem>();
             items.Add(CurrentMovie);
-            items.Add(new MenuItem("Make reservation", Menu.NotImplemented));
+            items.Add(new MenuItem("Make reservation", Reservation.Main));
             items.Add(new MenuItem("Back", DatePicker.showChoose));
             items.Add(new MenuItem("Main menu", Menu.Start));
             MenuBuilder menu = new MenuBuilder(items);
