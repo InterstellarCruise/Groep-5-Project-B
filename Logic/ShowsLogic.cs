@@ -52,7 +52,7 @@ class ShowsLogic
                 emptyOrNot = true;
                 FilmsLogic filmsLogic = new FilmsLogic();
                 FilmModel film = filmsLogic.GetById(show.FilmId);
-                string key = $"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}, Movie length: {film.Length}";
+                string key = $"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}, Movie length: {film.Length}H";
                 string value = $"{show.RoomId} {show.Time} {show.Date}";
                 if (!ShowInfo.ContainsKey(key))
                 {
