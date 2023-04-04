@@ -4,6 +4,7 @@
         "name": "DR Strange",
         "description": "DR Strange will kill a lot of monsters",
         "ageLimit": 12,
+        "length": 2.30,
         "genres": [
             "Action",
             "Adventure",
@@ -15,6 +16,7 @@
         "name": "John Wick",
         "description": "John Wick pew pew",
         "ageLimit": 16,
+        "length": 3,
         "genres": [
             "Action",
             "Adventure"
@@ -25,6 +27,7 @@
         "name": "Harry Potter",
         "description": "Something with wizards",
         "ageLimit": 16,
+        "length": 2.30,
         "genres": [
             "Action",
             "Adventure"
@@ -35,6 +38,7 @@
         "name": "idk man",
         "description": "random text",
         "ageLimit": 18,
+        "length": 2.45,
         "genres": [
             "Action",
             "Adventure",
