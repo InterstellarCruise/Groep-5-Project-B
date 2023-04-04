@@ -8,6 +8,12 @@
         get { return _roomTimeDate; }
         set { _roomTimeDate = value; }
     }
+    private int _movieId;
+    public int MovieId
+    {
+        get { return _movieId; }
+        set { _movieId = value; }
+    }
 
     public MenuItem(string displayText, Action action)
     {

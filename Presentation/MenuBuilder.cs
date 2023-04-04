@@ -37,8 +37,8 @@
                         Console.WriteLine(_items[i].DisplayText);
                         Console.ResetColor();
                     }
-                    
-                    
+
+
                 }
                 else
                 {
@@ -62,14 +62,18 @@
                 {
                     MoviePicker.movie = _items[selectedIndex].RoomTimeDate;
                 }
+                if (_items[selectedIndex].MovieId != null)
+                {
+                    AddShows.MovieId = _items[selectedIndex].MovieId;
+                }
                 if (_items[selectedIndex].Action != null)
                 {
                     _items[selectedIndex].Execute();
                     _running = false;
                 }
-                
-                
-                
+
+
+
             }
         }
     }

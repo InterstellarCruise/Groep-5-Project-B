@@ -14,7 +14,8 @@ class FilmsLogic
     //private set, so this can only be set by the class itself
 
     static public FilmModel? CurrentFilm { get; private set; }
-
+    public static string Lines = "--------------------------------";
+    public static Dictionary<string, int> FilmInfo = new Dictionary<string, int> { };
     public FilmsLogic()
     {
         _films = FilmsAccess.LoadAll();
@@ -39,7 +40,21 @@ class FilmsLogic
         FilmsAccess.WriteAll(_films);
 
     }
+    public static void AllFilms(List<FilmModel> films)
+    {
+        foreach (FilmModel film in films)
+        {
 
+
+            FilmsLogic filmsLogic = new FilmsLogic();
+            string key = $"Film name: {film.Name}.";
+            int value = film.Id;
+            if (!FilmInfo.ContainsKey(key))
+            {
+                FilmInfo.Add(key, value);
+            }
+        }
+    }
     public FilmModel GetById(int id)
     {
         return _films.Find(i => i.Id == id);
