@@ -52,13 +52,13 @@ class ShowsLogic
                 emptyOrNot = true;
                 FilmsLogic filmsLogic = new FilmsLogic();
                 FilmModel film = filmsLogic.GetById(show.FilmId);
-                string key = $"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}.";
+                string key = $"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}, Movie length: {film.Length}";
                 string value = $"{show.RoomId} {show.Time} {show.Date}";
                 if (!ShowInfo.ContainsKey(key))
                 {
                     ShowInfo.Add(key, value);
                 }
-                
+
             }
         }
         return emptyOrNot;
@@ -92,7 +92,7 @@ class ShowsLogic
 
     public void DeleteShow(ShowModel show)
     {
-        
+
         _shows.Remove(show);
         ShowsAccess.WriteAll(_shows);
     }
