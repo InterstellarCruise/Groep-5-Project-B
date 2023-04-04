@@ -1,6 +1,4 @@
-﻿using System;
-
-public class MenuItem
+﻿public class MenuItem
 {
     public string DisplayText;
     public Action Action;

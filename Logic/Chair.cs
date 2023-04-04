@@ -16,6 +16,7 @@
         "H",
         "I",
         "J",
+        "K",
         "L",
         "M",
         "N",
@@ -44,9 +45,9 @@
         switch (Row)
         {
             case "screen":
-                return "\t Screen\n\t\t\b-------------------------------------------";
+                return "\b\b\b\bScreen\n    -----------------------------------------------";
             case "Continue":
-                return "\n\n\n\n\r\t\t\t\t\b\b<<Continue>>";
+                return "\n\n\n\n\r\t\t\t\b\b\b<<Continue>>";
             default:
                 if (Rank != 0 && Number != 0)
                 {

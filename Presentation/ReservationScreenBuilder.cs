@@ -5,19 +5,19 @@
     public static string selchairs = "";
     protected static int origRow;
     protected static int origCol;
-    public static void MultipleChoice(List<MenuItem> options)
+    public static string legendred = "  [BLUE] --> 7.50 EUR";
+    public static string legendorange = "  [GREEN] --> 10.50 EUR";
+    public static void MultipleChoice(List<MenuItem> options, int curpos)
     {
-        const int startX = 15;
-        const int startY = 12;
-        const int optionsPerLine = 11;
+        Console.SetCursorPosition(0, 0);
+        const int startX = 4;
+        const int startY = 10;
+        const int optionsPerLine = 12;
         const int spacingPerLine = 4;
-        origRow = 0;
+        origRow = Console.CursorTop;
         origCol = Console.CursorLeft;
-        string legendred = "  [RED] --> Not available";
-        string legendorange = "  [ORANGE] --> Already selected";
 
-
-        int currentSelection = 0;
+        int currentSelection = curpos;
 
         ConsoleKey key;
 
@@ -28,42 +28,7 @@
 
 
             Console.Clear();
-            Console.WriteLine("---------------------------------------------------             -------------------------------------");
-            Console.WriteLine($"  Navigate using the arrow-keys\t\t\t\t\t  Total price: {Reservation.Total("nothing")} EUR\n  Select/Deselect chairs with [ENTER]\n  To continue use the down arrow-key on column [6]");
-            Console.WriteLine("---------------------------------------------------             -------------------------------------");
-            Console.WriteLine($"  [MAGENTA] --> Available\t\t\t\t\t  Selected Chairs:{selchairs}");
-            Console.WriteLine(legendorange);
-            Console.WriteLine(legendred);
-            Console.WriteLine("---------------------------------------------------             -------------------------------------");
-            for (int i = 0; i < 9; i++)
-            {
-                if (i == 0 || i == 4 || i == 8)
-                    WriteAt("+", 0, i);
-                else
-                    WriteAt("|", 0, i);
-            }
-            for (int j = 0; j < 9; j++)
-            {
-                if (j == 0 || j == 4 || j == 8)
-                    WriteAt("+", 50, j);
-                else
-                    WriteAt("|", 50, j);
-            }
-            for (int k = 0; k < 9; k++)
-            {
-                if (k == 0 || k == 4 || k == 8)
-                    WriteAt("+", 64, k);
-                else
-                    WriteAt("|", 64, k);
-            }
-            for (int l = 0; l < 9; l++)
-            {
-                if (l == 0 || l == 4 || l == 8)
-                    WriteAt("+", 101, l);
-                else
-                    WriteAt("|", 101, l);
-            }
-
+            DisplayInfo();
 
             for (int i = 0; i < options.Count; i++)
             {
@@ -87,19 +52,25 @@
 
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Blue;
+                    if (options[i].chair.Rank == 1)
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                    else if (options[i].chair.Rank == 2)
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    else if (options[i].chair.Rank == 3)
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                    else
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
 
                 Console.Write(options[i].chair.RowNumber());
 
                 Console.ResetColor();
             }
-
             key = Console.ReadKey(true).Key;
 
             switch (key)
@@ -161,12 +132,11 @@
                     }
                 case ConsoleKey.Enter:
                     {
+                        bool chair = options[currentSelection].chair.Available;
                         if (options[currentSelection].chair.Row != null)
                         {
                             if (!options[currentSelection].chair.Available && !options[currentSelection].chair.takeseat)
                             {
-                                Console.WriteLine($"\n\n\t\t\t\b\b\b<<Chair: {options[currentSelection].chair.RowNumber()} is not available>>");
-                                Thread.Sleep(1500);
                             }
                             else
                             {
@@ -199,7 +169,7 @@
                                             else if (re > 30 && re < 70)
                                                 legendred = legendred + $"{options[currentSelection].chair.RowNumber()}/";
                                             else if (selchairs.Length > 17)
-                                                legendorange = legendorange + $"\t\t\t\t\t  {options[currentSelection].chair.RowNumber()}/";
+                                                legendorange = legendorange + $"\t\t\t\t\t\t  {options[currentSelection].chair.RowNumber()}/";
 
 
                                         }
@@ -216,8 +186,6 @@
                                         string rownumb = options[currentSelection].chair.RowNumber();
                                         options[currentSelection].chair.RemoveSeat();
                                         selchairs = selchairs.Replace($"{rownumb}/", "");
-                                        Console.WriteLine($"\n\n\t\t        <<Chair: {rownumb} deselected>>");
-                                        Thread.Sleep(1500);
                                     }
 
                                 }
@@ -243,6 +211,44 @@
         {
             Console.Clear();
             Console.WriteLine(e.Message);
+        }
+    }
+    static void DisplayInfo()
+    {
+        Console.WriteLine("---------------------------------------------------             -------------------------------------");
+        Console.WriteLine($"  Navigate using the arrow-keys\t\t\t\t\t  Total price: {Reservation.Total("nothing")} EUR\n  Select/Deselect chairs with [ENTER]\n  To continue use the down arrow-key on column [6]");
+        Console.WriteLine("---------------------------------------------------             -------------------------------------");
+        Console.WriteLine($"  [MAGENTA] --> 12.50 EUR\t\t\t\t\t  Selected Chairs:{selchairs}");
+        Console.WriteLine(legendorange);
+        Console.WriteLine(legendred);
+        Console.WriteLine("---------------------------------------------------             -------------------------------------");
+        for (int i = 0; i < 9; i++)
+        {
+            if (i == 0 || i == 4 || i == 8)
+                WriteAt("+", 0, i);
+            else
+                WriteAt("|", 0, i);
+        }
+        for (int j = 0; j < 9; j++)
+        {
+            if (j == 0 || j == 4 || j == 8)
+                WriteAt("+", 50, j);
+            else
+                WriteAt("|", 50, j);
+        }
+        for (int k = 0; k < 9; k++)
+        {
+            if (k == 0 || k == 4 || k == 8)
+                WriteAt("+", 64, k);
+            else
+                WriteAt("|", 64, k);
+        }
+        for (int l = 0; l < 9; l++)
+        {
+            if (l == 0 || l == 4 || l == 8)
+                WriteAt("+", 101, l);
+            else
+                WriteAt("|", 101, l);
         }
     }
 }
