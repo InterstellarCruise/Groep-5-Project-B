@@ -28,7 +28,7 @@ public static class AddShows
         List<MenuItem> items = new List<MenuItem>();
         items.Add(new MenuItem(_option, null));
         items.Add(new MenuItem("Show", AddShow));
-        items.Add(new MenuItem("Film", AddFilm));
+        items.Add(new MenuItem("Film", AddFilms.FilmInput));
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();
     }
@@ -68,17 +68,6 @@ public static class AddShows
         Console.Clear();
         ShowModel show = new ShowModel(ID, MovieId, RoomId, Date, Time);
         ShowsAccess.Add(show);
-    }
-    public static void AddFilm()
-    {
-        // Console.WriteLine("Enter film id you want to delete");
-        // int id = Convert.ToInt32(Console.ReadLine());
-        // FilmModel film = filmLogic.GetById(id);
-        // filmLogic.DeleteFilm(film);
-        // Console.WriteLine("The film has been removed");
-        // int miliseconds = 3000;
-        // Thread.Sleep(miliseconds);
-        // AdminFeatures.Start();
     }
 
 }

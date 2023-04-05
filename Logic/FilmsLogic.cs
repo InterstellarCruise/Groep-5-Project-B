@@ -65,6 +65,12 @@ class FilmsLogic
         _films.Remove(film);
         FilmsAccess.WriteAll(_films);
     }
+    public static int LastID()
+    {
+        List<FilmModel> _films = FilmsAccess.LoadAll();
+        int ID = _films.Count;
+        return ID;
+    }
 }
 
 

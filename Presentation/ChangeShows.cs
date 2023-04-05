@@ -4,7 +4,7 @@ public static class ChangeShows
     static ShowsLogic showLogic = new ShowsLogic();
     static FilmsLogic filmLogic = new FilmsLogic();
     private static ShowModel _show = new ShowModel(0, 0, 0, null, null);
-    private static FilmModel _film = new FilmModel(0, null, null, 0, null);
+    private static FilmModel _film = new FilmModel(0, null, null, 0, 0.0, null);
     private static string CurrentShow = "";
     public static ShowModel show
     {
@@ -20,7 +20,7 @@ public static class ChangeShows
     {
         SearchByID();
         MenuDisplay();
-    }   
+    }
     public static void MenuDisplay()
     {
         if (show != null)
@@ -145,7 +145,7 @@ public static class ChangeShows
             Console.Clear();
             AdminFeatures.Start();
         }
-        
+
     }
 }
 

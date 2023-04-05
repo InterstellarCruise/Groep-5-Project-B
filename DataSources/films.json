@@ -4,7 +4,7 @@
         "name": "DR Strange",
         "description": "DR Strange will kill a lot of monsters",
         "ageLimit": 12,
-        "length": 2.30,
+        "length": 2.3,
         "genres": [
             "Action",
             "Adventure",
@@ -27,7 +27,7 @@
         "name": "Harry Potter",
         "description": "Something with wizards",
         "ageLimit": 16,
-        "length": 2.30,
+        "length": 2.3,
         "genres": [
             "Action",
             "Adventure"
@@ -44,6 +44,17 @@
             "Adventure",
             "Thriller",
             "Horror"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Shrek 1",
+        "description": "Shrek is an ogre.",
+        "ageLimit": 0,
+        "length": 1.5,
+        "genres": [
+            "comedy",
+            "horror"
         ]
     }
 ]
