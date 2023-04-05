@@ -37,7 +37,7 @@ public static class AddFilms
         Console.WriteLine("Type the length of the movie like (Hour.Minutes): ");
         double Length = Convert.ToDouble(Console.ReadLine());
         Console.Clear();
-        Console.WriteLine("Type the genres of the movie: ");
+        Console.WriteLine("Type a genre of the movie: ");
         bool genrecheck = false;
         while (!genrecheck)
         {
