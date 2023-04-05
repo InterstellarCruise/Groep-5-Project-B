@@ -96,6 +96,12 @@ class ShowsLogic
         _shows.Remove(show);
         ShowsAccess.WriteAll(_shows);
     }
+    public static int LastID()
+    {
+        List<ShowModel> _shows = ShowsAccess.LoadAll();
+        int ID = _shows.Count;
+        return ID;
+    }
 }
 
 

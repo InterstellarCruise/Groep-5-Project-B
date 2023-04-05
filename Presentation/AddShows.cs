@@ -54,16 +54,20 @@ public static class AddShows
     public static void ShowInput()
     {
         Console.Clear();
-        Console.WriteLine(MovieId);
-        // Console.WriteLine("E");
-        // // int id = Convert.ToInt32(Console.ReadLine());
-        // Console.WriteLine("E");
-        // ShowModel show = showLogic.GetById(id);
-        // showLogic.DeleteShow(show);
-        // Console.WriteLine("The show has been removed");
-        // int miliseconds = 3000;
-        // Thread.Sleep(miliseconds);
-        // AdminFeatures.Start();
+        int LastID = ShowsLogic.LastID();
+        int ID = LastID += 1;
+        Console.WriteLine("Type the room number this movie will play in: ");
+        string room = Console.ReadLine();
+        int RoomId = Convert.ToInt32(room);
+        Console.Clear();
+        Console.WriteLine("Type the date this show will play like (Year-Month-Day): ");
+        string Date = Console.ReadLine();
+        Console.Clear();
+        Console.WriteLine("Type the time this show will start like (Hour-Minutes): ");
+        string Time = Console.ReadLine();
+        Console.Clear();
+        ShowModel show = new ShowModel(ID, MovieId, RoomId, Date, Time);
+        ShowsAccess.Add(show);
     }
     public static void AddFilm()
     {
