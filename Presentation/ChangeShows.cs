@@ -4,7 +4,7 @@ public static class ChangeShows
     static ShowsLogic showLogic = new ShowsLogic();
     static FilmsLogic filmLogic = new FilmsLogic();
     private static ShowModel _show = new ShowModel(0, 0, 0, null, null);
-    private static FilmModel _film = new FilmModel(0, null, null, 0, null);
+    private static FilmModel _film = new FilmModel(0, null, null, 0, 0, null);
     private static string CurrentShow = "";
     public static ShowModel show
     {
@@ -102,6 +102,20 @@ public static class ChangeShows
         MenuDisplay();
     }
 
+    public static void EditLength()
+    {
+        Console.WriteLine("\n-------------------------------\nEnter a new length of the show");
+        double lenght = Convert.ToInt64(Console.ReadLine());
+        film.Lenght = lenght;
+        filmLogic.UpdateList(film);
+        show = showLogic.GetById(film.Id);
+        Console.WriteLine("\nThe age limit has been updated, here is the new result:\n");
+        ShowInformation();
+        int milliseconds = 3000;
+        Thread.Sleep(milliseconds);
+        Console.Clear();
+        MenuDisplay();
+    }
 
     public static void EditDescription()
     {

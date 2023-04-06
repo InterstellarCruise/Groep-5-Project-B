@@ -31,10 +31,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
-bin/
-obj/
-.vs/
-.vscode/
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
@@ -399,8 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-
-bin/
-obj/
-.vs/
-.vscode/
+obj/Debug/net6.0/Project.assets.cache
+obj/Debug/net6.0/Project.assets.cache
