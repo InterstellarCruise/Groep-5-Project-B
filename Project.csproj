@@ -20,6 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="DataSources\chairs.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataSources\rooms.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="DataSources\accounts.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

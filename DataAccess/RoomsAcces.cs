@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-public static class RoomAcces
+public static class RoomsAccess
 {
     static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/rooms.json"));
 

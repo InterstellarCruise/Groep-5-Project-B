@@ -1,12 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
-namespace Project.DataAccess
+public static class ChairsAccess
 {
-    internal class ChairsAcces
+    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/chairs.json"));
+
+
+    public static List<ChairModel> LoadAll()
     {
+        string json = File.ReadAllText(path);
+        return JsonSerializer.Deserialize<List<ChairModel>>(json);
     }
+
+
+    public static void WriteAll(List<ChairModel> chairs)
+    {
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        string json = JsonSerializer.Serialize(chairs, options);
+        File.WriteAllText(path, json);
+    }
+
+
+
 }
