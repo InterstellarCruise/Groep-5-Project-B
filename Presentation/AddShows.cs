@@ -1,3 +1,6 @@
+
+
+using System.Globalization;
 public static class AddShows
 {
     static ShowsLogic showLogic = new ShowsLogic();
@@ -53,20 +56,59 @@ public static class AddShows
     }
     public static void ShowInput()
     {
+        int[] daysInMonth = new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
         Console.Clear();
         int LastID = ShowsLogic.LastID();
         int ID = LastID += 1;
-        Console.WriteLine("Type the room number this movie will play in: ");
-        string room = Console.ReadLine();
+        Console.WriteLine("Type the room number this movie will play in (1 to 3): ");
+        string room = "";
+        room = Console.ReadLine();
+
+        while (room != "1" && room != "2" && room != "3")
+        {
+            Console.WriteLine(room);
+            Console.WriteLine("Only a room between 1 to 3");
+            room = Console.ReadLine();
+        }
         int RoomId = Convert.ToInt32(room);
+        //-----------------------
         Console.Clear();
+
+        // DateTime dt = TryParse(Date);
+        DateTime? date = null;
+        bool validInputDate = false;
+        string inputdate;
+        bool validyear = false;
         Console.WriteLine("Type the date this show will play like (Year-Month-Day): ");
-        string Date = Console.ReadLine();
-        Console.Clear();
+        do
+        {
+            inputdate = Console.ReadLine();
+            try
+            {
+
+                date = DateTime.Parse(inputdate);
+                Console.WriteLine(date?.Year);
+                if (date?.Year >= DateTime.Now.Year && date?.Year <= DateTime.Now.Year + 5)
+                {
+                    validyear = true;
+                }
+                else
+                {
+                    Console.WriteLine("The date needs to be between the current year and 5 years from now.");
+                }
+                validInputDate = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Invalid date format. Please enter the date in the format yyyy-MM-dd.");
+            }
+        } while (!validInputDate || !validyear);
+
+        // Console.Clear();
         Console.WriteLine("Type the time this show will start like (Hour-Minutes): ");
         string Time = Console.ReadLine();
         Console.Clear();
-        ShowModel show = new ShowModel(ID, MovieId, RoomId, Date, Time);
+        ShowModel show = new ShowModel(ID, MovieId, RoomId, inputdate, Time);
         ShowsAccess.Add(show);
     }
 

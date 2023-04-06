@@ -1,60 +1,71 @@
 [
-    {
-        "id": 1,
-        "name": "DR Strange",
-        "description": "DR Strange will kill a lot of monsters",
-        "ageLimit": 12,
-        "length": 2.3,
-        "genres": [
-            "Action",
-            "Adventure",
-            "Horror"
-        ]
-    },
-    {
-        "id": 2,
-        "name": "John Wick",
-        "description": "John Wick pew pew",
-        "ageLimit": 16,
-        "length": 3,
-        "genres": [
-            "Action",
-            "Adventure"
-        ]
-    },
-    {
-        "id": 3,
-        "name": "Harry Potter",
-        "description": "Something with wizards",
-        "ageLimit": 16,
-        "length": 2.3,
-        "genres": [
-            "Action",
-            "Adventure"
-        ]
-    },
-    {
-        "id": 4,
-        "name": "idk man",
-        "description": "random text",
-        "ageLimit": 18,
-        "length": 2.45,
-        "genres": [
-            "Action",
-            "Adventure",
-            "Thriller",
-            "Horror"
-        ]
-    },
-    {
-        "id": 5,
-        "name": "Shrek 1",
-        "description": "Shrek is an ogre.",
-        "ageLimit": 0,
-        "length": 1.5,
-        "genres": [
-            "comedy",
-            "horror"
-        ]
-    }
+  {
+    "id": 1,
+    "name": "DR Strange",
+    "description": "DR Strange will kill a lot of monsters",
+    "ageLimit": 12,
+    "length": 2.3,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Horror"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "John Wick",
+    "description": "John Wick pew pew",
+    "ageLimit": 16,
+    "length": 3,
+    "genres": [
+      "Action",
+      "Adventure"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Harry Potter",
+    "description": "Something with wizards",
+    "ageLimit": 16,
+    "length": 2.3,
+    "genres": [
+      "Action",
+      "Adventure"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "idk man",
+    "description": "random text",
+    "ageLimit": 18,
+    "length": 2.45,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Thriller",
+      "Horror"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Shrek 1",
+    "description": "Shrek is an ogre.",
+    "ageLimit": 0,
+    "length": 1.5,
+    "genres": [
+      "comedy",
+      "horror"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Scooby-doo 1",
+    "description": "This movie is about ghosts.",
+    "ageLimit": 0,
+    "length": 2,
+    "genres": [
+      "Comedy",
+      "Horror"
+    ]
+  }
 ]
