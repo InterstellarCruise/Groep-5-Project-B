@@ -42,6 +42,22 @@ public class ChairLogic
         ChairsAccess.WriteAll(_chairs);
 
     }
+    public ChairModel GetById(int id)
+    {
+        return _chairs.Find(i => i.Id == id);
+    }
+    public List<ChairModel> GetByRoomId(int roomId)
+    {
+        List<ChairModel> roomschairs = new List<ChairModel>();
+        foreach(ChairModel c in _chairs)
+        {
+            if (c.Roomid == roomId)
+            {
+                roomschairs.Add(c);
+            }
+        }
+        return roomschairs;
+    }
 
 
 }

@@ -62,7 +62,7 @@ public static class UserLogin
         }
         else
         {
-            Console.WriteLine("-----------------------------\nNo account found with that email and password");
+            Console.WriteLine("\n-----------------------------\nNo account found with that email and password");
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);
             List<MenuItem> items = new List<MenuItem>();

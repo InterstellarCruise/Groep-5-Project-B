@@ -1,0 +1,20 @@
+﻿[
+  {
+    "id": 1,
+    "showid": 1,
+    "accountid": 1,
+    "ressedchairs": [
+      6,
+      5
+    ]
+  },
+  {
+    "id": 2,
+    "showid": 2,
+    "accountid": 2,
+    "ressedchairs": [
+      1,
+      2
+    ]
+  }
+]

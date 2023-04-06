@@ -1,4 +1,4 @@
-using System.ComponentModel.Design;
+﻿using System.ComponentModel.Design;
 using static System.Net.Mime.MediaTypeNames;
 
 static class Menu
