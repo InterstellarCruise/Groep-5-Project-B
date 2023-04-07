@@ -73,21 +73,18 @@ public static class AddShows
         int RoomId = Convert.ToInt32(room);
         //-----------------------
         Console.Clear();
-
-        // DateTime dt = TryParse(Date);
         DateTime? date = null;
         bool validInputDate = false;
         string inputdate;
         bool validyear = false;
         Console.WriteLine("Type the date this show will play like (Year-Month-Day): ");
+
         do
         {
             inputdate = Console.ReadLine();
             try
             {
-
                 date = DateTime.Parse(inputdate);
-                Console.WriteLine(date?.Year);
                 if (date?.Year >= DateTime.Now.Year && date?.Year <= DateTime.Now.Year + 5)
                 {
                     validyear = true;
@@ -104,11 +101,41 @@ public static class AddShows
             }
         } while (!validInputDate || !validyear);
 
-        // Console.Clear();
-        Console.WriteLine("Type the time this show will start like (Hour-Minutes): ");
-        string Time = Console.ReadLine();
         Console.Clear();
-        ShowModel show = new ShowModel(ID, MovieId, RoomId, inputdate, Time);
+        Console.WriteLine("Type the time this show will start like (Hour-Minutes): ");
+        int[] hm;
+        string time;
+        bool timecheck = false;
+
+        do
+        {
+            time = Console.ReadLine();
+            try
+            {
+                hm = time.Split("-").Select(int.Parse).ToArray();
+                if (hm.Length != 2)
+                {
+                    Console.WriteLine("Input is not a valid time, please try again.");
+                }
+                else if (hm[0] >= 0 && hm[0] <= 23 && hm[1] >= 0 && hm[1] <= 59)
+                {
+                    timecheck = true;
+
+                }
+                else
+                {
+                    Console.WriteLine("Input is not a valid time, please try again.");
+                }
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine("Invalid date format. Please enter the date in the format Hour-Minutes");
+            }
+        }
+        while (!timecheck);
+
+        Console.Clear();
+        ShowModel show = new ShowModel(ID, MovieId, RoomId, inputdate, time);
         ShowsAccess.Add(show);
     }
 
