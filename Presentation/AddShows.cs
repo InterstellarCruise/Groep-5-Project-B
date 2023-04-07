@@ -85,51 +85,50 @@ public static class AddShows
             try
             {
                 date = DateTime.Parse(inputdate);
-                if (date?.Year >= DateTime.Now.Year && date?.Year <= DateTime.Now.Year + 5)
-                {
-                    validyear = true;
-                }
-                else
-                {
-                    Console.WriteLine("The date needs to be between the current year and 5 years from now.");
-                }
-                validInputDate = true;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Invalid date format. Please enter the date in the format yyyy-MM-dd.");
             }
+            if (date?.Year >= DateTime.Now.Year && date?.Year <= DateTime.Now.Year + 5)
+            {
+                validyear = true;
+            }
+            else
+            {
+                Console.WriteLine("The date needs to be between the current year and 5 years from now.");
+            }
+            validInputDate = true;
         } while (!validInputDate || !validyear);
 
         Console.Clear();
         Console.WriteLine("Type the time this show will start like (Hour:Minutes): ");
-        int[] hm;
+        int[] hm = new int[0];
         string time;
         bool timecheck = false;
-
         do
         {
             time = Console.ReadLine();
             try
             {
                 hm = time.Split(":").Select(int.Parse).ToArray();
-                if (hm.Length != 2)
-                {
-                    Console.WriteLine("Input is not a valid time, please try again.");
-                }
-                else if (hm[0] >= 0 && hm[0] <= 23 && hm[1] >= 0 && hm[1] <= 59)
-                {
-                    timecheck = true;
-
-                }
-                else
-                {
-                    Console.WriteLine("Input is not a valid time, please try again.");
-                }
             }
             catch (FormatException e)
             {
                 Console.WriteLine("Invalid date format. Please enter the date in the format Hour:Minutes");
+            }
+            if (hm.Length != 2)
+            {
+                Console.WriteLine("Input is not a valid time, please try again.");
+            }
+            else if (hm[0] >= 0 && hm[0] <= 23 && hm[1] >= 0 && hm[1] <= 59)
+            {
+                timecheck = true;
+
+            }
+            else
+            {
+                Console.WriteLine("Input is not a valid time, please try again.");
             }
         }
         while (!timecheck);
