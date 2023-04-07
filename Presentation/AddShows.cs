@@ -102,7 +102,7 @@ public static class AddShows
         } while (!validInputDate || !validyear);
 
         Console.Clear();
-        Console.WriteLine("Type the time this show will start like (Hour-Minutes): ");
+        Console.WriteLine("Type the time this show will start like (Hour:Minutes): ");
         int[] hm;
         string time;
         bool timecheck = false;
@@ -112,7 +112,7 @@ public static class AddShows
             time = Console.ReadLine();
             try
             {
-                hm = time.Split("-").Select(int.Parse).ToArray();
+                hm = time.Split(":").Select(int.Parse).ToArray();
                 if (hm.Length != 2)
                 {
                     Console.WriteLine("Input is not a valid time, please try again.");
@@ -129,7 +129,7 @@ public static class AddShows
             }
             catch (FormatException e)
             {
-                Console.WriteLine("Invalid date format. Please enter the date in the format Hour-Minutes");
+                Console.WriteLine("Invalid date format. Please enter the date in the format Hour:Minutes");
             }
         }
         while (!timecheck);
