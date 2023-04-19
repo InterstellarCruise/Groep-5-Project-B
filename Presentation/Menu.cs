@@ -7,6 +7,8 @@ static class Menu
     public static bool AdminLogged = false;
     static public void Start()
     {
+
+        Console.CursorVisible = false;
         MenuBuilder menu = new MenuBuilder(Items());
         menu.DisplayMenu();
     }

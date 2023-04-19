@@ -8,12 +8,12 @@
     public static string legendred = "  [BLUE] --> 7.50 EUR";
     public static string legendorange = "  [GREEN] --> 10.50 EUR";
     public static ShowModel show { get; set; }
-    public static void MultipleChoice(List<MenuItem> options, int curpos)
+    public static void MultipleChoice(List<MenuItem> options, int curpos, int optionsperline)
     {
         Console.SetCursorPosition(0, 0);
-        const int startX = 4;
+        const int startX = 5;
         const int startY = 10;
-        const int optionsPerLine = 12;
+        int optionsPerLine = optionsperline;
         const int spacingPerLine = 4;
         origRow = Console.CursorTop;
         origCol = Console.CursorLeft;
@@ -47,7 +47,7 @@
                         }
                         else
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
                         }
                     }
 
@@ -66,6 +66,18 @@
                         Console.ForegroundColor = ConsoleColor.Blue;
                     else
                         Console.ForegroundColor = ConsoleColor.DarkGray;
+                    if (!options[i].chair.Available)
+                    {
+
+                        if (options[i].chair.takeseat)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                        }
+                    }
                 }
 
                 Console.Write(ChairLogic.RowNumber(options[i].chair));
@@ -76,6 +88,13 @@
 
             switch (key)
             {
+                case ConsoleKey.Escape:
+                    MoviePicker.Start();
+                    break;
+                case ConsoleKey.Spacebar:
+                    double amount = Reservation.Total("nothing");
+                    CheckOut.Start(_selectedchairs, amount, show);
+                    break;
                 case ConsoleKey.LeftArrow:
                     {
                         try
@@ -155,29 +174,8 @@
                                         {
                                             _selectedchairs.Add(options[currentSelection].chair);
                                             ChairLogic.TakeSeat(options[currentSelection].chair);
-                                            int le = legendorange.Length;
-                                            int re = legendred.Length;
-                                            if (selchairs.Length < 17)
-                                                selchairs = selchairs + $"{ChairLogic.RowNumber(options[currentSelection].chair)}/";
-                                            else if (le > 40 && le < 70)
-                                            {
-                                                legendorange = legendorange + $"{ChairLogic.RowNumber(options[currentSelection].chair)}/";
-                                            }
-                                            else if (le > 70 && re < 30)
-                                            {
-                                                legendred = legendred + $"\t\t\t\t\t  {ChairLogic.RowNumber(options[currentSelection].chair)}/";
-                                            }
-                                            else if (re > 30 && re < 70)
-                                                legendred = legendred + $"{ChairLogic.RowNumber(options[currentSelection].chair)}/";
-                                            else if (selchairs.Length > 17)
-                                                legendorange = legendorange + $"\t\t\t\t\t\t  {ChairLogic.RowNumber(options[currentSelection].chair)}/";
-
-
                                         }
-
-
                                     }
-
                                 }
                                 else
                                 {
@@ -186,20 +184,14 @@
                                         _selectedchairs.Remove(options[currentSelection].chair);
                                         string rownumb = ChairLogic.RowNumber(options[currentSelection].chair);
                                         ChairLogic.RemoveSeat(options[currentSelection].chair);
-                                        selchairs = selchairs.Replace($"{rownumb}/", "");
                                     }
-
                                 }
                             }
-
-
                         }
                         break;
                     }
             }
-
         }
-
     }
     protected static void WriteAt(string s, int x, int y)
     {
@@ -216,13 +208,13 @@
     }
     static void DisplayInfo()
     {
-        Console.WriteLine("---------------------------------------------------             -------------------------------------");
-        Console.WriteLine($"  Navigate using the arrow-keys\t\t\t\t\t  Total price: {Reservation.Total("nothing")} EUR\n  Select/Deselect chairs with [ENTER]\n  To continue use the down arrow-key on column [6]");
-        Console.WriteLine("---------------------------------------------------             -------------------------------------");
-        Console.WriteLine($"  [MAGENTA] --> 12.50 EUR\t\t\t\t\t  Selected Chairs:{selchairs}");
+        Console.WriteLine("---------------------------------------------------------       -------------------------------------");
+        Console.WriteLine($"  Navigate using the arrow-keys\t\t\t\t\t  Total price: {Reservation.Total("nothing")} EUR\n  Select/Deselect chairs with [ENTER]\n  Press [SPACE] to check-out and Press [ESC] to go back");
+        Console.WriteLine("---------------------------------------------------------       -------------------------------------");
+        Console.WriteLine($"  [MAGENTA] --> 12.50 EUR");
         Console.WriteLine(legendorange);
         Console.WriteLine(legendred);
-        Console.WriteLine("---------------------------------------------------             -------------------------------------");
+        Console.WriteLine("---------------------------------------------------------");
         for (int i = 0; i < 9; i++)
         {
             if (i == 0 || i == 4 || i == 8)
@@ -233,23 +225,24 @@
         for (int j = 0; j < 9; j++)
         {
             if (j == 0 || j == 4 || j == 8)
-                WriteAt("+", 50, j);
+                WriteAt("+", 56, j);
             else
-                WriteAt("|", 50, j);
+                WriteAt("|", 56, j);
         }
-        for (int k = 0; k < 9; k++)
+        for (int k = 0; k < 5; k++)
         {
-            if (k == 0 || k == 4 || k == 8)
+            if (k == 0 || k == 4)
                 WriteAt("+", 64, k);
             else
                 WriteAt("|", 64, k);
         }
-        for (int l = 0; l < 9; l++)
+        for (int l = 0; l < 5; l++)
         {
-            if (l == 0 || l == 4 || l == 8)
+            if (l == 0 || l == 4)
                 WriteAt("+", 101, l);
             else
                 WriteAt("|", 101, l);
         }
+
     }
 }

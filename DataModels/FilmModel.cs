@@ -15,8 +15,8 @@ public class FilmModel
     [JsonPropertyName("ageLimit")]
     public int AgeLimit { get; set; }
 
-    [JsonPropertyName("lenght")]
-    public double Lenght { get; set; }
+    [JsonPropertyName("length")]
+    public double Length { get; set; }
      
     [JsonPropertyName("genres")]
     public List<string> Genre { get; set; }
@@ -27,7 +27,7 @@ public class FilmModel
         Name = name;
         Description = description;
         AgeLimit = ageLimit;
-        Lenght = length;
+        Length = length;
         Genre = genre;
     }
 

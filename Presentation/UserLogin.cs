@@ -1,6 +1,7 @@
 public static class UserLogin
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
+    public static AccountModel CurrentAccount { get; private set; }
 
 
     public static void Start()
@@ -16,15 +17,20 @@ public static class UserLogin
     }
     public static void Dologin()
     {
-        Console.WriteLine("\nWelcome to the login page\n-----------------------------");
+        Console.CursorVisible = true;
         string email = "";
         do
         {
-            Console.WriteLine("Please enter your email address");
+            Console.WriteLine("\nWelcome to the login page\n-----------------------------");
+            Console.WriteLine("Please enter your email address or type 'B' to go back");
             email = Console.ReadLine().ToLower();
+            if (email == "b")
+                Start();
             if (!email.ToLower().Contains("@") && email != "admin")
             {
                 Console.WriteLine("\nenter a valid email address\n-----------------------------");
+                Thread.Sleep(2000);
+                Console.Clear();
             }
         } while (email != "admin" && !email.ToLower().Contains("@"));
         Console.WriteLine("Please enter your password");
@@ -34,7 +40,6 @@ public static class UserLogin
         {
             var keyInfo = Console.ReadKey(intercept: true);
             key = keyInfo.Key;
-
             if (key == ConsoleKey.Backspace && password.Length > 0)
             {
                 Console.Write("\b \b");
@@ -58,6 +63,7 @@ public static class UserLogin
             Thread.Sleep(milliseconds);
             Console.Clear();
             Menu.LoggedIn = true;
+            CurrentAccount = acc;
             Menu.Start();
         }
         else
@@ -74,6 +80,7 @@ public static class UserLogin
     }
     public static void Doregister()
     {
+        Console.CursorVisible = true;
         Console.WriteLine("\nFirst name");
         string fname = Console.ReadLine();
         string fname_after = fname.Substring(0, 1).ToUpper() + fname.Substring(1);

@@ -14,13 +14,6 @@ public class ChairLogic
     {
         _chairs = ChairsAccess.LoadAll();
 
-        int counter = 1;
-        foreach (ChairModel c in _chairs)
-        {
-            c.Id = counter;
-            //UpdateList(c);
-            counter++;
-        }
         ChairsAccess.WriteAll(_chairs);
     }
 
@@ -63,7 +56,19 @@ public class ChairLogic
         switch (chair.Row)
         {
             case "screen":
-                return "\b\b\b\bScreen\n    -----------------------------------------------";
+                if (chair.Roomid == 1)
+                {
+                    return "\t\t\tScreen\n    -----------------------------------------------";
+                }
+                else if (chair.Roomid == 2)
+                {
+                    return "\t\t\t\t    Screen\n    ------------------------------------------------------------------------";
+                }
+                else
+                {
+                    return "\t\t\t\t\t\t\t     Screen\n    ------------------------------------------------------------------------------------------------------------------------";
+                }
+                
             case "Continue":
                 return "\n\n\n\n\r\t\t\t\b\b\b<<Continue>>";
             default:

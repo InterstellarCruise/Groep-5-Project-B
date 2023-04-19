@@ -26,6 +26,8 @@ public class ChairModel
         Rank = rank;
         Column = column;
         Row = row;
+        Available = true;
+        takeseat = false;
     }
 
 }

@@ -6,37 +6,39 @@ static class MoviePicker
     //This shows the menu. You can call back to this method to show the menu again
     //after another presentation method is completed.
     //You could edit this to show different menus depending on the user's role
-    private static string _movie = "";
-    public static string movie
-    {
-        get { return _movie; }
-        set { _movie = value; }
-    }
+    public static string movie { get; set; }
+    public static ShowModel CurrentShow { get; set; }
     public static MenuItem CurrentMovie = null;
+    private static string[] data;
+    private static int room;
     static public void Start()
     {
         //Given data: The room number of the show and the date and time of the show.
-        string[] data = movie.Split();
-        int room = Convert.ToInt32(data[0]);
+        if (movie.Length > 0)
+        {
+            data = movie.Split();
+            room = Convert.ToInt32(data[0]);
+        }
+
 
 
 
         ShowsLogic filmsLogic = new ShowsLogic();
         List<ShowModel> shows = ShowsAccess.LoadAll();
-    
+
 
         foreach (ShowModel show in shows)
         {
-            if(show.RoomId == room & show.Date==data[2] & show.Time ==data[1]){
+            if (show.RoomId == room & show.Date == data[2] & show.Time == data[1]) {
 
                 List<MenuItem> items = new List<MenuItem>();
                 MenuBuilder menu = new MenuBuilder(items);
                 FilmsLogic filmsLogic_picker = new FilmsLogic();
                 List<FilmModel> films = FilmsAccess.LoadAll();
                 var film = filmsLogic_picker.GetById(show.FilmId);
-                CurrentMovie = new MenuItem($"-----------------------------\nMovie name: {film.Name} \nDescription: {film.Description} \nAge limit: {film.AgeLimit}\nfilm duration: {film.Lenght} \n-----------------------------", null);
-                CurrentMovie.show = show;
+                CurrentMovie = new MenuItem($"-----------------------------\nMovie name: {film.Name} \nDescription: {film.Description} \nAge limit: {film.AgeLimit}\nfilm duration: {film.Length} \n-----------------------------", null);
                 items.Add(CurrentMovie);
+                CurrentShow = show;
                 if (!Menu.LoggedIn)
                 {
                     items.Add(new MenuItem("If you have read the age limit and are agreeing to the terms and conditions you may login to verify your account.", movielogin));
@@ -44,7 +46,9 @@ static class MoviePicker
                 }
                 else
                 {
-                    items.Add(new MenuItem("Make reservation", Reservation.Main));
+                    var Reservationoption = new MenuItem("Make reservation", Reservation.Main);
+                    Reservationoption.show = show;
+                    items.Add(Reservationoption);
                 }
                 items.Add(new MenuItem("Back", DatePicker.showChoose));
                 items.Add(new MenuItem("Main menu", Menu.Start));
@@ -52,19 +56,23 @@ static class MoviePicker
 
             }
         }
-
-     static void movielogin()
+    }
+    static void movielogin()
     {
-        
-        Console.WriteLine("\nWelcome to the login page\n-----------------------------");
+        Console.CursorVisible = true;
         string email = "";
         do
         {
-            Console.WriteLine("Please enter your email address");
+            Console.WriteLine("Welcome to the login page\n-----------------------------");
+            Console.WriteLine("Please enter your email address or type 'B' to go back");
             email = Console.ReadLine().ToLower();
+            if (email == "b")
+                    Start();
             if (!email.ToLower().Contains("@") && email != "admin")
             {
                 Console.WriteLine("\nPlease enter a valid email address\n-----------------------------");
+                Thread.Sleep(2000);
+                Console.Clear();
             }
         } while (email != "admin" && !email.ToLower().Contains("@"));
         Console.WriteLine("Please enter your password");
@@ -100,7 +108,10 @@ static class MoviePicker
             Console.Clear();
             List<MenuItem> items = new List<MenuItem>();
             items.Add(CurrentMovie);
-            items.Add(new MenuItem("Make reservation", Reservation.Main));
+
+            var Reservationoption = new MenuItem("Make reservation", Reservation.Main);
+            Reservationoption.show = CurrentShow;
+            items.Add(Reservationoption);
             items.Add(new MenuItem("Back", DatePicker.showChoose));
             items.Add(new MenuItem("Main menu", Menu.Start));
             MenuBuilder menu = new MenuBuilder(items);
@@ -120,8 +131,9 @@ static class MoviePicker
         }
 
         }
-         static void Movieregister()
+    static void Movieregister()
     {
+        Console.CursorVisible = true;
         Console.WriteLine("\nwhat is you're First name");
         string fname = Console.ReadLine();
         string fname_after = fname.Substring(0, 1).ToUpper() + fname.Substring(1);
@@ -150,7 +162,9 @@ static class MoviePicker
             Console.Clear();
             List<MenuItem> items = new List<MenuItem>();
             items.Add(CurrentMovie);
-            items.Add(new MenuItem("Make reservation", Menu.NotImplemented));
+            var Reservationoption = new MenuItem("Make reservation", Reservation.Main);
+            Reservationoption.show = CurrentShow;
+            items.Add(Reservationoption);
             items.Add(new MenuItem("Back", DatePicker.showChoose));
             items.Add(new MenuItem("Main menu", Menu.Start));
             MenuBuilder menu = new MenuBuilder(items);
@@ -174,7 +188,7 @@ static class MoviePicker
 
         
     }
-    }
+    
 
 
         

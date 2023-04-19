@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Claims;
 
 public class Reservation
 {
@@ -72,172 +73,91 @@ public class Reservation
     public static void RoomOne()
     {
         List<MenuItem> items = new List<MenuItem>();
-        /*
-        for (int i = 0; i < 3; i++)
-        {
-            string row = Chair.GetRow(i);
-            for (int j = 1; j < 13; j++)
-            {
-                if (i == 0 && j <= 2 || i == 0 && j > 10)
-                {
-                    Chair nochair = TempChair();
-                    chairs.Add(nochair);
-                }
-                else if (i == 0)
-                {
-                    Chair tempchair = new Chair(3, j, row);
-                    tempchair.Available = false;
-                    chairs.Add(tempchair);
-                }
-
-                if (i == 1 && j <= 1 || i == 1 && j > 11 || i == 2 && j <= 1 || i == 2 && j > 11)
-                {
-                    Chair nochair = TempChair();
-                    chairs.Add(nochair);
-                }
-                else if (i == 1 || i == 2)
-                {
-                    Chair tempchair = new Chair(3, j, row);
-                    chairs.Add(tempchair);
-                }
-            }
-        }
-        for (int i = 3; i < 11; i++)
-        {
-            string row = Chair.GetRow(i);
-            for (int j = 1; j < 13; j++)
-            {
-                if (i == 3 && j > 5 && j < 8)
-                {
-                    Chair tempchair = new Chair(2, j, row);
-                    chairs.Add(tempchair);
-                }
-                else if (i == 4 && j > 4 && j < 9)
-                {
-                    Chair tempchair = new Chair(2, j, row);
-                    chairs.Add(tempchair);
-                }
-                else if (i > 4 && i < 9 && j > 3 && j < 10)
-                {
-                    if (j > 5 && j < 8)
-                    {
-                        Chair tempchair = new Chair(1, j, row);
-                        chairs.Add(tempchair);
-                    }
-                    else
-                    {
-                        Chair tempchair = new Chair(2, j, row);
-                        chairs.Add(tempchair);
-                    }
-                }
-                else if (i == 9 && j > 4 && j < 9)
-                {
-                    Chair tempchair = new Chair(2, j, row);
-                    chairs.Add(tempchair);
-                }
-                else if (i == 10 && j > 5 && j < 8)
-                {
-                    Chair tempchair = new Chair(2, j, row);
-                    chairs.Add(tempchair);
-                }
-
-                else
-                {
-                    Chair tempchair = new Chair(3, j, row);
-                    chairs.Add(tempchair);
-                }
-            }
-        }
-        for (int i = 11; i < 14; i++)
-        {
-            string row = Chair.GetRow(i);
-            for (int j = 1; j < 13; j++)
-            {
-                if (i == 11 && j == 1 || i == 11 && j == 12 || i > 11 && j <= 2 || i > 11 && j >= 11)
-                {
-                    Chair nochair = TempChair();
-                    chairs.Add(nochair);
-                }
-                else
-                {
-                    Chair tempchair = new Chair(3, j, row);
-                    chairs.Add(tempchair);
-                }
-            }
-        }
-        foreach (Chair chair in chairs)
-        {
-            items.Add(new MenuItem(chair, Print));
-        }
-        for (int l = 0; l < 13; l++)
-        {
-            if (l == 5)
-            {
-                Chair continue1 = new Chair(0, 0, "Continue");
-                items.Add(new MenuItem(continue1, Continue));
-            }
-            else
-            {
-                Chair dummychair = new Chair(0, 0, null);
-                items.Add(new MenuItem(dummychair, Nothing));
-            }
-
-        }
-        for (int k = 1; k < 13; k++)
-        {
-            if (k == 6)
-            {
-                Chair screen = new Chair(0, 0, "screen");
-                items.Add(new MenuItem(screen, Nothing));
-            }
-            else
-            {
-
-                Chair dummychair = new Chair(0, 0, null);
-                items.Add(new MenuItem(dummychair, Nothing));
-            }
-        }
-        */
         ChairLogic chairLogic = new ChairLogic();
         List<ChairModel> chairs = chairLogic.GetByRoomId(1);
+        ReservationScreenBuilder.show = CurrentShow;
+        List<ChairModel> ressedchairs = GetReservations(1);
+        foreach (ChairModel chair in chairs)
+        {
+            foreach (ChairModel ressedchair in ressedchairs)
+            {
+                if (ChairLogic.RowNumber(ressedchair) == ChairLogic.RowNumber(chair))
+                {
+                    chair.Available = false;
+                }
+
+            }
+        }
         foreach (ChairModel chair in chairs)
         {
             items.Add(new MenuItem(chair, Print));
         }
-        ReservationScreenBuilder.show = CurrentShow;
-        ReservationScreenBuilder.MultipleChoice(items, 2);
+        ReservationScreenBuilder.MultipleChoice(items, 2, 12);
 
 
     }
     
-    /*public static Chair TempChair()
-    {
-        Chair nochair = new Chair(0, 0, null);
-        return nochair;
-    }
-    */
     public static void RoomTwo()
     {
         List<MenuItem> items = new List<MenuItem>();
         ChairLogic chairLogic = new ChairLogic();
         List<ChairModel> chairs = chairLogic.GetByRoomId(2);
+        ReservationScreenBuilder.show = CurrentShow;
+        List<ChairModel> ressedchairs = GetReservations(2);
+        foreach (ChairModel chair in chairs)
+        {
+            foreach (ChairModel ressedchair in ressedchairs)
+            {
+                if (ChairLogic.RowNumber(ressedchair) == ChairLogic.RowNumber(chair))
+                {
+                    chair.Available = false;
+                }
+            }
+        }
         foreach (ChairModel chair in chairs)
         {
             items.Add(new MenuItem(chair, Print));
         }
-        ReservationScreenBuilder.show = CurrentShow;
-        ReservationScreenBuilder.MultipleChoice(items, 2);
+        ReservationScreenBuilder.MultipleChoice(items, 2, 18);
     }
     public static void RoomThree()
     {
         List<MenuItem> items = new List<MenuItem>();
         ChairLogic chairLogic = new ChairLogic();
         List<ChairModel> chairs = chairLogic.GetByRoomId(3);
+        ReservationScreenBuilder.show = CurrentShow;
+        List<ChairModel> ressedchairs = GetReservations(3);
+        foreach (ChairModel chair in chairs)
+        {
+            foreach (ChairModel ressedchair in ressedchairs)
+            {
+                if (ChairLogic.RowNumber(ressedchair) == ChairLogic.RowNumber(chair))
+                {
+                    chair.Available = false;
+                }
+
+            }
+        }
         foreach (ChairModel chair in chairs)
         {
             items.Add(new MenuItem(chair, Print));
         }
-        ReservationScreenBuilder.show = CurrentShow;
-        ReservationScreenBuilder.MultipleChoice(items, 2);
+        ReservationScreenBuilder.MultipleChoice(items, 5, 30);
+    }
+    public static List<ChairModel> GetReservations(int roomId)
+    {
+        ReservationsLogic reservationsLogic = new ReservationsLogic();
+        List<TheReservationModel> reservations = reservationsLogic.GetByShowId(CurrentShow.Id, roomId);
+        List<ChairModel> chairs = new List<ChairModel>();
+        foreach(TheReservationModel theReservation in reservations)
+        {
+            foreach(int i in theReservation.Ressedchairs)
+            {
+                ChairLogic chairlogic = new ChairLogic();
+                ChairModel chair = chairlogic.GetById(i);
+                chairs.Add(chair);
+            }
+        }
+        return chairs;
     }
 }
