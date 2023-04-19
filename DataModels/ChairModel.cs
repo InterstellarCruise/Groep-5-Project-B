@@ -16,6 +16,8 @@ public class ChairModel
 
     [JsonPropertyName("row")]
     public string Row { get; set; }
+    public bool Available;
+    public bool takeseat;
 
     public ChairModel(int id, int roomid, int rank, int column, string row)
     {

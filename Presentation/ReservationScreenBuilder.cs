@@ -1,12 +1,13 @@
 ﻿public class ReservationScreenBuilder
 {
     private static bool _running = true;
-    private static List<Chair> _selectedchairs = new List<Chair>();
+    private static List<ChairModel> _selectedchairs = new List<ChairModel>();
     public static string selchairs = "";
     protected static int origRow;
     protected static int origCol;
     public static string legendred = "  [BLUE] --> 7.50 EUR";
     public static string legendorange = "  [GREEN] --> 10.50 EUR";
+    public static ShowModel show { get; set; }
     public static void MultipleChoice(List<MenuItem> options, int curpos)
     {
         Console.SetCursorPosition(0, 0);
@@ -67,7 +68,7 @@
                         Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
 
-                Console.Write(options[i].chair.RowNumber());
+                Console.Write(ChairLogic.RowNumber(options[i].chair));
 
                 Console.ResetColor();
             }
@@ -142,7 +143,7 @@
                             {
                                 if (!_selectedchairs.Contains(options[currentSelection].chair))
                                 {
-                                    if (options[currentSelection].chair.RowNumber() == "Continue")
+                                    if (ChairLogic.RowNumber(options[currentSelection].chair) == "Continue")
                                     {
                                         options[currentSelection].Execute();
                                         _running = false;
@@ -153,23 +154,23 @@
                                         if (options[currentSelection].chair.Row != "Selected Chairs: " && options[currentSelection].chair.Row != "screen" && options[currentSelection].chair.Row != "Total cost: ")
                                         {
                                             _selectedchairs.Add(options[currentSelection].chair);
-                                            options[currentSelection].chair.TakeSeat();
+                                            ChairLogic.TakeSeat(options[currentSelection].chair);
                                             int le = legendorange.Length;
                                             int re = legendred.Length;
                                             if (selchairs.Length < 17)
-                                                selchairs = selchairs + $"{options[currentSelection].chair.RowNumber()}/";
+                                                selchairs = selchairs + $"{ChairLogic.RowNumber(options[currentSelection].chair)}/";
                                             else if (le > 40 && le < 70)
                                             {
-                                                legendorange = legendorange + $"{options[currentSelection].chair.RowNumber()}/";
+                                                legendorange = legendorange + $"{ChairLogic.RowNumber(options[currentSelection].chair)}/";
                                             }
                                             else if (le > 70 && re < 30)
                                             {
-                                                legendred = legendred + $"\t\t\t\t\t  {options[currentSelection].chair.RowNumber()}/";
+                                                legendred = legendred + $"\t\t\t\t\t  {ChairLogic.RowNumber(options[currentSelection].chair)}/";
                                             }
                                             else if (re > 30 && re < 70)
-                                                legendred = legendred + $"{options[currentSelection].chair.RowNumber()}/";
+                                                legendred = legendred + $"{ChairLogic.RowNumber(options[currentSelection].chair)}/";
                                             else if (selchairs.Length > 17)
-                                                legendorange = legendorange + $"\t\t\t\t\t\t  {options[currentSelection].chair.RowNumber()}/";
+                                                legendorange = legendorange + $"\t\t\t\t\t\t  {ChairLogic.RowNumber(options[currentSelection].chair)}/";
 
 
                                         }
@@ -183,8 +184,8 @@
                                     if (options[currentSelection].chair.Row != "screen" && options[currentSelection].chair.Row != "Total cost: ")
                                     {
                                         _selectedchairs.Remove(options[currentSelection].chair);
-                                        string rownumb = options[currentSelection].chair.RowNumber();
-                                        options[currentSelection].chair.RemoveSeat();
+                                        string rownumb = ChairLogic.RowNumber(options[currentSelection].chair);
+                                        ChairLogic.RemoveSeat(options[currentSelection].chair);
                                         selchairs = selchairs.Replace($"{rownumb}/", "");
                                     }
 

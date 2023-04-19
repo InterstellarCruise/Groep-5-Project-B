@@ -2,11 +2,12 @@
 {
     public string DisplayText;
     public Action Action;
-    public Chair chair;
+    public ChairModel chair;
     public string RoomTimeDate
     { get; set; }
+    public ShowModel show { get; set; }
 
-    public MenuItem(Chair chair1, Action action) : this(chair1.RowNumber(), action) => chair = chair1;
+    public MenuItem(ChairModel chair1, Action action) : this(ChairLogic.RowNumber(chair1), action) => chair = chair1;
     public MenuItem(string displayText, Action action)
     {
         DisplayText = displayText;

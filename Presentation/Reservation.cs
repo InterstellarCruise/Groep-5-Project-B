@@ -3,9 +3,24 @@
 public class Reservation
 {
     private static double totalprice = 0;
+    public static ShowModel CurrentShow { get; set; }
     public static void Main()
     {
-        RoomOne();
+        switch (CurrentShow.RoomId)
+        {
+            case 1:
+                RoomOne();
+                break;
+            case 2:
+                RoomTwo();
+                break;
+            case 3:
+                RoomThree();
+                break;
+            default:
+                break;
+        }
+
     }
     public static void Nothing() { }
     public static double Total(int rank)
@@ -46,9 +61,7 @@ public class Reservation
     {
         return totalprice;
     }
-    public static void Print()
-    {
-    }
+    public static void Print() { }
     public static void Continue()
     {
         Console.Clear();
@@ -58,8 +71,8 @@ public class Reservation
     }
     public static void RoomOne()
     {
-        List<Chair> chairs = new List<Chair>();
         List<MenuItem> items = new List<MenuItem>();
+        /*
         for (int i = 0; i < 3; i++)
         {
             string row = Chair.GetRow(i);
@@ -184,13 +197,47 @@ public class Reservation
                 items.Add(new MenuItem(dummychair, Nothing));
             }
         }
+        */
+        ChairLogic chairLogic = new ChairLogic();
+        List<ChairModel> chairs = chairLogic.GetByRoomId(1);
+        foreach (ChairModel chair in chairs)
+        {
+            items.Add(new MenuItem(chair, Print));
+        }
+        ReservationScreenBuilder.show = CurrentShow;
         ReservationScreenBuilder.MultipleChoice(items, 2);
 
 
     }
-    public static Chair TempChair()
+    
+    /*public static Chair TempChair()
     {
         Chair nochair = new Chair(0, 0, null);
         return nochair;
+    }
+    */
+    public static void RoomTwo()
+    {
+        List<MenuItem> items = new List<MenuItem>();
+        ChairLogic chairLogic = new ChairLogic();
+        List<ChairModel> chairs = chairLogic.GetByRoomId(2);
+        foreach (ChairModel chair in chairs)
+        {
+            items.Add(new MenuItem(chair, Print));
+        }
+        ReservationScreenBuilder.show = CurrentShow;
+        ReservationScreenBuilder.MultipleChoice(items, 2);
+    }
+    public static void RoomThree()
+    {
+        List<MenuItem> items = new List<MenuItem>();
+        ChairLogic chairLogic = new ChairLogic();
+        List<ChairModel> chairs = chairLogic.GetByRoomId(3);
+        foreach (ChairModel chair in chairs)
+        {
+            items.Add(new MenuItem(chair, Print));
+        }
+        ReservationScreenBuilder.show = CurrentShow;
+        ReservationScreenBuilder.MultipleChoice(items, 2);
     }
 }

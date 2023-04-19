@@ -58,6 +58,40 @@ public class ChairLogic
         }
         return roomschairs;
     }
+    public static string RowNumber(ChairModel chair)
+    {
+        switch (chair.Row)
+        {
+            case "screen":
+                return "\b\b\b\bScreen\n    -----------------------------------------------";
+            case "Continue":
+                return "\n\n\n\n\r\t\t\t\b\b\b<<Continue>>";
+            default:
+                if (chair.Rank != 0 && chair.Column != 0)
+                {
+                    return $"{chair.Row}{chair.Column}";
+                }
+                else
+                {
+                    return null;
+                }
+        }
+    }
+    public static void TakeSeat(ChairModel chair)
+    {
+        chair.takeseat = true;
+        chair.Available = false;
+        Reservation.Total(chair.Rank);
+    }
+    public static void RemoveSeat(ChairModel chair)
+    {
+        if (chair.takeseat)
+        {
+            chair.takeseat = false;
+            chair.Available = true;
+            Reservation.RemoveTotal(chair.Rank);
+        }
 
+    }
 
 }

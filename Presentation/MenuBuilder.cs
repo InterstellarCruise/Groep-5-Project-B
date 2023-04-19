@@ -62,6 +62,10 @@
                 {
                     MoviePicker.movie = _items[selectedIndex].RoomTimeDate;
                 }
+                if (_items[selectedIndex].show != null)
+                {
+                    Reservation.CurrentShow = _items[selectedIndex].show;
+                }
                 if (_items[selectedIndex].Action != null)
                 {
                     _items[selectedIndex].Execute();
