@@ -3,7 +3,7 @@ using System.Security.Claims;
 
 public class Reservation
 {
-    private static double totalprice = 0;
+    public static double totalprice = 0;
     public static ShowModel CurrentShow { get; set; }
     public static void Main()
     {
@@ -118,7 +118,7 @@ public class Reservation
         {
             items.Add(new MenuItem(chair, Print));
         }
-        ReservationScreenBuilder.MultipleChoice(items, 2, 18);
+        ReservationScreenBuilder.MultipleChoice(items, 1, 18);
     }
     public static void RoomThree()
     {

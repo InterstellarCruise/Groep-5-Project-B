@@ -10,6 +10,31 @@
     public static ShowModel show { get; set; }
     public static void MultipleChoice(List<MenuItem> options, int curpos, int optionsperline)
     {
+        if (!CheckOut.BackMenu)
+        {
+            if (_selectedchairs.Count != 0)
+            {
+                foreach (MenuItem item in options)
+                {
+                    foreach (ChairModel chair in _selectedchairs)
+                    {
+                        if (ChairLogic.RowNumber(item.chair) == ChairLogic.RowNumber(chair))
+                        {
+                            item.chair.Available = false;
+                            item.chair.takeseat = true;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            _selectedchairs.Clear();
+            Reservation.totalprice = 0;
+            CheckOut.BackMenu = false;
+        }
+            
+
         Console.SetCursorPosition(0, 0);
         const int startX = 5;
         const int startY = 10;
@@ -43,7 +68,7 @@
 
                         if (options[currentSelection].chair.takeseat)
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                         }
                         else
                         {
@@ -89,6 +114,8 @@
             switch (key)
             {
                 case ConsoleKey.Escape:
+                    Reservation.totalprice = 0;
+                    _selectedchairs.Clear();
                     MoviePicker.Start();
                     break;
                 case ConsoleKey.Spacebar:
@@ -152,41 +179,26 @@
                     }
                 case ConsoleKey.Enter:
                     {
-                        bool chair = options[currentSelection].chair.Available;
                         if (options[currentSelection].chair.Row != null)
                         {
-                            if (!options[currentSelection].chair.Available && !options[currentSelection].chair.takeseat)
+                            if (options[currentSelection].chair.Available && !options[currentSelection].chair.takeseat)
                             {
+                                options[currentSelection].Execute();
+                                if (!_selectedchairs.Contains(options[currentSelection].chair))
+                                {
+                                    options[currentSelection].Execute();
+                                    _selectedchairs.Add(options[currentSelection].chair);
+                                    ChairLogic.TakeSeat(options[currentSelection].chair);
+                                }
                             }
                             else
                             {
-                                if (!_selectedchairs.Contains(options[currentSelection].chair))
-                                {
-                                    if (ChairLogic.RowNumber(options[currentSelection].chair) == "Continue")
-                                    {
-                                        options[currentSelection].Execute();
-                                        _running = false;
-                                    }
-                                    else
-                                    {
-                                        options[currentSelection].Execute();
-                                        if (options[currentSelection].chair.Row != "Selected Chairs: " && options[currentSelection].chair.Row != "screen" && options[currentSelection].chair.Row != "Total cost: ")
-                                        {
-                                            _selectedchairs.Add(options[currentSelection].chair);
-                                            ChairLogic.TakeSeat(options[currentSelection].chair);
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    if (options[currentSelection].chair.Row != "screen" && options[currentSelection].chair.Row != "Total cost: ")
-                                    {
-                                        _selectedchairs.Remove(options[currentSelection].chair);
-                                        string rownumb = ChairLogic.RowNumber(options[currentSelection].chair);
-                                        ChairLogic.RemoveSeat(options[currentSelection].chair);
-                                    }
-                                }
+                                _selectedchairs.Remove(options[currentSelection].chair);
+                                ChairLogic.RemoveSeat(options[currentSelection].chair);
+
                             }
+                            
+                            
                         }
                         break;
                     }
