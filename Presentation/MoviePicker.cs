@@ -13,6 +13,8 @@ static class MoviePicker
         set { _movie = value; }
     }
     public static MenuItem CurrentMovie = null;
+    public static ShowModel theshow =null;
+    static ReservationsLogic reservationsLogic = new ReservationsLogic();
     static public void Start()
     {
         //Given data: The room number of the show and the date and time of the show.
@@ -28,13 +30,13 @@ static class MoviePicker
         foreach (ShowModel show in shows)
         {
             if(show.RoomId == room & show.Date==data[2] & show.Time ==data[1]){
-
+                theshow = show;
                 List<MenuItem> items = new List<MenuItem>();
                 MenuBuilder menu = new MenuBuilder(items);
                 FilmsLogic filmsLogic_picker = new FilmsLogic();
                 List<FilmModel> films = FilmsAccess.LoadAll();
                 var film = filmsLogic_picker.GetById(show.FilmId);
-                CurrentMovie = new MenuItem($"-----------------------------\nMovie name: {film.Name} \nDescription: {film.Description} \nAge limit: {film.AgeLimit}\nfilm duration: {film.Lenght} \n-----------------------------", null);
+                CurrentMovie = new MenuItem($"-----------------------------\nMovie name: {film.Name} \nDescription: {film.Description} \nAge limit: {film.AgeLimit}\nfilm duration: {film.Length} \n-----------------------------", null);
                 items.Add(CurrentMovie);
                 if (!Menu.LoggedIn)
                 {
@@ -112,36 +114,18 @@ static class MoviePicker
         acc.NewAcc(email, password, fullname);
         Console.WriteLine("you have Succesfully registered");
         AccountModel ac = accountLogic.CheckLogin(email, password);
-        if (acc != null)
-        {
-            if(ac.FullName == "Admin")
-            {
-                Menu.AdminLogged = true;
-            }
-            Menu.LoggedIn = true;
-            int millisecond = 2000;
-            Thread.Sleep(millisecond);
-            Console.Clear();
-            List<MenuItem> items = new List<MenuItem>();
-            items.Add(CurrentMovie);
-            items.Add(new MenuItem("Make reservation", Menu.NotImplemented));
-            items.Add(new MenuItem("Back", DatePicker.showChoose));
-            items.Add(new MenuItem("Main menu", Menu.Start));
-            MenuBuilder menu = new MenuBuilder(items);
-            menu.DisplayMenu();
-            }
-        else
-        {
-            Console.WriteLine("-----------------------------\nNo account found with that email and password");
-            int millisecondss = 2000;
-            Thread.Sleep(millisecondss);
-            List<MenuItem> items = new List<MenuItem>();
-            items.Add(new MenuItem("Try aigan", movielogin));
-            items.Add(new MenuItem("Back", DatePicker.showChoose));
-            items.Add(new MenuItem("Main menu", Menu.Start));
-            MenuBuilder menu = new MenuBuilder(items);
-            menu.DisplayMenu();
-        }
+        Menu.LoggedIn = true;
+        int millisecond = 2000;
+        Thread.Sleep(millisecond);
+        Console.Clear();
+        List<MenuItem> items = new List<MenuItem>();
+        List<int> chiars = new List<int>{1,3};
+        items.Add(CurrentMovie);
+        items.Add(new MenuItem("Make reservation", Transaction.reservation(ac.Id,theshow.Id,chiars)));
+        items.Add(new MenuItem("Back", DatePicker.showChoose));
+        items.Add(new MenuItem("Main menu", Menu.Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
         int milliseconds = 2000;
         Thread.Sleep(milliseconds);
         Console.Clear();

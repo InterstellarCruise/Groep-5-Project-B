@@ -4,8 +4,8 @@
         "showid":1,
         "accountid":1,
         "ressedchiars":[
-            "bye",
-            "hi"
+            2,
+            1
         ]
     },
     {
@@ -13,8 +13,8 @@
         "showid":2,
         "accountid":2,
         "ressedchiars":[
-            "bye",
-            "hi"
+            1,
+            2
         ]   
     }
 ]

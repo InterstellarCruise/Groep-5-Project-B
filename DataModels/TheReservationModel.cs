@@ -11,9 +11,9 @@ public class TheReservationModel
     public int Accountid { get; set; }
 
     [JsonPropertyName("ressedchair")]
-    public List<string> Ressedchair { get; set; }
+    public List<int> Ressedchair { get; set; }
 
-    public TheReservationModel(int id, int showid, int accountid, List<string> ressedchairs)
+    public TheReservationModel(int id, int showid, int accountid, List<int> ressedchairs)
     {
         Id = id;
         Showid = showid;
