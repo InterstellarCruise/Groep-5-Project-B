@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Text.Json;
 
@@ -53,13 +52,13 @@ class ShowsLogic
                 emptyOrNot = true;
                 FilmsLogic filmsLogic = new FilmsLogic();
                 FilmModel film = filmsLogic.GetById(show.FilmId);
-                string key = $"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}.";
+                string key = $"Room: {show.RoomId}, Date: {show.Date}, Time: {show.Time}, Movie name: {film.Name}, Movie length: {film.Length}H";
                 string value = $"{show.RoomId} {show.Time} {show.Date}";
                 if (!ShowInfo.ContainsKey(key))
                 {
                     ShowInfo.Add(key, value);
                 }
-                
+
             }
         }
         return emptyOrNot;
@@ -76,7 +75,7 @@ class ShowsLogic
         ShowModel show = null;
         try
         {
-            show = shows.Find(i => i.RoomId == Convert.ToDouble(input[0]) && i.Time == input[1]);
+            show = shows.Find(i => i.RoomId == Convert.ToInt32(input[0]) && i.Time == input[1]);
         }
         catch (Exception)
         {
@@ -91,23 +90,17 @@ class ShowsLogic
         return _shows.Find(i => i.Id == id);
     }
 
-    public ShowModel GetByFilmId(int id)
-    {
-        return _shows.Find(i => i.FilmId == id);
-    }
-
     public void DeleteShow(ShowModel show)
     {
-        
+
         _shows.Remove(show);
         ShowsAccess.WriteAll(_shows);
     }
-
-    public bool ValidShowDate(string date)
+    public static int LastID()
     {
-        DateTime tempObject;
-
-        return DateTime.TryParseExact(date, "yyyy-mm-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out tempObject);
+        List<ShowModel> _shows = ShowsAccess.LoadAll();
+        int ID = _shows.Count;
+        return ID;
     }
 }
 
