@@ -19,6 +19,12 @@ public static class ShowsAccess
         File.WriteAllText(path, json);
     }
 
+    public static void Add(ShowModel show)
+    {
+        var shows = LoadAll();
+        shows.Add(show);
+        WriteAll(shows);
+    }
 
 
 }
