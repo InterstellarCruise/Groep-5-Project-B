@@ -157,6 +157,8 @@ public static class ChangeShows
     public static void SearchByID()
     {
         Console.Clear();
+        Console.WriteLine("These are all the current shows");
+        ShowsLogic.AllCurrentShows();
         Console.WriteLine("Enter the ID of the show you want to view \n-------------------------------");
         int id = Convert.ToInt32(Console.ReadLine());
         show = showLogic.GetById(id);

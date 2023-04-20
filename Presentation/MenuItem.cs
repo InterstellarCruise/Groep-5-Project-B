@@ -15,6 +15,12 @@
         RoomTimeDate = "";
 
     }
+    private int _movieId;
+    public int MovieId
+    {
+        get { return _movieId; }
+        set { _movieId = value; }
+    }
 
     public void Execute() => Action();
 }

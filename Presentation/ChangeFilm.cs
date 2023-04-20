@@ -124,6 +124,8 @@ public static class ChangeFilm
     public static void SearchByID()
     {
         Console.Clear();
+        Console.WriteLine("These are all the current films");
+        FilmsLogic.AllCurrentFilms();
         Console.WriteLine("Enter the ID of the film you want to view \n-------------------------------");
         int id = Convert.ToInt32(Console.ReadLine());
         film = filmLogic.GetById(id);

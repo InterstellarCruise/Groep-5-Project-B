@@ -25,6 +25,8 @@ public static class RemoveShows
     }
     public static void DeleteShow()
     {
+        Console.WriteLine("These are all the current shows");
+        ShowsLogic.AllCurrentShows();
         Console.WriteLine("Enter show id you want to delete");
         int id = Convert.ToInt32(Console.ReadLine());
         ShowModel show = showLogic.GetById(id);
@@ -36,6 +38,8 @@ public static class RemoveShows
     }
     public static void DeleteFilm()
     {
+        Console.WriteLine("These are all the current films");
+        FilmsLogic.AllCurrentFilms();
         Console.WriteLine("Enter film id you want to delete");
         int id = Convert.ToInt32(Console.ReadLine());
         FilmModel film = filmLogic.GetById(id);

@@ -59,7 +59,7 @@ class ShowsLogic
                 {
                     ShowInfo.Add(key, value);
                 }
-                
+
             }
         }
         return emptyOrNot;
@@ -98,7 +98,7 @@ class ShowsLogic
 
     public void DeleteShow(ShowModel show)
     {
-        
+
         _shows.Remove(show);
         ShowsAccess.WriteAll(_shows);
     }
@@ -115,6 +115,16 @@ class ShowsLogic
         List<ShowModel> _shows = ShowsAccess.LoadAll();
         int ID = _shows.Count;
         return ID;
+    }
+    public static void AllCurrentShows()
+    {
+        List<ShowModel> Shows = ShowsAccess.LoadAll();
+        foreach (ShowModel show in Shows)
+        {
+            Console.WriteLine($"Show ID: {show.Id}");
+            Console.WriteLine($"Room: {show.RoomId}");
+            Console.WriteLine($"Film: {show.FilmId} \n");
+        }
     }
 }
 
