@@ -2,6 +2,7 @@ static class Bar
 {
     static ReservationsLogic reservationsLogic = new ReservationsLogic();
     static BarLogic barLogic = new BarLogic();
+    public static string answer = "no";
 
     static public void barplace(int account_id ,string date, string Time)
     {
@@ -35,17 +36,12 @@ static class Bar
             {
                 var new_bar = new BarModel(number,date ,account_id,Time);
                 barLogic.UpdateList(new_bar);
+                answer = "yes";
+
             }
         
         }
-        List<MenuItem> items = new List<MenuItem>();
-        items.Add(new MenuItem("Back", DatePicker.showChoose));
-        items.Add(new MenuItem("Main menu", Menu.Start));
-        MenuBuilder menu = new MenuBuilder(items);
-        menu.DisplayMenu();
-        int milliseconds = 2000;
-        Thread.Sleep(milliseconds);
-        Console.Clear();
+        
     }
     
 }

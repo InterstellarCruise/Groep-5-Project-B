@@ -49,6 +49,7 @@
         ReservationsLogic reservationlogic  = new ReservationsLogic(); 
         film = filmLogic.GetById(_show.FilmId);
         reservationlogic.AddReservation(_show.Id, acc.Id, _chairs, _amount);
+        Bar.barplace(acc.Id,_show.Date,_show.Time);
         Console.WriteLine("Transaction Receipt from Shinema");
         Console.WriteLine("------------------------------");
         Console.WriteLine($"Movie: {film.Name}");
