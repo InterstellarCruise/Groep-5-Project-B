@@ -9,6 +9,7 @@ public class ReservationList
         List<TheReservationModel> reslist = ReservationsLogic.ReservationsByAccount(id);
         foreach (TheReservationModel res in reslist)
         {
+            ShowModel show = ShowsLogic.GetById(res.Showid);
             Console.WriteLine($"{res.Id}");
         }
         // items.Add(new MenuItem("\nBack", Start));
