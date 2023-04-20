@@ -57,6 +57,22 @@ class FilmsLogic
         int ID = _films.Count;
         return ID;
     }
+
+    public static void AllFilms(List<FilmModel> films)
+    {
+        foreach (FilmModel film in films)
+        {
+
+
+            FilmsLogic filmsLogic = new FilmsLogic();
+            string key = $"Film name: {film.Name}.";
+            int value = film.Id;
+            if (!FilmInfo.ContainsKey(key))
+            {
+                FilmInfo.Add(key, value);
+            }
+        }
+    }
 }
 
 
