@@ -10,7 +10,8 @@ public class ReservationList
         foreach (TheReservationModel res in reslist)
         {
             ShowModel show = ShowsLogic.GetById(res.Showid);
-            Console.WriteLine($"{res.Id}");
+            _show = show;
+            Console.WriteLine($"{_show.Id}");
         }
         // items.Add(new MenuItem("\nBack", Start));
         // MenuBuilder menu = new MenuBuilder(items);
