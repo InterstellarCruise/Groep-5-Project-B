@@ -13,7 +13,9 @@ class FilmsLogic
     //This can be used to get the current logged in account from anywhere in the program
     //private set, so this can only be set by the class itself
 
-    // static public FilmModel? CurrentFilm { get; private set; }
+    static public FilmModel? CurrentFilm { get; private set; }
+    public static string Lines = "--------------------------------";
+    public static Dictionary<string, int> FilmInfo = new Dictionary<string, int> { };
 
     public FilmsLogic()
     {
@@ -43,6 +45,46 @@ class FilmsLogic
     public FilmModel GetById(int id)
     {
         return _films.Find(i => i.Id == id);
+    }
+    public void DeleteFilm(FilmModel film)
+    {
+
+        _films.Remove(film);
+        FilmsAccess.WriteAll(_films);
+    }
+
+    public static int LastID()
+    {
+        List<FilmModel> _films = FilmsAccess.LoadAll();
+        int ID = _films.Count;
+        return ID;
+    }
+
+    public static void AllFilms(List<FilmModel> films)
+    {
+        foreach (FilmModel film in films)
+        {
+
+
+            FilmsLogic filmsLogic = new FilmsLogic();
+            string key = $"Film name: {film.Name}.";
+            int value = film.Id;
+            if (!FilmInfo.ContainsKey(key))
+            {
+                FilmInfo.Add(key, value);
+            }
+        }
+    }
+    public static void AllCurrentFilms()
+    {
+        List<FilmModel> Films = FilmsAccess.LoadAll();
+        foreach (FilmModel film in Films)
+        {
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine($"Film ID: {film.Id}");
+            Console.WriteLine($"Film Title: {film.Name} \n");
+            Console.WriteLine("--------------------------------");
+        }
     }
 }
 

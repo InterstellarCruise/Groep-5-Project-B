@@ -1,0 +1,20 @@
+﻿[
+  {
+    "id": 1,
+    "rows": 13,
+    "columns": 12,
+    "chairs": 150
+  },
+  {
+    "id": 2,
+    "rows": 19,
+    "columns": 18,
+    "chairs": 300
+  },
+  {
+    "id": 3,
+    "rows": 20,
+    "columns": 30,
+    "chairs": 500
+  }
+]

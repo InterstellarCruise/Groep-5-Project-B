@@ -2,18 +2,25 @@
 {
     public string DisplayText;
     public Action Action;
-    private string _roomTimeDate;
+    public ChairModel chair;
     public string RoomTimeDate
-    {
-        get { return _roomTimeDate; }
-        set { _roomTimeDate = value; }
-    }
+    { get; set; }
+    public ShowModel show { get; set; }
 
+    public MenuItem(ChairModel chair1, Action action) : this(ChairLogic.RowNumber(chair1), action) => chair = chair1;
     public MenuItem(string displayText, Action action)
     {
         DisplayText = displayText;
         Action = action;
-        _roomTimeDate = "";
+        RoomTimeDate = "";
+
     }
+    private int _movieId;
+    public int MovieId
+    {
+        get { return _movieId; }
+        set { _movieId = value; }
+    }
+
     public void Execute() => Action();
 }

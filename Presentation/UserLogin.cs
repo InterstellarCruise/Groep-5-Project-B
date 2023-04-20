@@ -1,6 +1,7 @@
 public static class UserLogin
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
+    public static AccountModel CurrentAccount { get; set; }
 
 
     public static void Start()
@@ -16,15 +17,44 @@ public static class UserLogin
     }
     public static void Dologin()
     {
-        Console.WriteLine("\nWelcome to the login page\n-----------------------------");
-        Console.WriteLine("Please enter your email address");
-        string email = Console.ReadLine();
+        Console.CursorVisible = true;
+        string email = "";
+        do
+        {
+            Console.WriteLine("\nWelcome to the login page\n-----------------------------");
+            Console.WriteLine("Please enter your email address or type 'B' to go back");
+            email = Console.ReadLine().ToLower();
+            if (email == "b")
+                Start();
+            if (!email.ToLower().Contains("@") && email != "admin")
+            {
+                Console.WriteLine("\nenter a valid email address\n-----------------------------");
+                Thread.Sleep(2000);
+                Console.Clear();
+            }
+        } while (email != "admin" && !email.ToLower().Contains("@"));
         Console.WriteLine("Please enter your password");
-        string password = Console.ReadLine();
+        var password = string.Empty;
+        ConsoleKey key;
+        do
+        {
+            var keyInfo = Console.ReadKey(intercept: true);
+            key = keyInfo.Key;
+            if (key == ConsoleKey.Backspace && password.Length > 0)
+            {
+                Console.Write("\b \b");
+                password = password[0..^1];
+            }
+            else if (!char.IsControl(keyInfo.KeyChar))
+            {
+                Console.Write("*");
+                password += keyInfo.KeyChar;
+            }
+        } while (key != ConsoleKey.Enter);
         AccountModel acc = accountsLogic.CheckLogin(email, password);
         if (acc != null)
         {
-            Console.WriteLine("-----------------------------\nWelcome back " + acc.FullName);
+            Console.WriteLine("\n-----------------------------\nWelcome back " + acc.FullName);
             if (acc.FullName == "Admin")
             {
                 Menu.AdminLogged = true;
@@ -33,11 +63,12 @@ public static class UserLogin
             Thread.Sleep(milliseconds);
             Console.Clear();
             Menu.LoggedIn = true;
+            CurrentAccount = acc;
             Menu.Start();
         }
         else
         {
-            Console.WriteLine("-----------------------------\nNo account found with that email and password");
+            Console.WriteLine("\n-----------------------------\nNo account found with that email and password");
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);
             List<MenuItem> items = new List<MenuItem>();
@@ -49,14 +80,23 @@ public static class UserLogin
     }
     public static void Doregister()
     {
+        Console.CursorVisible = true;
         Console.WriteLine("\nFirst name");
         string fname = Console.ReadLine();
         string fname_after = fname.Substring(0, 1).ToUpper() + fname.Substring(1);
         Console.WriteLine("Last name:");
         string lname = Console.ReadLine();
         string lname_after = lname.Substring(0, 1).ToUpper() + lname.Substring(1);
-        Console.WriteLine("Email address:");
-        string email = Console.ReadLine();
+        string email = "";
+        do
+        {
+            Console.WriteLine("Email address: ");
+            email = Console.ReadLine().ToLower();
+            if (!email.ToLower().Contains("@"))
+            {
+                Console.WriteLine("\nenter a valid email address\n-----------------------------");
+            }
+        } while (!email.ToLower().Contains("@"));
         email = email.ToLower();
         Console.WriteLine("Password:");
         string password = Console.ReadLine();

@@ -19,7 +19,7 @@ static class DatePicker
         static void chooseDate()
         {
             Console.Clear();
-
+            Console.CursorVisible = true;
             Console.WriteLine("Type a date you want to see the shows from like: year-month-day");
             Console.WriteLine("Type 'B' to go back");
             Console.WriteLine("--------------------------------");
@@ -54,6 +54,7 @@ static class DatePicker
     public static void showChoose()
     {
         Console.Clear();
+        Console.CursorVisible = false;
         Console.WriteLine($"Movies playing on {Date}\n");
         ShowsLogic.MoviesByDate(Shows, Date, emptyOrNot);
         List<MenuItem> items = new List<MenuItem>();

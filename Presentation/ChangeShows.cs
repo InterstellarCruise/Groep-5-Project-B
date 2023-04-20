@@ -20,7 +20,7 @@ public static class ChangeShows
     {
         SearchByID();
         MenuDisplay();
-    }   
+    }
     public static void MenuDisplay()
     {
         if (show != null)
@@ -61,67 +61,74 @@ public static class ChangeShows
     {
         Console.WriteLine("\n-------------------------------\nEnter a new date (Format: year-month-day)");
         string date = Console.ReadLine();
-        show.Date = date;
-        showLogic.UpdateList(show);
-        film = filmLogic.GetById(show.Id);
-        Console.WriteLine("\nThe date has been updated, here is the new result:\n");
-        ShowInformation();
-        int milliseconds = 3000;
-        Thread.Sleep(milliseconds);
-        Console.Clear();
-        MenuDisplay();
+        if (showLogic.ValidShowDate(date) == false)
+        {
+            Console.WriteLine("This is an invalid date, please fill in a date in the format of year-month-day");
+            EditDate();
+        }
+        else
+        {
+            showLogic.UpdateList(show);
+            film = filmLogic.GetById(show.Id);
+            Console.WriteLine("\nThe date has been updated, here is the new result:\n");
+            ShowInformation();
+            int milliseconds = 3000;
+            Thread.Sleep(milliseconds);
+            Console.Clear();
+            MenuDisplay();
+        }
     }
 
     public static void EditTTime()
     {
         Console.WriteLine("\n-------------------------------\nEnter a new time (Format: hour:minute)");
         string time = Console.ReadLine();
-        show.Time = time;
-        showLogic.UpdateList(show);
-        film = filmLogic.GetById(show.Id);
-        Console.WriteLine("\nThe time has been updated, here is the new result:\n");
-        ShowInformation();
-        int milliseconds = 3000;
-        Thread.Sleep(milliseconds);
-        Console.Clear();
-        MenuDisplay();
+        if (showLogic.ValidShowTime(time) == false)
+        {
+            Console.WriteLine("This is an invalid time, please put a time in anywhere between 00:00 and 23:59");
+            EditTTime();
+        }
+        else
+        {
+            show.Time = time;
+            showLogic.UpdateList(show);
+            film = filmLogic.GetById(show.Id);
+            Console.WriteLine("\nThe time has been updated, here is the new result:\n");
+            ShowInformation();
+            int milliseconds = 3000;
+            Thread.Sleep(milliseconds);
+            Console.Clear();
+            MenuDisplay();
+        }
     }
 
     public static void EditAgeLimit()
     {
         Console.WriteLine("\n-------------------------------\nEnter a new age limit");
         int ageLimit = Convert.ToInt32(Console.ReadLine());
-        film.AgeLimit = ageLimit;
-        filmLogic.UpdateList(film);
-        show = showLogic.GetById(film.Id);
-        Console.WriteLine("\nThe age limit has been updated, here is the new result:\n");
-        ShowInformation();
-        int milliseconds = 3000;
-        Thread.Sleep(milliseconds);
-        Console.Clear();
-        MenuDisplay();
+        if (ageLimit <= 6 || ageLimit >= 18)
+        {
+            Console.WriteLine("This is an incorrect age limit, please put an age limit between 6 and 18 years");
+            EditAgeLimit();
+        }
+        else
+        {
+            film.AgeLimit = ageLimit;
+            filmLogic.UpdateList(film);
+            show = showLogic.GetById(film.Id);
+            Console.WriteLine("\nThe age limit has been updated, here is the new result:\n");
+            ShowInformation();
+            int milliseconds = 3000;
+            Thread.Sleep(milliseconds);
+            Console.Clear();
+            MenuDisplay();
+        }
     }
 
-    public static void EditLength()
-    {
-        Console.WriteLine("\n-------------------------------\nEnter a new length of the show");
-
-        double length = Convert.ToInt64(Console.ReadLine());
-        film.Length = length;
-        
-        filmLogic.UpdateList(film);
-        show = showLogic.GetById(film.Id);
-        Console.WriteLine("\nThe age limit has been updated, here is the new result:\n");
-        ShowInformation();
-        int milliseconds = 3000;
-        Thread.Sleep(milliseconds);
-        Console.Clear();
-        MenuDisplay();
-    }
 
     public static void EditDescription()
     {
-        Console.WriteLine("\n-------------------------------\nEnter a new descrption\n");
+        Console.WriteLine("\n-------------------------------\nEnter a new description\n");
         string descrption = Console.ReadLine();
         film.Description = descrption;
         filmLogic.UpdateList(film);
@@ -149,7 +156,10 @@ public static class ChangeShows
 
     public static void SearchByID()
     {
-        Console.WriteLine("Enter the ID of the show you want to view");
+        Console.Clear();
+        Console.WriteLine("These are all the current shows");
+        ShowsLogic.AllCurrentShows();
+        Console.WriteLine("Enter the ID of the show you want to view \n-------------------------------");
         int id = Convert.ToInt32(Console.ReadLine());
         show = showLogic.GetById(id);
         if (show == null)
@@ -160,7 +170,7 @@ public static class ChangeShows
             Console.Clear();
             AdminFeatures.Start();
         }
-        
+
     }
 }
 

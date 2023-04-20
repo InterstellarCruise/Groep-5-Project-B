@@ -1,8 +1,8 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 
 public static class ReservationsAccess
 {
-    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/reservation.json"));
+    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/reservations.json"));
 
 
     public static List<TheReservationModel> LoadAll()
