@@ -1,6 +1,22 @@
 ﻿public class CheckOut
 {
     private static List<int> _chairs = new List<int>();
+    static ShowsLogic showLogic = new ShowsLogic();
+    static FilmsLogic filmLogic = new FilmsLogic();
+    private static FilmModel _film = new FilmModel(0, null, null, 0, 0, null);
+    private static string CurrentFilm = "";
+    public static FilmModel film
+    {
+        get { return _film; }
+        set { _film = value; }
+    }
+
+    private static int _movieId;
+    public static int MovieId
+    {
+        get { return _movieId; }
+        set { _movieId = value; }
+    }
     private static ShowModel? _show {  get; set; }
     public static bool BackMenu = false;
     public static void Start(List<ChairModel> chairs, double amount, ShowModel show)
@@ -27,8 +43,16 @@
     {
         AccountModel acc = UserLogin.CurrentAccount;
         ReservationsLogic reservationlogic  = new ReservationsLogic();
+        film = filmLogic.GetById(_show.FilmId);
         reservationlogic.AddReservation(_show.Id, acc.Id, _chairs);
-        Console.WriteLine("\n\nSuccesfully checked-out");
+        Console.WriteLine("Transaction Receipt from Shinema");
+        Console.WriteLine("------------------------------");
+        Console.WriteLine($"Movie: {film.Name}");
+        Console.WriteLine($"Number of Chairs: {_chairs} ");
+        Console.WriteLine($"Room: {_show.RoomId}");
+        // Console.WriteLine($"Total: €{}");
+        Console.WriteLine("------------------------------");
+        Console.WriteLine("Thank you for choosing " + "Shinema"+ "!");
         Thread.Sleep(2000);
         Menu.Start();
     }
