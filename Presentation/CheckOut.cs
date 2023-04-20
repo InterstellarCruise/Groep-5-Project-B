@@ -34,7 +34,7 @@
             selecchairs = selecchairs + $" {ChairLogic.RowNumber(chair)}";
             _chairs.Add(chair.Id);
         }
-        menuItems.Add(new MenuItem($"-------------------------\n{selecchairs}\n-------------------------\nTotal price: {amount} EUR\n-------------------------\n", null));
+        menuItems.Add(new MenuItem($"-------------------------\n{selecchairs}\n-------------------------\nTotal price: {amount} EUR\n-------------------------", null));
         menuItems.Add(new MenuItem("Check-out", checkout));
         menuItems.Add(new MenuItem("Back", Reservation.Main));
         menuItems.Add(new MenuItem("Main menu", BackToMenu));

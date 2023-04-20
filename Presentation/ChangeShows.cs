@@ -25,7 +25,7 @@ public static class ChangeShows
     {
         if (show != null)
         {
-            film = filmLogic.GetById(show.Id);
+            film = filmLogic.GetById(show.FilmId);
             ShowInformation();
 
             List<MenuItem> items = new List<MenuItem>();
@@ -158,18 +158,22 @@ public static class ChangeShows
     {
         Console.Clear();
         Console.WriteLine("These are all the current shows");
-        ShowsLogic.AllCurrentShows();
-        Console.WriteLine("Enter the ID of the show you want to view \n-------------------------------");
-        int id = Convert.ToInt32(Console.ReadLine());
-        show = showLogic.GetById(id);
-        if (show == null)
+        List<ShowModel> shows = ShowsLogic.AllCurrentShows();
+        List<MenuItem> items = new List<MenuItem>();
+        foreach (ShowModel show in shows)
         {
-            Console.WriteLine("There is no show with this ID");
-            int miliseconds = 2000;
-            Thread.Sleep(miliseconds);
-            Console.Clear();
-            AdminFeatures.Start();
+            FilmsLogic filmlogic = new FilmsLogic();
+            FilmModel film1 = filmlogic.GetById(show.FilmId);
+            MenuItem item = new MenuItem($"--------------------------------\nShow ID: {show.Id}\nRoom: {show.RoomId}\nFilm: {film1.Name}", MenuDisplay);
+            item.show = show;
+            item.changeshow = true;
+            items.Add(item);
         }
+        MenuItem lastshow = items.Last();
+        lastshow.DisplayText = lastshow.DisplayText + "\n--------------------------------\n";
+        items.Add(new MenuItem("Back", Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
 
     }
 }

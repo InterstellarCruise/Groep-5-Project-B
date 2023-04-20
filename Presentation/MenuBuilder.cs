@@ -64,7 +64,9 @@
                 }
                 if (_items[selectedIndex].show != null)
                 {
-                    Reservation.CurrentShow = _items[selectedIndex].show;
+                    if (_items[selectedIndex].changeshow) ChangeShows.show = _items[selectedIndex].show;
+                    else Reservation.CurrentShow = _items[selectedIndex].show;
+
                 }
                 if (_items[selectedIndex].Action != null)
                 {
