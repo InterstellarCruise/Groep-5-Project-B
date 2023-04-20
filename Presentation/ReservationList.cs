@@ -1,5 +1,7 @@
 public class ReservationList
 {
+    private static ShowModel? _show { get; set; }
+    private static TheReservationModel? _res { get; set; }
     public static void listReservations()
     {
         Console.Clear();
@@ -9,7 +11,8 @@ public class ReservationList
         List<TheReservationModel> reslist = ReservationsLogic.ReservationsByAccount(id);
         foreach (TheReservationModel res in reslist)
         {
-            ShowModel show = ShowsLogic.GetById(res.Showid);
+            _res = res;
+            ShowModel show = ShowsLogic.GetById(_res.Showid);
             _show = show;
             Console.WriteLine($"{_show.Id}");
         }
