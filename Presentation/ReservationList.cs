@@ -1,6 +1,20 @@
 public class ReservationList
 {
-    private static ShowModel? _show { get; set; }
+    private static ShowModel _show = new ShowModel(0, 0, 0, null, null);
+    private static FilmModel _film = new FilmModel(0, null, null, 0, 0, null);
+    static ShowsLogic showLogic = new ShowsLogic();
+    static FilmsLogic filmLogic = new FilmsLogic();
+    public static ShowModel Show
+    {
+        get { return _show; }
+        set { _show = value; }
+    }
+    public static FilmModel film
+    {
+        get { return _film; }
+        set { _film = value; }
+    }
+    static ReservationsLogic resLogic = new ReservationsLogic();
     private static TheReservationModel? _res { get; set; }
     public static void listReservations()
     {
@@ -8,17 +22,14 @@ public class ReservationList
         // Console.CursorVisible = false;
         Console.WriteLine($"Reservations\n");
         int id = AccountsLogic.CurrentAccount.Id;
-        List<TheReservationModel> reslist = ReservationsLogic.ReservationsByAccount(id);
-        foreach (TheReservationModel res in reslist)
-        {
-            _res = res;
-            ShowModel show = ShowsLogic.GetById(_res.Showid);
-            _show = show;
-            Console.WriteLine($"{_show.Id}");
-        }
-        // items.Add(new MenuItem("\nBack", Start));
-        // MenuBuilder menu = new MenuBuilder(items);
-        // menu.DisplayMenu();
+        Console.WriteLine(id);
+        ReservationsLogic.AllCurrentRes(id);
+        _res = resLogic.GetById(id);
+        Show = showLogic.GetById(_res.Showid);
+        film = filmLogic.GetById(Show.FilmId);
+ 
+        
+
     }
 }
 
