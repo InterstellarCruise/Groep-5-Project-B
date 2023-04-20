@@ -22,5 +22,11 @@
     "emailAddress": "di@g.com",
     "password": "123",
     "fullName": "Diana Faliuta"
+  },
+  {
+    "id": 5,
+    "emailAddress": "debakker@gmail.com",
+    "password": "wesley7886",
+    "fullName": "Wesley De vogel"
   }
 ]
