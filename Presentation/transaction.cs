@@ -1,17 +1,9 @@
-static class Transaction
+static class Bar
 {
     static ReservationsLogic reservationsLogic = new ReservationsLogic();
     static BarLogic barLogic = new BarLogic();
-    public static void Start()
-    {
-        var show = MoviePicker.theshow;
-        reservationsLogic.Newreservation(AccountsLogic.CurrentAccount.Id, show.Id,MoviePicker.chiars);
 
-        
-
-    }
-
-    static public void Bar(int account_id ,string date, string Time)
+    static public void barplace(int account_id ,string date, string Time)
     {
         List<TheReservationModel> reservations = ReservationsAccess.LoadAll();
         List<BarModel> barreservations = BarAccess.LoadAll();

@@ -151,7 +151,7 @@ public class Reservation
         List<ChairModel> chairs = new List<ChairModel>();
         foreach(TheReservationModel theReservation in reservations)
         {
-            foreach(int i in theReservation.Ressedchairs)
+            foreach(int i in theReservation.Ressedchair)
             {
                 ChairLogic chairlogic = new ChairLogic();
                 ChairModel chair = chairlogic.GetById(i);
