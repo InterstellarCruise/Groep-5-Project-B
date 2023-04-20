@@ -3,11 +3,13 @@
     private static List<int> _chairs = new List<int>();
     private static ShowModel? _show {  get; set; }
     public static bool BackMenu = false;
+    private static double _amount;
     public static void Start(List<ChairModel> chairs, double amount, ShowModel show)
     {
         Console.Clear();
         List<MenuItem> menuItems = new List<MenuItem>();
         _show = show;
+        _amount = amount;
         string selecchairs = "Current selected chairs:";
         foreach (ChairModel chair in chairs )
         {
@@ -27,7 +29,7 @@
     {
         AccountModel acc = UserLogin.CurrentAccount;
         ReservationsLogic reservationlogic  = new ReservationsLogic();
-        reservationlogic.AddReservation(_show.Id, acc.Id, _chairs);
+        reservationlogic.AddReservation(_show.Id, acc.Id, _chairs, _amount);
         Console.WriteLine("\n\nSuccesfully checked-out");
         Thread.Sleep(2000);
         Menu.Start();
