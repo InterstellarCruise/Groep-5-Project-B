@@ -14,6 +14,7 @@ class FilmsLogic
     //private set, so this can only be set by the class itself
 
     static public FilmModel? CurrentFilm { get; private set; }
+    public static string Lines = "--------------------------------";
     public static Dictionary<string, int> FilmInfo = new Dictionary<string, int> { };
 
     public FilmsLogic()
