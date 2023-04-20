@@ -19,6 +19,12 @@ public static class FilmsAccess
         File.WriteAllText(path, json);
     }
 
+    public static void Add(FilmModel film)
+    {
+        var films = LoadAll();
+        films.Add(film);
+        WriteAll(films);
+    }
 
 
 }
