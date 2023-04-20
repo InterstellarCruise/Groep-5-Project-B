@@ -7,6 +7,11 @@
     public static bool BackMenu = false;
     private static double _amount {get; set;}
     private static string _selecchairs {get; set;}
+    public static FilmModel film
+    {
+        get { return _film; }
+        set { _film = value; }
+    }
     public static void Start(List<ChairModel> chairs, double amount, ShowModel show)
     {
         Console.Clear();
