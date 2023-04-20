@@ -105,8 +105,8 @@ public static class ChangeShows
     public static void EditLength()
     {
         Console.WriteLine("\n-------------------------------\nEnter a new length of the show");
-        double lenght = Convert.ToInt64(Console.ReadLine());
-        film.Lenght = lenght;
+        double length = Convert.ToInt64(Console.ReadLine());
+        film.Length = length;
         filmLogic.UpdateList(film);
         show = showLogic.GetById(film.Id);
         Console.WriteLine("\nThe age limit has been updated, here is the new result:\n");

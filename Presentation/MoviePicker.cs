@@ -34,7 +34,7 @@ static class MoviePicker
                 FilmsLogic filmsLogic_picker = new FilmsLogic();
                 List<FilmModel> films = FilmsAccess.LoadAll();
                 var film = filmsLogic_picker.GetById(show.FilmId);
-                CurrentMovie = new MenuItem($"-----------------------------\nMovie name: {film.Name} \nDescription: {film.Description} \nAge limit: {film.AgeLimit}\nfilm duration: {film.Lenght} \n-----------------------------", null);
+                CurrentMovie = new MenuItem($"-----------------------------\nMovie name: {film.Name} \nDescription: {film.Description} \nAge limit: {film.AgeLimit}\nfilm duration: {film.Length} \n-----------------------------", null);
                 items.Add(CurrentMovie);
                 if (!Menu.LoggedIn)
                 {
