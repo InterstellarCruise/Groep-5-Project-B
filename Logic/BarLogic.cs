@@ -16,7 +16,7 @@ class BarLogic
 
     public BarLogic()
     {
-        _bar = TheBarAccess.LoadAll();
+        _bar = BarAccess.LoadAll();
     }
 
 
@@ -35,7 +35,7 @@ class BarLogic
             //add new model
             _bar.Add(acc);
         }
-        TheBarAccess.WriteAll(_bar);
+        BarAccess.WriteAll(_bar);
 
     }
 }

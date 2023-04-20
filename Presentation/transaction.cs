@@ -2,9 +2,11 @@ static class Transaction
 {
     static ReservationsLogic reservationsLogic = new ReservationsLogic();
     static BarLogic barLogic = new BarLogic();
-    static public System.Action reservation(int accountid, int showid, List<int> ressedchiars)
+    static public System.Action reservation(int accountid, int showid, List<int> ressedchiars, ShowModel show)
     {
         reservationsLogic.Newreservation(accountid, showid, ressedchiars);
+        Transaction.Bar(accountid,show.Date,show.Time);
+        
         return default;
 
     }
@@ -12,7 +14,7 @@ static class Transaction
     static public System.Action Bar(int account_id ,string date, string Time)
     {
         List<TheReservationModel> reservations = ReservationsAccess.LoadAll();
-        List<BarModel> barreservations = TheBarAccess.LoadAll();
+        List<BarModel> barreservations = BarAccess.LoadAll();
         int places = 40;
         int number = 1;
         foreach(BarModel l in barreservations)

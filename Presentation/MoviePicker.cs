@@ -121,7 +121,7 @@ static class MoviePicker
         List<MenuItem> items = new List<MenuItem>();
         List<int> chiars = new List<int>{1,3};
         items.Add(CurrentMovie);
-        items.Add(new MenuItem("Make reservation", Transaction.reservation(ac.Id,theshow.Id,chiars)));
+        items.Add(new MenuItem("Make reservation", Transaction.reservation(ac.Id,theshow.Id,chiars,theshow)));
         items.Add(new MenuItem("Back", DatePicker.showChoose));
         items.Add(new MenuItem("Main menu", Menu.Start));
         MenuBuilder menu = new MenuBuilder(items);

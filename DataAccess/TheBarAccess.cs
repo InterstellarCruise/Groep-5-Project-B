@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-public static class TheBarAccess
+public static class BarAccess
 {
     static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/bar.json"));
 
