@@ -18,12 +18,6 @@ public static class ShowsAccess
         string json = JsonSerializer.Serialize(shows, options);
         File.WriteAllText(path, json);
     }
-    public static void Add(ShowModel show)
-    {
-        var shows = LoadAll();
-        shows.Add(show);
-        WriteAll(shows);
-    }
 
 
 
