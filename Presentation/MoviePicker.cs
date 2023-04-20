@@ -102,6 +102,7 @@ static class MoviePicker
             {
                 Menu.AdminLogged = true;
             }
+            UserLogin.CurrentAccount = acc;
             Menu.LoggedIn = true;
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);

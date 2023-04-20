@@ -1,7 +1,7 @@
 public static class UserLogin
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
-    public static AccountModel CurrentAccount { get; private set; }
+    public static AccountModel CurrentAccount { get; set; }
 
 
     public static void Start()
