@@ -19,6 +19,9 @@
         get { return _movieId; }
         set { _movieId = value; }
     }
+    private static ShowModel? _show {  get; set; }
+    public static bool BackMenu = false;
+
     public static void Start(List<ChairModel> chairs, double amount, ShowModel show)
     {
         Console.Clear();
