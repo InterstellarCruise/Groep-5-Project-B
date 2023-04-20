@@ -3,7 +3,8 @@
     private static List<int> _chairs = new List<int>();
     private static ShowModel? _show {  get; set; }
     public static bool BackMenu = false;
-    private static double _amount;
+    private static double _amount {get; set;}
+    private static string _selecchairs {get; set;}
     public static void Start(List<ChairModel> chairs, double amount, ShowModel show)
     {
         Console.Clear();
