@@ -109,6 +109,13 @@ class ShowsLogic
 
         return DateTime.TryParseExact(date, "yyyy-mm-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out tempObject);
     }
+
+    public static int LastID()
+    {
+        List<ShowModel> _shows = ShowsAccess.LoadAll();
+        int ID = _shows.Count;
+        return ID;
+    }
 }
 
 
