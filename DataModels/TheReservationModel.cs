@@ -10,14 +10,17 @@ public class TheReservationModel
     [JsonPropertyName("accountid")]
     public int Accountid { get; set; }
 
-    [JsonPropertyName("ressedchair")]
-    public List<int> Ressedchair { get; set; }
+    [JsonPropertyName("ressedchairs")]
+    public List<int> Ressedchairs { get; set; }
+    [JsonPropertyName("amount")]
+    public double Amount { get; set; }
 
-    public TheReservationModel(int id, int showid, int accountid, List<int> ressedchairs)
+    public TheReservationModel(int id, int showid, int accountid, List<int> ressedchairs, double amount)
     {
         Id = id;
         Showid = showid;
         Accountid = accountid;
-        Ressedchair = ressedchairs;
+        Ressedchairs = ressedchairs;
+        Amount = amount;
     }
 }

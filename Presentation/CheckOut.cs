@@ -21,12 +21,13 @@
     }
     private static ShowModel? _show {  get; set; }
     public static bool BackMenu = false;
+
     public static void Start(List<ChairModel> chairs, double amount, ShowModel show)
     {
         Console.Clear();
-        _amount = amount;
         List<MenuItem> menuItems = new List<MenuItem>();
         _show = show;
+        _amount = amount;
         string selecchairs = "Current selected chairs:";
         foreach (ChairModel chair in chairs )
         {
@@ -38,7 +39,6 @@
         menuItems.Add(new MenuItem("Back", Reservation.Main));
         menuItems.Add(new MenuItem("Main menu", BackToMenu));
         MenuBuilder menu = new MenuBuilder(menuItems);
-        _selecchairs = selecchairs;
         
         menu.DisplayMenu();
         selecchairs = "Current selected chairs:";
@@ -48,7 +48,7 @@
         AccountModel acc = UserLogin.CurrentAccount;
         ReservationsLogic reservationlogic  = new ReservationsLogic(); 
         film = filmLogic.GetById(_show.FilmId);
-        reservationlogic.AddReservation(_show.Id, acc.Id, _chairs);
+        reservationlogic.AddReservation(_show.Id, acc.Id, _chairs, _amount);
         Console.WriteLine("Transaction Receipt from Shinema");
         Console.WriteLine("------------------------------");
         Console.WriteLine($"Movie: {film.Name}");
