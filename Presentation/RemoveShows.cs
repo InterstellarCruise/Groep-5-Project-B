@@ -39,8 +39,10 @@ public static class RemoveShows
         Console.WriteLine("Enter film id you want to delete");
         int id = Convert.ToInt32(Console.ReadLine());
         FilmModel film = filmLogic.GetById(id);
+        ShowModel show = showLogic.GetByFilmId(id);
         filmLogic.DeleteFilm(film);
-        Console.WriteLine("The film has been removed");
+        showLogic.DeleteShow(show);
+        Console.WriteLine("The film and the shows that were displaying this film have been removed");
         int miliseconds = 3000;
         Thread.Sleep(miliseconds);
         AdminFeatures.Start();

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text.Json;
 
@@ -75,7 +76,7 @@ class ShowsLogic
         ShowModel show = null;
         try
         {
-            show = shows.Find(i => i.RoomId == Convert.ToInt32(input[0]) && i.Time == input[1]);
+            show = shows.Find(i => i.RoomId == Convert.ToDouble(input[0]) && i.Time == input[1]);
         }
         catch (Exception)
         {
@@ -90,11 +91,23 @@ class ShowsLogic
         return _shows.Find(i => i.Id == id);
     }
 
+    public ShowModel GetByFilmId(int id)
+    {
+        return _shows.Find(i => i.FilmId == id);
+    }
+
     public void DeleteShow(ShowModel show)
     {
         
         _shows.Remove(show);
         ShowsAccess.WriteAll(_shows);
+    }
+
+    public bool ValidShowDate(string date)
+    {
+        DateTime tempObject;
+
+        return DateTime.TryParseExact(date, "yyyy-mm-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out tempObject);
     }
 }
 
