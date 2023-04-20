@@ -1,6 +1,7 @@
 ﻿public class CheckOut
 {
     private static List<int> _chairs = new List<int>();
+    static FilmsLogic filmLogic = new FilmsLogic();
     private static ShowModel? _show {  get; set; }
     public static bool BackMenu = false;
     private static double _amount {get; set;}
@@ -30,6 +31,7 @@
     {
         AccountModel acc = UserLogin.CurrentAccount;
         ReservationsLogic reservationlogic  = new ReservationsLogic();
+        film = filmLogic.GetById(_show.FilmId);
         reservationlogic.AddReservation(_show.Id, acc.Id, _chairs, _amount);
         Console.WriteLine("Transaction Receipt from Shinema");
         Console.WriteLine("------------------------------");
