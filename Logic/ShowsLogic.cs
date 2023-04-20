@@ -110,6 +110,13 @@ class ShowsLogic
         return DateTime.TryParseExact(date, "yyyy-mm-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out tempObject);
     }
 
+    public bool ValidShowTime(string time)
+    {
+        DateTime tempObject;
+
+        return DateTime.TryParseExact(time, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out tempObject);
+    }
+
     public static int LastID()
     {
         List<ShowModel> _shows = ShowsAccess.LoadAll();
@@ -121,9 +128,11 @@ class ShowsLogic
         List<ShowModel> Shows = ShowsAccess.LoadAll();
         foreach (ShowModel show in Shows)
         {
+            Console.WriteLine("--------------------------------");
             Console.WriteLine($"Show ID: {show.Id}");
             Console.WriteLine($"Room: {show.RoomId}");
-            Console.WriteLine($"Film: {show.FilmId} \n");
+            Console.WriteLine($"Film: {show.FilmId}");
+            Console.WriteLine("--------------------------------");
         }
     }
 }

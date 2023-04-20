@@ -9,6 +9,13 @@ public static class ChangeFilm
         get { return _film; }
         set { _film = value; }
     }
+
+    private static int _movieId;
+    public static int MovieId
+    {
+        get { return _movieId; }
+        set { _movieId = value; }
+    }
     public static void Start()
     {
         SearchByID();

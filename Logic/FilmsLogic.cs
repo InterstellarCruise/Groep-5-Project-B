@@ -80,8 +80,10 @@ class FilmsLogic
         List<FilmModel> Films = FilmsAccess.LoadAll();
         foreach (FilmModel film in Films)
         {
+            Console.WriteLine("--------------------------------");
             Console.WriteLine($"Film ID: {film.Id}");
             Console.WriteLine($"Film Title: {film.Name} \n");
+            Console.WriteLine("--------------------------------");
         }
     }
 }

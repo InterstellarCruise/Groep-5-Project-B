@@ -31,7 +31,7 @@ public static class ChangeShows
             List<MenuItem> items = new List<MenuItem>();
             items.Add(new MenuItem(CurrentShow, null));
             items.Add(new MenuItem("Date", EditDate));
-            // items.Add(new MenuItem("Time", EditTTime));
+            items.Add(new MenuItem("Time", EditTTime));
             items.Add(new MenuItem("Title", EditTitle));
             items.Add(new MenuItem("Description", EditDescription));
             items.Add(new MenuItem("Age Limit", EditAgeLimit));
@@ -79,28 +79,28 @@ public static class ChangeShows
         }
     }
 
-    // public static void EditTTime()
-    // {
-    //     Console.WriteLine("\n-------------------------------\nEnter a new time (Format: hour.minute)");
-    //     double time = Convert.ToDouble(Console.ReadLine());
-    //     if (time <= 0 || time >= 24)
-    //     {
-    //         Console.WriteLine("This is an invalid time, please put a time in anywhere between 00.00 and 23.59");
-    //         EditTTime();
-    //     }
-    //     else
-    //     {
-    //         show.Time = time;
-    //         showLogic.UpdateList(show);
-    //         film = filmLogic.GetById(show.Id);
-    //         Console.WriteLine("\nThe time has been updated, here is the new result:\n");
-    //         ShowInformation();
-    //         int milliseconds = 3000;
-    //         Thread.Sleep(milliseconds);
-    //         Console.Clear();
-    //         MenuDisplay();
-    //     }
-    // }
+    public static void EditTTime()
+    {
+        Console.WriteLine("\n-------------------------------\nEnter a new time (Format: hour:minute)");
+        string time = Console.ReadLine();
+        if (showLogic.ValidShowTime(time) == false)
+        {
+            Console.WriteLine("This is an invalid time, please put a time in anywhere between 00:00 and 23:59");
+            EditTTime();
+        }
+        else
+        {
+            show.Time = time;
+            showLogic.UpdateList(show);
+            film = filmLogic.GetById(show.Id);
+            Console.WriteLine("\nThe time has been updated, here is the new result:\n");
+            ShowInformation();
+            int milliseconds = 3000;
+            Thread.Sleep(milliseconds);
+            Console.Clear();
+            MenuDisplay();
+        }
+    }
 
     public static void EditAgeLimit()
     {
