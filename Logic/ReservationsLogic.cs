@@ -24,7 +24,7 @@ class ReservationsLogic
     public List<TheReservationModel> GetByShowId(int showId, int roomId)
     {
         List<TheReservationModel> theReservationModels = new List<TheReservationModel>();
-        foreach(var model in _reservations)
+        foreach (var model in _reservations)
         {
             if (model.Showid == showId)
             {
@@ -62,6 +62,21 @@ class ReservationsLogic
         }
         ReservationsAccess.WriteAll(_reservations);
 
+    }
+
+    public static List<TheReservationModel> ReservationsByAccount(int id)
+    {
+        List<TheReservationModel> reservations = ReservationsAccess.LoadAll();
+        List<TheReservationModel> MyReservations = new List<TheReservationModel>();
+        foreach (TheReservationModel reservation in reservations)
+        {
+
+            if (reservation.Accountid == id)
+            {
+                MyReservations.Add(reservation);
+            }
+        }
+        return MyReservations;
     }
 }
 
