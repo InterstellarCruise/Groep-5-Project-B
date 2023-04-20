@@ -2,16 +2,16 @@ static class Transaction
 {
     static ReservationsLogic reservationsLogic = new ReservationsLogic();
     static BarLogic barLogic = new BarLogic();
-    static public System.Action reservation(int accountid, int showid, List<int> ressedchiars, ShowModel show)
+    public static void Start()
     {
-        reservationsLogic.Newreservation(accountid, showid, ressedchiars);
-        Transaction.Bar(accountid,show.Date,show.Time);
+        var show = MoviePicker.theshow;
+        reservationsLogic.Newreservation(AccountsLogic.CurrentAccount.Id, show.Id,MoviePicker.chiars);
+
         
-        return default;
 
     }
 
-    static public System.Action Bar(int account_id ,string date, string Time)
+    static public void Bar(int account_id ,string date, string Time)
     {
         List<TheReservationModel> reservations = ReservationsAccess.LoadAll();
         List<BarModel> barreservations = BarAccess.LoadAll();
@@ -46,10 +46,14 @@ static class Transaction
             }
         
         }
-        
-    
-        return default;
-
+        List<MenuItem> items = new List<MenuItem>();
+        items.Add(new MenuItem("Back", DatePicker.showChoose));
+        items.Add(new MenuItem("Main menu", Menu.Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
+        int milliseconds = 2000;
+        Thread.Sleep(milliseconds);
+        Console.Clear();
     }
     
 }

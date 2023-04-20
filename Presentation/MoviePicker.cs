@@ -15,6 +15,7 @@ static class MoviePicker
     public static MenuItem CurrentMovie = null;
     public static ShowModel theshow =null;
     static ReservationsLogic reservationsLogic = new ReservationsLogic();
+    public static List<int> chiars =null;
     static public void Start()
     {
         //Given data: The room number of the show and the date and time of the show.
@@ -75,8 +76,10 @@ static class MoviePicker
             Thread.Sleep(milliseconds);
             Console.Clear();
             List<MenuItem> items = new List<MenuItem>();
+            List<int> chiar = new List<int>{1,3};
+            chiar = chiars;
             items.Add(CurrentMovie);
-            items.Add(new MenuItem("Make reservation", Menu.NotImplemented));
+            items.Add(new MenuItem("Make reservation", Transaction.Start));
             items.Add(new MenuItem("Back", DatePicker.showChoose));
             items.Add(new MenuItem("Main menu", Menu.Start));
             MenuBuilder menu = new MenuBuilder(items);
@@ -119,9 +122,11 @@ static class MoviePicker
         Thread.Sleep(millisecond);
         Console.Clear();
         List<MenuItem> items = new List<MenuItem>();
-        List<int> chiars = new List<int>{1,3};
+        List<int> chiar = new List<int>{1,3};
+        chiar = chiars;
+        
         items.Add(CurrentMovie);
-        items.Add(new MenuItem("Make reservation", Transaction.reservation(ac.Id,theshow.Id,chiars,theshow)));
+        items.Add(new MenuItem("Make reservation", Transaction.Start));
         items.Add(new MenuItem("Back", DatePicker.showChoose));
         items.Add(new MenuItem("Main menu", Menu.Start));
         MenuBuilder menu = new MenuBuilder(items);
