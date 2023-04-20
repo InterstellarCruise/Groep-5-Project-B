@@ -39,10 +39,10 @@ class ReservationsLogic
         }
         return theReservationModels;
     }
-    public void AddReservation(int showid, int accountid, List<int> chairids)
+    public void AddReservation(int showid, int accountid, List<int> chairids, double amount)
     {
         int id = _reservations.Count() + 1;
-        TheReservationModel model = new TheReservationModel(id, showid, accountid, chairids);
+        TheReservationModel model = new TheReservationModel(id, showid, accountid, chairids, amount);
         UpdateList(model);
     }
     public void UpdateList(TheReservationModel reservation)
