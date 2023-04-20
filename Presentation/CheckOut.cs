@@ -30,7 +30,14 @@
         AccountModel acc = UserLogin.CurrentAccount;
         ReservationsLogic reservationlogic  = new ReservationsLogic();
         reservationlogic.AddReservation(_show.Id, acc.Id, _chairs, _amount);
-        Console.WriteLine("\n\nSuccesfully checked-out");
+        Console.WriteLine("Transaction Receipt from Shinema");
+        Console.WriteLine("------------------------------");
+        Console.WriteLine($"Movie: {film.Name}");
+        Console.WriteLine($"Number of Chairs: {_selecchairs} ");
+        Console.WriteLine($"Room: {_show.RoomId}");
+        Console.WriteLine($"Total: {_amount} EUR");
+        Console.WriteLine("------------------------------");
+        Console.WriteLine("Thank you for choosing " + "Shinema"+ "!");
         Thread.Sleep(2000);
         Menu.Start();
     }
