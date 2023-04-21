@@ -64,33 +64,33 @@ class ReservationsLogic
 
     }
 
-    // public static List<TheReservationModel> ReservationsByAccount(int id)
-    // {
-    //     List<TheReservationModel> reservations = ReservationsAccess.LoadAll();
-    //     List<TheReservationModel> MyReservations = new List<TheReservationModel>();
-    //     foreach (TheReservationModel reservation in reservations)
-    //     {
+    public static List<TheReservationModel> ReservationsByAccount(int id)
+    {
+        List<TheReservationModel> reservations = ReservationsAccess.LoadAll();
+        List<TheReservationModel> MyReservations = new List<TheReservationModel>();
+        foreach (TheReservationModel reservation in reservations)
+        {
 
-    //         if (reservation.Accountid == id)
-    //         {
-    //             MyReservations.Add(reservation);
-    //         }
-    //     }
-    //     return MyReservations;
-    // }
+            if (reservation.Accountid == id)
+            {
+                MyReservations.Add(reservation);
+            }
+        }
+        return MyReservations;
+    }
 
     public static void AllCurrentRes(int id)
     {
         List<TheReservationModel> Reser = ReservationsAccess.LoadAll();
-        
+
         foreach (TheReservationModel res in Reser)
-        if(id == res.Accountid)
-        {
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine($"Reservation Id: {res.Id}");
-            Console.WriteLine($"Show ID: {res.Showid}");
-            Console.WriteLine("--------------------------------");
-        }
+            if (id == res.Accountid)
+            {
+                Console.WriteLine("--------------------------------");
+                Console.WriteLine($"Reservation Id: {res.Id}");
+                Console.WriteLine($"Show ID: {res.Showid}");
+                Console.WriteLine("--------------------------------");
+            }
     }
 }
 
