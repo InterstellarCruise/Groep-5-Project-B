@@ -14,7 +14,7 @@ public class ReservationDetail
         Console.WriteLine($"General information:");
         Console.WriteLine("\n");
         Console.WriteLine($"Total cost: {reservation.Amount} EUR");
-        Console.WriteLine(string.Format("Chairs reserved: ({0}).", string.Join(", ", reservation.Ressedchairs)));
+        Console.WriteLine(string.Format("Chairs reserved: ({0})", string.Join(", ", reservation.Ressedchairs)));
         Console.WriteLine('\n');
         // Console.WriteLine($"Chairs reserved:");
         // foreach (int i in reservation.Ressedchairs)
@@ -32,7 +32,7 @@ public class ReservationDetail
         Console.WriteLine($"Film description: {Film.Description}");
         Console.WriteLine($"Age limit: {Film.AgeLimit}");
         Console.WriteLine($"Film length: {Film.Length}");
-        Console.WriteLine(string.Format("Genres of the movie: ({0}).", string.Join(", ", Film.Genre)));
+        Console.WriteLine(string.Format("Genres of the movie: ({0})", string.Join(", ", Film.Genre)));
 
     }
 }
