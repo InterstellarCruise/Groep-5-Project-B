@@ -13,7 +13,7 @@ public class ReservationDetail
         Console.WriteLine("=============================================\n");
         Console.WriteLine($"General information:");
         Console.WriteLine("\n");
-        Console.WriteLine($"Total cost: {reservation.Amount}");
+        Console.WriteLine($"Total cost: {reservation.Amount} EUR");
         Console.WriteLine(string.Format("Chairs reserved: ({0}).", string.Join(", ", reservation.Ressedchairs)));
         Console.WriteLine('\n');
         // Console.WriteLine($"Chairs reserved:");
