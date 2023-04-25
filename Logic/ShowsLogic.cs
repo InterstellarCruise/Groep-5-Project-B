@@ -123,10 +123,10 @@ class ShowsLogic
         int ID = _shows.Count;
         return ID;
     }
-    public static List<ShowModel> AllCurrentShows()
+    public static void AllCurrentShows()
     {
         List<ShowModel> Shows = ShowsAccess.LoadAll();
-        /*foreach (ShowModel show in Shows)
+        foreach (ShowModel show in Shows)
         {
             Console.WriteLine("--------------------------------");
             Console.WriteLine($"Show ID: {show.Id}");
@@ -134,12 +134,11 @@ class ShowsLogic
             Console.WriteLine($"Film: {show.FilmId}");
             Console.WriteLine("--------------------------------");
         }
-        */
-        return Shows;
+        // return Shows;
     }
 }
 
 
 
 
-
+ 
