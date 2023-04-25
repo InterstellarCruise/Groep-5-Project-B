@@ -42,5 +42,14 @@
     "accountid": 5,
     "ressedchairs": [],
     "amount": 0
+  },
+  {
+    "id": 6,
+    "showid": 2,
+    "accountid": 5,
+    "ressedchairs": [
+      576
+    ],
+    "amount": 12.5
   }
 ]
