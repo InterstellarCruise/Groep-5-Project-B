@@ -153,7 +153,7 @@ public static class AddShows
             {
                 Console.WriteLine("Room is reserved on this time!");
             }
-            if (hm[0] >= 0 && hm[0] <= 23 && hm[1] >= 0 && hm[1] <= 59)
+            if (hm[0] >= 0 && hm[0] <= 23 && hm[1] >= 0 && hm[1] <= 59 && roomcheck == true)
             {
                 timecheck = true;
 
@@ -166,7 +166,8 @@ public static class AddShows
         while (!timecheck);
 
         // Console.Clear();
-        ShowModel show = new ShowModel(ID, MovieId, RoomId, inputdate, time);
+
+        ShowModel show = new ShowModel(ID, MovieId + 1, RoomId, inputdate, time);
         ShowsAccess.Add(show);
     }
 
