@@ -58,8 +58,7 @@
         Console.WriteLine("------------------------------");
         Console.WriteLine("Thank you for choosing " + "Shinema"+ "!");
         Thread.Sleep(2000);
-        BackMenu = true;
-        Menu.Start();
+        BackToMenu();
     }
     public static void BackToMenu()
     {
