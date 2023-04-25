@@ -57,7 +57,7 @@
         Console.WriteLine($"Total: {_amount} EUR");
         Console.WriteLine("------------------------------");
         Console.WriteLine("Thank you for choosing " + "Shinema"+ "!");
-        Thread.Sleep(2000);
+        Thread.Sleep(4000);
         BackToMenu();
     }
     public static void BackToMenu()

@@ -29,13 +29,13 @@ public class Reservation
         switch (rank)
         {
             case 1:
-                totalprice += 7.50;
+                totalprice += 8;
                 break;
             case 2:
-                totalprice += 10.50;
+                totalprice += 10;
                 break;
             case 3:
-                totalprice += 12.50;
+                totalprice += 12;
                 break;
 
         }
@@ -46,13 +46,13 @@ public class Reservation
         switch (rank)
         {
             case 1:
-                totalprice -= 7.50;
+                totalprice -= 8;
                 break;
             case 2:
-                totalprice -= 10.50;
+                totalprice -= 10;
                 break;
             case 3:
-                totalprice -= 12.50;
+                totalprice -= 12;
                 break;
 
         }
