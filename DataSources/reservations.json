@@ -26,5 +26,21 @@
       27
     ],
     "amount": 12.5
+  },
+  {
+    "id": 4,
+    "showid": 1,
+    "accountid": 5,
+    "ressedchairs": [
+      4
+    ],
+    "amount": 12.5
+  },
+  {
+    "id": 5,
+    "showid": 1,
+    "accountid": 5,
+    "ressedchairs": [],
+    "amount": 0
   }
 ]
