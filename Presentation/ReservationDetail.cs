@@ -10,7 +10,7 @@ public class ReservationDetail
         FilmModel Film = filmsLogic.GetById(Show.FilmId);
 
         Console.WriteLine($"Reservation");
-        Console.WriteLine("=============================================\n");
+        Console.WriteLine("=============================================");
         Console.WriteLine($"General information:");
         Console.WriteLine("\n");
         Console.WriteLine($"Total cost: {reservation.Amount} EUR");
