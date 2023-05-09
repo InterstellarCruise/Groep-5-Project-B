@@ -69,6 +69,12 @@ class AccountsLogic
         }
 
     }
+    public bool CheckEmail(string email)
+    {
+        var account = _accounts.FirstOrDefault(a => a.EmailAddress == email);
+        if (account == null) return false;
+        else return true;
+    }
 }
 
 

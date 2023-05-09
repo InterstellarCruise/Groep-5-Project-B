@@ -68,6 +68,10 @@
                     else Reservation.CurrentShow = _items[selectedIndex].show;
 
                 }
+                if (_items[selectedIndex].reservation != null)
+                {
+                    ReservationDetail.reservation = _items[selectedIndex].reservation;
+                }
                 if (_items[selectedIndex].Action != null)
                 {
                     _items[selectedIndex].Execute();

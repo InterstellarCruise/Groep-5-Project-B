@@ -70,7 +70,7 @@ public class CheckOut
         Console.WriteLine($"barseat(s) {_answer}");
         Console.WriteLine("------------------------------");
         Console.WriteLine("Thank you for choosing " + "Shinema"+ "!");
-        Thread.Sleep(2000);
+        Thread.Sleep(4000);
         BackToMenu();
     }
     public static void BackToMenu()

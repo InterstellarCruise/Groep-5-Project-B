@@ -5,8 +5,8 @@
     public static string selchairs = "";
     protected static int origRow;
     protected static int origCol;
-    public static string legendred = "  [BLUE] --> 7.50 EUR";
-    public static string legendorange = "  [GREEN] --> 10.50 EUR";
+    public static string legendred = "  [BLUE] --> 8.00 EUR";
+    public static string legendorange = "  [GREEN] --> 10.00 EUR";
     public static ShowModel show { get; set; }
     public static void MultipleChoice(List<MenuItem> options, int curpos, int optionsperline)
     {
@@ -223,7 +223,7 @@
         Console.WriteLine("---------------------------------------------------------       -------------------------------------");
         Console.WriteLine($"  Navigate using the arrow-keys\t\t\t\t\t  Total price: {Reservation.Total("nothing")} EUR\n  Select/Deselect chairs with [ENTER]\n  Press [SPACE] to check-out and Press [ESC] to go back");
         Console.WriteLine("---------------------------------------------------------       -------------------------------------");
-        Console.WriteLine($"  [MAGENTA] --> 12.50 EUR");
+        Console.WriteLine($"  [MAGENTA] --> 12.00 EUR");
         Console.WriteLine(legendorange);
         Console.WriteLine(legendred);
         Console.WriteLine("---------------------------------------------------------");

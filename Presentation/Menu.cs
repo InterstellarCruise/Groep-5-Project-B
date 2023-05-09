@@ -33,7 +33,7 @@ static class Menu
         }
         else if (LoggedIn)
         {
-            items.Add(new MenuItem("Account", NotImplemented));
+            items.Add(new MenuItem("Account", AccountPage.start));
         }
         items.Add(new MenuItem("Shows", DatePicker.Start));
         items.Add(new MenuItem("Cinema Info", CinemaInfo.start));
