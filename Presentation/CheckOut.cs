@@ -15,7 +15,7 @@ public class CheckOut
     private static FilmModel _film = new FilmModel(0, null, null, 0, 0, null);
     private static string CurrentFilm = "";
     private static double _amount {get; set;}
-    public static string _selecchairs {get; set;}
+    private static string _selecchairs {get; set;}
     public static FilmModel film
     {
         get { return _film; }
