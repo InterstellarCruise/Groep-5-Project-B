@@ -2,26 +2,25 @@ public class ReservationList
 {
     public static void listReservations()
     {
-        int counter = 0;
         Console.Clear();
+        List<MenuItem> items = new List<MenuItem>();
         int id = AccountsLogic.CurrentAccount.Id;
         List<TheReservationModel> reservations = ReservationsLogic.ReservationsByAccount(id);
         ShowsLogic showsLogic = new ShowsLogic();
         FilmsLogic filmsLogic = new FilmsLogic();
-        Console.WriteLine($"Reservations\n");
-        Console.WriteLine("=============================================");
+        items.Add(new MenuItem($"Reservations\n=============================================", null));
         foreach (TheReservationModel reservation in reservations)
         {
-            counter++;
             ShowModel Show = showsLogic.GetById(reservation.Showid);
             FilmModel Film = filmsLogic.GetById(Show.FilmId);
-            Console.WriteLine($"{counter}: Reservation for {Film.Name} at {Show.Date}");
-            Console.WriteLine("=============================================");
+            MenuItem item = new MenuItem($"Reservation for {Film.Name} at {Show.Date}", ReservationDetail.detailReservation);
+            item.reservation = reservation;
+            items.Add(item);
+            items.Add(new MenuItem("=============================================\n", null));
         }
-        Console.WriteLine("Type the number of the reservation you want to see the details of: ");
-        int choice = Convert.ToInt32(Console.ReadLine()) - 1;
-        TheReservationModel res = reservations[choice];
-        ReservationDetail.detailReservation(res);
+        items.Add(new MenuItem("\nBack", AccountPage.start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
     }
 }
 

@@ -92,6 +92,13 @@ class ReservationsLogic
                 Console.WriteLine("--------------------------------");
             }
     }
+    public void DeleteReservation(TheReservationModel reservation)
+    {
+        TheReservationModel x = GetById(reservation.Id);
+        _reservations.Remove(x);
+        ReservationsAccess.WriteAll(_reservations);
+    }
+
 }
 
 
