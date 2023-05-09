@@ -51,5 +51,51 @@
       576
     ],
     "amount": 12.5
+  },
+  {
+    "id": 7,
+    "showid": 1,
+    "accountid": 5,
+    "ressedchairs": [
+      18
+    ],
+    "amount": 12
+  },
+  {
+    "id": 8,
+    "showid": 2,
+    "accountid": 5,
+    "ressedchairs": [
+      548
+    ],
+    "amount": 12
+  },
+  {
+    "id": 9,
+    "showid": 3,
+    "accountid": 5,
+    "ressedchairs": [
+      548,
+      192
+    ],
+    "amount": 12
+  },
+  {
+    "id": 10,
+    "showid": 3,
+    "accountid": 5,
+    "ressedchairs": [
+      188
+    ],
+    "amount": 12
+  },
+  {
+    "id": 11,
+    "showid": 1,
+    "accountid": 5,
+    "ressedchairs": [
+      29
+    ],
+    "amount": 12
   }
 ]

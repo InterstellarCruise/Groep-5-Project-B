@@ -15,7 +15,7 @@ public class CheckOut
     private static FilmModel _film = new FilmModel(0, null, null, 0, 0, null);
     private static string CurrentFilm = "";
     private static double _amount {get; set;}
-    private static string _selecchairs {get; set;}
+    public static string _selecchairs {get; set;}
     public static FilmModel film
     {
         get { return _film; }
@@ -131,8 +131,7 @@ public class CheckOut
             string? answer = Console.ReadLine().ToLower();
             if(answer == "y" )
             {
-                int amount_chiars = _selecchairs.Count();
-                var new_bar = new BarModel(number ,date ,account_id,Time,amount_chiars);
+                var new_bar = new BarModel(number ,date ,account_id,Time,_chairs.Count());
                 barLogic.UpdateList(new_bar);
                 _answer = "yes";
 
