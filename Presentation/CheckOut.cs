@@ -131,7 +131,8 @@ public class CheckOut
             string? answer = Console.ReadLine().ToLower();
             if(answer == "y" )
             {
-                var new_bar = new BarModel(number ,date ,account_id,Time);
+                int amount_chiars = _selecchairs.Count();
+                var new_bar = new BarModel(number ,date ,account_id,Time,amount_chiars);
                 barLogic.UpdateList(new_bar);
                 _answer = "yes";
 
