@@ -126,15 +126,6 @@ class ShowsLogic
     public static List<ShowModel> AllCurrentShows()
     {
         List<ShowModel> Shows = ShowsAccess.LoadAll();
-        /*foreach (ShowModel show in Shows)
-        {
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine($"Show ID: {show.Id}");
-            Console.WriteLine($"Room: {show.RoomId}");
-            Console.WriteLine($"Film: {show.FilmId}");
-            Console.WriteLine("--------------------------------");
-        }
-        */
         return Shows;
     }
 }
