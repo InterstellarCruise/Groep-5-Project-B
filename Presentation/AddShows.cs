@@ -24,6 +24,7 @@ public static class AddShows
         menu.DisplayMenu();
     }
 
+
     public static void Options()
     {
         List<MenuItem> items = new List<MenuItem>();
@@ -33,6 +34,8 @@ public static class AddShows
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();
     }
+
+
     public static void AddShow()
     {
         Console.Clear();
@@ -52,6 +55,8 @@ public static class AddShows
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();
     }
+
+
     public static void RoomInput()
     {
         Console.Clear();
@@ -70,6 +75,8 @@ public static class AddShows
         int RoomId = Convert.ToInt32(room);
         DateInput(RoomId);
     }
+
+
     public static void DateInput(int RoomId)
     {
         int[] daysInMonth = new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
