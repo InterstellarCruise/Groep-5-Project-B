@@ -43,16 +43,25 @@ public static class AddFilms
         {
             string _genre = Console.ReadLine();
             Genres.Add(_genre);
-            Console.WriteLine("Do you want to add another genre? Yes or No");
+            Console.WriteLine("Do you want to add another genre? Y / N");
             string YN = Console.ReadLine();
-            if (YN == "No")
+            if (YN.ToUpper() == "N")
             {
                 genrecheck = true;
             }
+            else
+            {
+                Console.WriteLine("The name of the other genre:");
+            }
         }
+        Console.Clear();
+        Console.WriteLine(Name + " added to database");
+        int milliseconds = 1500;
+        Thread.Sleep(milliseconds);
         Console.Clear();
         FilmModel film = new FilmModel(ID, Name, Description, AgeLimit, Length, Genres);
         FilmsAccess.Add(film);
+        Menu.Start();
     }
 
 }
