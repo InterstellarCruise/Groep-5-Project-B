@@ -16,6 +16,7 @@
     public static void LogOut()
     {
         Menu.LoggedIn = false;
+        Menu.AdminLogged = false;
         UserLogin.CurrentAccount = null;
         Console.Clear();
         Console.WriteLine("Logged out");
