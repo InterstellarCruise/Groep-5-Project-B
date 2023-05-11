@@ -31,6 +31,7 @@ public class ReservationDetail
         string y = string.Format("Chairs reserved: ({0}).", string.Join(", ", _allChair));
         string x = string.Format("Genres of the movie: ({0}).", string.Join(", ", Film.Genre));
         string info = $"Reservation\n=============================================\nGeneral information:\nTotal cost: {reservation.Amount} EUR\n{y}\n=============================================\nInformation about the show:\nRoom number: {Show.RoomId}\nDate of the show: {Show.Date}\nTime of the show: {Show.Time}\n=============================================\nInformation about the movie:\nFilm name: {Film.Name}\nFilm description: {Film.Description}\nAge limit: {Film.AgeLimit}\nFilm length: {Film.Length}\n{x}\n";
+
         items.Add(new MenuItem(info, null));
         items.Add(new MenuItem("Cancel reservation", ConfirmCancel));
         items.Add(new MenuItem("Back", ReservationList.listReservations));
