@@ -9,7 +9,7 @@ public class ReservationDetail
         FilmsLogic filmsLogic = new FilmsLogic();
         ShowModel Show = showsLogic.GetById(reservation.Showid);
         FilmModel Film = filmsLogic.GetById(Show.FilmId);
-<<<<<<< HEAD
+        // <<<<<<< HEAD
         List<MenuItem> items = new List<MenuItem>();
         string chairs = string.Format("Chairs reserved: ({0}).", string.Join(", ", reservation.Ressedchairs));
         string x = string.Format("Genres of the movie: ({0}).", string.Join(", ", Film.Genre));
@@ -37,34 +37,34 @@ public class ReservationDetail
         Console.WriteLine("Reservation successfully canceled");
         Thread.Sleep(3000);
         AccountPage.start();
-=======
+        // =======
 
-        Console.WriteLine($"Reservation");
-        Console.WriteLine("=============================================");
-        Console.WriteLine($"General information:");
-        Console.WriteLine("\n");
-        Console.WriteLine($"Total cost: {reservation.Amount} EUR");
-        Console.WriteLine(string.Format("Chairs reserved: ({0})", string.Join(", ", reservation.Ressedchairs)));
-        Console.WriteLine('\n');
-        // Console.WriteLine($"Chairs reserved:");
-        // foreach (int i in reservation.Ressedchairs)
-        Console.WriteLine("=============================================");
-        Console.WriteLine("Information about the show:");
-        Console.WriteLine("\n");
-        Console.WriteLine($"Room number: {Show.RoomId}");
-        Console.WriteLine($"Date of the show: {Show.Date}");
-        Console.WriteLine($"Time of the show: {Show.Time}");
-        Console.WriteLine('\n');
-        Console.WriteLine("=============================================");
-        Console.WriteLine("Information about the movie:");
-        Console.WriteLine($"\n");
-        Console.WriteLine($"Film name: {Film.Name}");
-        Console.WriteLine($"Film description: {Film.Description}");
-        Console.WriteLine($"Age limit: {Film.AgeLimit}");
-        Console.WriteLine($"Film length: {Film.Length}");
-        Console.WriteLine(string.Format("Genres of the movie: ({0})", string.Join(", ", Film.Genre)));
+        //         Console.WriteLine($"Reservation");
+        //         Console.WriteLine("=============================================");
+        //         Console.WriteLine($"General information:");
+        //         Console.WriteLine("\n");
+        //         Console.WriteLine($"Total cost: {reservation.Amount} EUR");
+        //         Console.WriteLine(string.Format("Chairs reserved: ({0})", string.Join(", ", reservation.Ressedchairs)));
+        //         Console.WriteLine('\n');
+        //         // Console.WriteLine($"Chairs reserved:");
+        //         // foreach (int i in reservation.Ressedchairs)
+        //         Console.WriteLine("=============================================");
+        //         Console.WriteLine("Information about the show:");
+        //         Console.WriteLine("\n");
+        //         Console.WriteLine($"Room number: {Show.RoomId}");
+        //         Console.WriteLine($"Date of the show: {Show.Date}");
+        //         Console.WriteLine($"Time of the show: {Show.Time}");
+        //         Console.WriteLine('\n');
+        //         Console.WriteLine("=============================================");
+        //         Console.WriteLine("Information about the movie:");
+        //         Console.WriteLine($"\n");
+        //         Console.WriteLine($"Film name: {Film.Name}");
+        //         Console.WriteLine($"Film description: {Film.Description}");
+        //         Console.WriteLine($"Age limit: {Film.AgeLimit}");
+        //         Console.WriteLine($"Film length: {Film.Length}");
+        //         Console.WriteLine(string.Format("Genres of the movie: ({0})", string.Join(", ", Film.Genre)));
 
->>>>>>> Roomavailable
+        // >>>>>>> Roomavailable
     }
 }
 
