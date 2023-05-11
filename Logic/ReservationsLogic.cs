@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-class ReservationsLogic
+public class ReservationsLogic
 {
     private List<ReservationModel> _reservations;
 

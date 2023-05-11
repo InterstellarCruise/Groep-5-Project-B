@@ -6,7 +6,7 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-class ShowsLogic
+public class ShowsLogic
 {
     private List<ShowModel> _shows;
     public static string Lines = "--------------------------------";
