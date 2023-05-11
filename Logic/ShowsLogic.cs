@@ -66,6 +66,24 @@ class ShowsLogic
 
     }
 
+    public static List<ShowModel> ShowsByDate(string date)
+    {
+        List<ShowModel> shows = new List<ShowModel>();
+        shows = ShowsAccess.LoadAll();
+        List<ShowModel> showsondate = new List<ShowModel>();
+        foreach (ShowModel show in shows)
+        {
+
+            if (show.Date == date)
+            {
+                showsondate.Add(show);
+
+            }
+        }
+        return showsondate;
+
+    }
+
     public static ShowModel ChooseShow(List<ShowModel> shows, string movie)
     {
         string[] input = movie.Split(' ');
