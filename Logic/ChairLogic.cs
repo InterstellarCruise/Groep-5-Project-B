@@ -39,6 +39,11 @@ public class ChairLogic
     {
         return _chairs.Find(i => i.Id == id);
     }
+
+    public ChairModel GetByCol(int id)
+    {
+        return _chairs.Find(i => i.Id == id);
+    }
     public List<ChairModel> GetByRoomId(int roomId)
     {
         List<ChairModel> roomschairs = new List<ChairModel>();

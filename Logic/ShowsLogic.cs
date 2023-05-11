@@ -66,24 +66,6 @@ class ShowsLogic
 
     }
 
-    public static List<ShowModel> ShowsByDate(string date)
-    {
-        List<ShowModel> shows = new List<ShowModel>();
-        shows = ShowsAccess.LoadAll();
-        List<ShowModel> showsondate = new List<ShowModel>();
-        foreach (ShowModel show in shows)
-        {
-
-            if (show.Date == date)
-            {
-                showsondate.Add(show);
-
-            }
-        }
-        return showsondate;
-
-    }
-
     public static ShowModel ChooseShow(List<ShowModel> shows, string movie)
     {
         string[] input = movie.Split(' ');
@@ -143,8 +125,30 @@ class ShowsLogic
     }
     public static List<ShowModel> AllCurrentShows()
     {
+        // List<ShowModel> Shows = ShowsAccess.LoadAll();
+        // foreach (ShowModel show in Shows)
+        // {
+        //     Console.WriteLine("--------------------------------");
+        //     Console.WriteLine($"Show ID: {show.Id}");
+        //     Console.WriteLine($"Room: {show.RoomId}");
+        //     Console.WriteLine($"Film: {show.FilmId}");
+        //     Console.WriteLine("--------------------------------");
+        // }
         List<ShowModel> Shows = ShowsAccess.LoadAll();
         return Shows;
+    }
+
+    public static void AllCurrShows()
+    {
+        List<ShowModel> Shows = ShowsAccess.LoadAll();
+        foreach (ShowModel show in Shows)
+        {
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine($"Show ID: {show.Id}");
+            Console.WriteLine($"Room: {show.RoomId}");
+            Console.WriteLine($"Film: {show.FilmId}");
+            Console.WriteLine("--------------------------------");
+        }
     }
 }
 
