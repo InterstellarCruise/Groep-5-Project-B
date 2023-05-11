@@ -1,12 +1,12 @@
 using System.Text.Json.Serialization;
-public class TheReservationModel
+public class ReservationModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
     [JsonPropertyName("showid")]
     public int Showid { get; set; }
-    
+
     [JsonPropertyName("accountid")]
     public int Accountid { get; set; }
 
@@ -15,7 +15,7 @@ public class TheReservationModel
     [JsonPropertyName("amount")]
     public double Amount { get; set; }
 
-    public TheReservationModel(int id, int showid, int accountid, List<int> ressedchairs, double amount)
+    public ReservationModel(int id, int showid, int accountid, List<int> ressedchairs, double amount)
     {
         Id = id;
         Showid = showid;

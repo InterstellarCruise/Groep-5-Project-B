@@ -6,7 +6,7 @@
     public string RoomTimeDate
     { get; set; }
     public ShowModel show { get; set; }
-    public TheReservationModel reservation { get; set; }
+    public ReservationModel reservation { get; set; }
     public bool changeshow = false;
 
     public FilmModel film { get; set; }

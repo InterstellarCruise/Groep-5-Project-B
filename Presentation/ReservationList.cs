@@ -5,11 +5,11 @@ public class ReservationList
         Console.Clear();
         List<MenuItem> items = new List<MenuItem>();
         int id = AccountsLogic.CurrentAccount.Id;
-        List<TheReservationModel> reservations = ReservationsLogic.ReservationsByAccount(id);
+        List<ReservationModel> reservations = ReservationsLogic.ReservationsByAccount(id);
         ShowsLogic showsLogic = new ShowsLogic();
         FilmsLogic filmsLogic = new FilmsLogic();
         items.Add(new MenuItem($"Reservations\n=============================================", null));
-        foreach (TheReservationModel reservation in reservations)
+        foreach (ReservationModel reservation in reservations)
         {
             ShowModel Show = showsLogic.GetById(reservation.Showid);
             FilmModel Film = filmsLogic.GetById(Show.FilmId);

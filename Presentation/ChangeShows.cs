@@ -156,24 +156,24 @@ public static class ChangeShows
 
     public static void SearchByID()
     {
-        // Console.Clear();
-        // Console.WriteLine("These are all the current shows");
-        // List<ShowModel> shows = ShowsLogic.AllCurrentShows();
-        // List<MenuItem> items = new List<MenuItem>();
-        // foreach (ShowModel show in shows)
-        // {
-        //     FilmsLogic filmlogic = new FilmsLogic();
-        //     FilmModel film1 = filmlogic.GetById(show.FilmId);
-        //     MenuItem item = new MenuItem($"--------------------------------\nShow ID: {show.Id}\nRoom: {show.RoomId}\nFilm: {film1.Name}", MenuDisplay);
-        //     item.show = show;
-        //     item.changeshow = true;
-        //     items.Add(item);
-        // }
-        // MenuItem lastshow = items.Last();
-        // lastshow.DisplayText = lastshow.DisplayText + "\n--------------------------------\n";
-        // items.Add(new MenuItem("Back", Start));
-        // MenuBuilder menu = new MenuBuilder(items);
-        // menu.DisplayMenu();
+        Console.Clear();
+        Console.WriteLine("These are all the current shows");
+        List<ShowModel> shows = ShowsLogic.AllCurrentShows();
+        List<MenuItem> items = new List<MenuItem>();
+        foreach (ShowModel show in shows)
+        {
+            FilmsLogic filmlogic = new FilmsLogic();
+            FilmModel film1 = filmlogic.GetById(show.FilmId);
+            MenuItem item = new MenuItem($"--------------------------------\nShow ID: {show.Id}\nRoom: {show.RoomId}\nFilm: {film1.Name}", MenuDisplay);
+            item.show = show;
+            item.changeshow = true;
+            items.Add(item);
+        }
+        MenuItem lastshow = items.Last();
+        lastshow.DisplayText = lastshow.DisplayText + "\n--------------------------------\n";
+        items.Add(new MenuItem("Back", AdminFeatures.Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
 
     }
 }
