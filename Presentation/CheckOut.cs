@@ -97,7 +97,7 @@ public class CheckOut
         //}
 
         int account_id = UserLogin.CurrentAccount.Id;
-        List<TheReservationModel> reservations = ReservationsAccess.LoadAll();
+        List<ReservationModel> reservations = ReservationsAccess.LoadAll();
         List<BarModel> barreservations = BarAccess.LoadAll();
         int places = 40;
         int number = 1;
