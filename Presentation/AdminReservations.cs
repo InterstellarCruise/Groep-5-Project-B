@@ -70,6 +70,7 @@ public class AdminReservations
             Console.Clear();
             AdminFeatures.Start();
         }
+        SeatShow(id);
     }
 
     public static void OccupiedSeatsRank()
@@ -89,10 +90,68 @@ public class AdminReservations
             Console.Clear();
             AdminFeatures.Start();
         }
+        SeatRank(id, rank);
     }
 
     public static void SeatRank(int id, int rank)
     {
+        List<ReservationModel> Reservation = ReservationsAccess.LoadAll();
+        List<int> chairs = new List<int>();
+        List<int> rankChair = new List<int>();
+        foreach (ReservationModel res in Reservation)
+        {
+            if (id == res.Showid)
+            {
+                chairs = res.Ressedchairs;
+                ChairLogic chairLogic = new ChairLogic();
+                foreach (var chairid in chairs)
+                {
+                    var chair = chairLogic.GetById(chairid);
 
+                    if (chair.Rank == rank)
+                    {
+                        if (rank == 1)
+                        {
+                            rankChair.Add(chair.Id);
+                        }
+                        if (rank == 2)
+                        {
+
+                            rankChair.Add(chair.Id);
+
+                        }
+                        if (rank == 3)
+                        {
+                            rankChair.Add(chair.Id);
+
+                        }
+                    }
+                }
+
+            }
+        }
+        Console.WriteLine($"The amount of seats occupied in this rank is {rankChair.Count}");
+        int miliseconds = 2000;
+        Thread.Sleep(miliseconds);
+        Console.Clear();
+        AdminFeatures.Start();
+    }
+
+    public static void SeatShow(int id)
+    {
+        List<int> chairs = new List<int>();
+        List<ReservationModel> Reservation = ReservationsAccess.LoadAll();
+        foreach (ReservationModel res in Reservation)
+        {
+            if (id == res.Showid)
+            {
+                chairs = res.Ressedchairs;
+            }
+        }
+        Console.WriteLine($"The amount of seats occupied in this show is {chairs.Count}");
+        int miliseconds = 2000;
+        Thread.Sleep(miliseconds);
+        Console.Clear();
+        AdminFeatures.Start();
     }
 }
