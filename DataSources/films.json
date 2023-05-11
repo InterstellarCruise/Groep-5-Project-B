@@ -55,5 +55,16 @@
     "genres": [
       "Horror"
     ]
+  },
+  {
+    "id": 6,
+    "name": "test",
+    "description": "test",
+    "ageLimit": 0,
+    "length": 2.5,
+    "genres": [
+      "Horror",
+      "Action"
+    ]
   }
 ]
