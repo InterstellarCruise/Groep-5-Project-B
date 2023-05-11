@@ -9,7 +9,10 @@ public class ReservationDetail
         FilmsLogic filmsLogic = new FilmsLogic();
         ShowModel Show = showsLogic.GetById(reservation.Showid);
         FilmModel Film = filmsLogic.GetById(Show.FilmId);
+<<<<<<< HEAD
         // <<<<<<< HEAD
+=======
+>>>>>>> d12acdfada01a4c49e2386a63f5078afed564422
         List<MenuItem> items = new List<MenuItem>();
         string chairs = string.Format("Chairs reserved: ({0}).", string.Join(", ", reservation.Ressedchairs));
         string x = string.Format("Genres of the movie: ({0}).", string.Join(", ", Film.Genre));
@@ -37,6 +40,7 @@ public class ReservationDetail
         Console.WriteLine("Reservation successfully canceled");
         Thread.Sleep(3000);
         AccountPage.start();
+<<<<<<< HEAD
         // =======
 
         //         Console.WriteLine($"Reservation");
@@ -65,6 +69,8 @@ public class ReservationDetail
         //         Console.WriteLine(string.Format("Genres of the movie: ({0})", string.Join(", ", Film.Genre)));
 
         // >>>>>>> Roomavailable
+=======
+>>>>>>> d12acdfada01a4c49e2386a63f5078afed564422
     }
 }
 
