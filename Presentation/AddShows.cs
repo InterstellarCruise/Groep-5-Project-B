@@ -24,6 +24,7 @@ public static class AddShows
         menu.DisplayMenu();
     }
 
+
     public static void Options()
     {
         List<MenuItem> items = new List<MenuItem>();
@@ -33,6 +34,8 @@ public static class AddShows
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();
     }
+
+
     public static void AddShow()
     {
         Console.Clear();
@@ -43,7 +46,7 @@ public static class AddShows
         {
             string filmname = FilmsLogic.FilmInfo.Keys.ElementAt(i);
             int FilmId = FilmsLogic.FilmInfo.Values.ElementAt(i);
-            MenuItem item = new MenuItem($"{FilmsLogic.Lines}\n{filmname}", ShowInput);
+            MenuItem item = new MenuItem($"{FilmsLogic.Lines}\n{filmname}", RoomInput);
             item.MovieId = FilmId;
             items.Add(item);
 
@@ -52,23 +55,34 @@ public static class AddShows
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();
     }
-    public static void ShowInput()
+
+
+    public static void RoomInput()
     {
-        int[] daysInMonth = new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
         Console.Clear();
-        int LastID = ShowsLogic.LastID();
-        int ID = LastID += 1;
         Console.WriteLine("Type the room number this movie will play in (1 to 3): ");
         string room = "";
         room = Console.ReadLine();
 
         while (room != "1" && room != "2" && room != "3")
         {
-            Console.WriteLine(room);
             Console.WriteLine("Only a room between 1 to 3");
-            room = Console.ReadLine();
+            int milliseconds = 1500;
+            Thread.Sleep(milliseconds);
+            Console.Clear();
+            RoomInput();
         }
         int RoomId = Convert.ToInt32(room);
+        DateInput(RoomId);
+    }
+
+
+    public static void DateInput(int RoomId)
+    {
+        int[] daysInMonth = new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        Console.Clear();
+        int LastID = ShowsLogic.LastID();
+        int ID = LastID += 1;
         //-----------------------
         Console.Clear();
         DateTime? date = null;
@@ -87,6 +101,10 @@ public static class AddShows
             catch (Exception e)
             {
                 Console.WriteLine("Invalid date format. Please enter the date in the format yyyy-MM-dd.");
+                int milliseconds = 1500;
+                Thread.Sleep(milliseconds);
+                Console.Clear();
+                DateInput(RoomId);
             }
             if (date?.Year >= DateTime.Now.Year && date?.Year <= DateTime.Now.Year + 5)
             {
@@ -95,18 +113,33 @@ public static class AddShows
             else
             {
                 Console.WriteLine("The date needs to be between the current year and 5 years from now.");
+                int milliseconds = 1500;
+                Thread.Sleep(milliseconds);
+                Console.Clear();
+                DateInput(RoomId);
             }
             validInputDate = true;
         } while (!validInputDate || !validyear);
 
+
         Console.Clear();
+        TimeInput(inputdate, ID, MovieId, RoomId);
+    }
+
+
+
+    public static void TimeInput(string inputdate, int ID, int MovieId, int RoomId)
+    {
         Console.WriteLine("Type the time this show will start like (Hour:Minutes): ");
         int[] hm = new int[0];
         string time;
         bool timecheck = false;
+
         do
         {
             time = Console.ReadLine();
+            List<ShowModel> showsondate = ShowsLogic.ShowsByDate(inputdate);
+            bool roomcheck = true;
             try
             {
                 hm = time.Split(":").Select(int.Parse).ToArray();
@@ -114,26 +147,77 @@ public static class AddShows
             catch (FormatException e)
             {
                 Console.WriteLine("Invalid date format. Please enter the date in the format Hour:Minutes");
+                int milliseconds = 1500;
+                Thread.Sleep(milliseconds);
+                Console.Clear();
+                TimeInput(inputdate, ID, MovieId, RoomId);
             }
             if (hm.Length != 2)
             {
                 Console.WriteLine("Input is not a valid time, please try again.");
+                int milliseconds = 1500;
+                Thread.Sleep(milliseconds);
+                Console.Clear();
+                TimeInput(inputdate, ID, MovieId, RoomId);
             }
-            else if (hm[0] >= 0 && hm[0] <= 23 && hm[1] >= 0 && hm[1] <= 59)
+            if (showsondate.Count > 0)
+            {
+                foreach (ShowModel loopedshow in showsondate)
+                {
+                    FilmsLogic filmsLogic = new FilmsLogic();
+                    FilmModel Film = filmsLogic.GetById(loopedshow.FilmId);
+
+                    double filmLengthInHours = Convert.ToDouble(Film.Length);
+                    TimeSpan filmLength = TimeSpan.FromHours(filmLengthInHours);
+
+                    TimeSpan timeSpan = TimeSpan.Parse(loopedshow.Time);
+                    TimeSpan endTime = timeSpan.Add(filmLength);
+                    TimeSpan parsedtime = TimeSpan.Parse(time);
+
+                    if (parsedtime >= timeSpan && parsedtime <= endTime)
+                    {
+                        roomcheck = false;
+                    }
+                }
+            }
+
+            if (roomcheck is false)
+            {
+                Console.WriteLine("Room is reserved on this time!");
+                int milliseconds = 1500;
+                Thread.Sleep(milliseconds);
+                Console.Clear();
+                TimeInput(inputdate, ID, MovieId, RoomId);
+            }
+            else if (hm[0] >= 0 && hm[0] <= 23 && hm[1] >= 0 && hm[1] <= 59 && roomcheck == true)
             {
                 timecheck = true;
-
             }
             else
             {
                 Console.WriteLine("Input is not a valid time, please try again.");
+                int milliseconds = 1500;
+                Thread.Sleep(milliseconds);
+                Console.Clear();
+                TimeInput(inputdate, ID, MovieId, RoomId);
             }
         }
         while (!timecheck);
-
-        Console.Clear();
-        ShowModel show = new ShowModel(ID, MovieId, RoomId, inputdate, time);
-        ShowsAccess.Add(show);
+        Add(ID, MovieId, RoomId, inputdate, time);
     }
+
+
+    public static void Add(int ID, int MovieID, int RoomId, string inputdate, string time)
+    {
+        Console.Clear();
+        Console.WriteLine("Show added on " + inputdate + ".");
+        int milliseconds = 1500;
+        Thread.Sleep(milliseconds);
+        Console.Clear();
+        ShowModel show = new ShowModel(ID, MovieId + 1, RoomId, inputdate, time);
+        ShowsAccess.Add(show);
+        Menu.Start();
+    }
+
 
 }
