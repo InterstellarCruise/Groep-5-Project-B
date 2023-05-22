@@ -24,11 +24,15 @@ public class BarLogic
     {
         //Find if there is already an model with the same id
         int index = _bar.FindIndex(s => s.Id == acc.Id);
-
-        if (index != -1)
-        {
-            //update existing model
-            _bar[index] = acc;
+        //Find if there is already an model with the same accountid
+        int add = _bar.FindIndex(s => s.Accountid == acc.Accountid);
+        int add2 = _bar.FindIndex(s => s.Start_Time == acc.Start_Time);
+        if (add != -1 & add2 != -1 )
+        {   
+           var adjust = _bar.Find(x => x.Accountid == acc.Accountid);
+           acc.Amount = acc.Amount + adjust.Amount;
+            _bar.RemoveAll(x => x.Accountid == acc.Accountid);
+            _bar.Add(acc);
         }
         else
         {
