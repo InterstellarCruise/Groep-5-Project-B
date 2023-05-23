@@ -76,6 +76,13 @@ public class AccountsLogic
         if (account == null) return false;
         else return true;
     }
+    public void RemoveAcc(string email)
+    {
+        var account = _accounts.FirstOrDefault(i => i.EmailAddress == email);
+        _accounts.Remove(account);
+        AccountsAccess.WriteAll(_accounts);
+        _accounts = AccountsAccess.LoadAll();
+    }
 }
 
 
