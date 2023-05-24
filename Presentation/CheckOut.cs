@@ -99,7 +99,7 @@ public class CheckOut
         int account_id = UserLogin.CurrentAccount.Id;
         List<ReservationModel> reservations = ReservationsAccess.LoadAll();
         List<BarModel> barreservations = BarAccess.LoadAll();
-        int places = 40;
+        int? places = 40;
         int number = 1;
         foreach(BarModel l in barreservations)
         {   List<BarModel> barreservationss = BarAccess.LoadAll();
@@ -119,7 +119,9 @@ public class CheckOut
 
             if(hours>=0 & hours<=2 | hourz >=0 & hourz<=2)
             {
+                if(l.Amount > 0){
                 places = places - l.Amount;
+                }
             }
             }
             }
