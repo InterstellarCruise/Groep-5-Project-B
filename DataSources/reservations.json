@@ -1,20 +1,12 @@
 [
   {
     "id": 1,
-    "showid": 3,
-    "accountid": 5,
-    "ressedchairs": [
-      208
-    ],
-    "amount": 12.5
-  },
-  {
-    "id": 2,
-    "showid": 4,
+    "showid": 1,
     "accountid": 5,
     "ressedchairs": [
       15,
-      16
+      29,
+      53
     ],
     "amount": 25
   }

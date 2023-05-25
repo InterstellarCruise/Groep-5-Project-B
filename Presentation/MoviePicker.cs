@@ -120,7 +120,7 @@ static class MoviePicker
             }
         else
         {
-            Console.WriteLine("-----------------------------\nNo account found with that email and password");
+            Console.WriteLine("\n-----------------------------\nNo account found with that email and password");
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);
             List<MenuItem> items = new List<MenuItem>();
@@ -135,63 +135,66 @@ static class MoviePicker
     static void Movieregister()
     {
         Console.CursorVisible = true;
-        Console.WriteLine("\nwhat is you're First name");
+        Console.WriteLine("\nFirst name:");
         string fname = Console.ReadLine();
         string fname_after = fname.Substring(0, 1).ToUpper() + fname.Substring(1);
-        Console.WriteLine("what is you're Last name:");
+        Console.WriteLine("Last name::");
         string lname = Console.ReadLine();
         string lname_after = lname.Substring(0, 1).ToUpper() + lname.Substring(1);
-        Console.WriteLine("what is you're Email address:");
-        string email = Console.ReadLine();
+        string email = "";
+        do
+        {
+            Console.WriteLine("Email address: ");
+            email = Console.ReadLine().ToLower();
+            if (!email.ToLower().Contains("@"))
+            {
+                Console.WriteLine("\nenter a valid email address\n-----------------------------");
+            }
+        } while (!email.ToLower().Contains("@"));
         email = email.ToLower();
-        Console.WriteLine("what would you like to be you're Password:");
-        string password = Console.ReadLine();
+        string password = "";
+        string password1 = " ";
+        do
+        {
+            Console.WriteLine("Password:");
+            password = Console.ReadLine();
+            Console.WriteLine("Repeat the password");
+            password1 = Console.ReadLine();
+            if (password != password1)
+            {
+                Console.WriteLine("The passwords aren't matching");
+                Console.WriteLine("Please try again");
+                Thread.Sleep(1000);
+                Console.Clear();
+            }
+        } while (password != password1);
         string fullname = $"{fname_after} {lname_after}";
         AccountsLogic acc = new AccountsLogic();
-        acc.NewAcc(email, password, fullname);
-        Console.WriteLine("you have Succesfully registered");
-        AccountModel ac = accountLogic.CheckLogin(email, password);
-        if (acc != null)
-        {
-            if(ac.FullName == "Admin")
-            {
-                Menu.AdminLogged = true;
-            }
-            Menu.LoggedIn = true;
-            int millisecond = 2000;
-            Thread.Sleep(millisecond);
-            Console.Clear();
-            List<MenuItem> items = new List<MenuItem>();
-            items.Add(CurrentMovie);
-            var Reservationoption = new MenuItem("Make reservation", Reservation.Main);
-            Reservationoption.show = CurrentShow;
-            items.Add(Reservationoption);
-            items.Add(new MenuItem("Back", DatePicker.showChoose));
-            items.Add(new MenuItem("Main menu", Menu.Start));
-            MenuBuilder menu = new MenuBuilder(items);
-            menu.DisplayMenu();
-            }
-        else
-        {
-            Console.WriteLine("-----------------------------\nNo account found with that email and password");
-            int millisecondss = 2000;
-            Thread.Sleep(millisecondss);
-            List<MenuItem> items = new List<MenuItem>();
-            items.Add(new MenuItem("Try aigan", movielogin));
-            items.Add(new MenuItem("Back", DatePicker.showChoose));
-            items.Add(new MenuItem("Main menu", Menu.Start));
-            MenuBuilder menu = new MenuBuilder(items);
-            menu.DisplayMenu();
-        }
-        int milliseconds = 2000;
-        Thread.Sleep(milliseconds);
+        bool exists = acc.NewAcc(email, password, fullname);
+        if (!exists) DuplicateEmailRegister(email);
+        Console.WriteLine("Succesfully registered");
+        Thread.Sleep(1000);
         Console.Clear();
-
+        movielogin();
+        
         
     }
-    
+    public static void DuplicateEmailRegister(string email)
+    {
+        Console.WriteLine($"\nThe emailaddress: {email} already exists");
+        Console.WriteLine("\nPlease contact the cinema if you have trouble loggin in");
+        Console.WriteLine("\nYou can find the contact information under Cinema Info at the main menu");
+        int milliseconds = 5000;
+        Thread.Sleep(milliseconds);
+        List<MenuItem> items = new List<MenuItem>();
+        items.Add(new MenuItem("Try again", Movieregister));
+        items.Add(new MenuItem("Main menu", Menu.Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
+    }
 
 
-        
-        
+
+
+
 }

@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "name": "DR Strange",
-    "description": "DR Strange will kill a lot of monsters",
-    "ageLimit": 13,
-    "length": 2.3,
+    "name": "Bananaboat",
+    "description": "Bananaboat adventures",
+    "ageLimit": 17,
+    "length": 2.8,
     "genres": [
       "Action",
       "Adventure",
@@ -35,15 +35,34 @@
   },
   {
     "id": 4,
-    "name": "idk man",
-    "description": "random text",
-    "ageLimit": 18,
-    "length": 2,
+    "name": "test",
+    "description": "test",
+    "ageLimit": 15,
+    "length": 2.5,
     "genres": [
-      "Action",
-      "Adventure",
-      "Thriller",
-      "Horror"
+      "horror",
+      "",
+      "action"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "l",
+    "description": "l",
+    "ageLimit": 0,
+    "length": 3.1,
+    "genres": [
+      "horror"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "pl",
+    "description": "pl",
+    "ageLimit": 0,
+    "length": 2.4,
+    "genres": [
+      "Action"
     ]
   },
   {

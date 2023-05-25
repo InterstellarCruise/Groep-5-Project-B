@@ -147,9 +147,9 @@ public class Reservation
     public static List<ChairModel> GetReservations(int roomId)
     {
         ReservationsLogic reservationsLogic = new ReservationsLogic();
-        List<TheReservationModel> reservations = reservationsLogic.GetByShowId(CurrentShow.Id, roomId);
+        List<ReservationModel> reservations = reservationsLogic.GetByShowId(CurrentShow.Id, roomId);
         List<ChairModel> chairs = new List<ChairModel>();
-        foreach(TheReservationModel theReservation in reservations)
+        foreach(ReservationModel theReservation in reservations)
         {
             foreach(int i in theReservation.Ressedchairs)
             {

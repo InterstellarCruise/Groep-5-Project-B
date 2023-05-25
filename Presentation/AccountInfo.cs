@@ -4,7 +4,9 @@ public class AccountInfo
 {
     public static void Accountinfo()
     {
+        string[] fullname = AccountPage.Account.FullName.Split(' ');
         List<MenuItem> items = new List<MenuItem>();
+        items.Add(new MenuItem($"First Name: {fullname[0]}\nLast Name: {fullname[1]}\nEmail:{AccountPage.Account.EmailAddress}\nPassword:{AccountPage.Account.Password}\n--------------------------------", null));
         items.Add(new MenuItem("Change information", ChangeInfo));
         items.Add(new MenuItem("Back", AccountPage.start));
         MenuBuilder menu = new MenuBuilder(items);

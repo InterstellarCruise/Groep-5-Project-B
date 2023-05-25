@@ -30,7 +30,7 @@ public static class UserLogin
             {
                 Console.WriteLine("\nenter a valid email address\n-----------------------------");
                 Thread.Sleep(2000);
-                Console.Clear();
+                if (!Console.IsOutputRedirected) Console.Clear();
             }
         } while (email != "admin" && !email.ToLower().Contains("@"));
         Console.WriteLine("Please enter your password");
@@ -61,7 +61,7 @@ public static class UserLogin
             }
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);
-            Console.Clear();
+            if (!Console.IsOutputRedirected) Console.Clear();
             Menu.LoggedIn = true;
             CurrentAccount = acc;
             Menu.Start();
@@ -98,15 +98,32 @@ public static class UserLogin
             }
         } while (!email.ToLower().Contains("@"));
         email = email.ToLower();
-        Console.WriteLine("Password:");
-        string password = Console.ReadLine();
+        string password = "";
+        string password1 = " ";
+        do
+        {
+            Console.WriteLine("Password:");
+            password = Console.ReadLine();
+            Console.WriteLine("Repeat the password");
+            password1 = Console.ReadLine();
+            if (password != password1)
+            {
+                Console.WriteLine("The passwords aren't matching");
+                Console.WriteLine("Please try again");
+                Thread.Sleep(1000);
+                if (!Console.IsOutputRedirected) Console.Clear();
+            }
+            } while (password != password1);
+        
         string fullname = $"{fname_after} {lname_after}";
         AccountsLogic acc = new AccountsLogic();
-        acc.NewAcc(email, password, fullname);
+        bool exists = acc.NewAcc(email, password, fullname);
+        if (!exists) DuplicateEmail(email);
         Console.WriteLine("Succesfully registered");
         int milliseconds = 2000;
         Thread.Sleep(milliseconds);
-        Console.Clear();
+        if (!Console.IsOutputRedirected)
+            Console.Clear();
         Dologin();
     }
     public static void DuplicateEmail(string email)
@@ -117,7 +134,7 @@ public static class UserLogin
         int milliseconds = 5000;
         Thread.Sleep(milliseconds);
         List<MenuItem> items = new List<MenuItem>();
-        items.Add(new MenuItem("Try aigan", Start));
+        items.Add(new MenuItem("Try again", Start));
         items.Add(new MenuItem("Main menu", Menu.Start));
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();

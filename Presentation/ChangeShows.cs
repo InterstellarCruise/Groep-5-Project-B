@@ -171,7 +171,7 @@ public static class ChangeShows
         }
         MenuItem lastshow = items.Last();
         lastshow.DisplayText = lastshow.DisplayText + "\n--------------------------------\n";
-        items.Add(new MenuItem("Back", Start));
+        items.Add(new MenuItem("Back", AdminFeatures.Start));
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();
 

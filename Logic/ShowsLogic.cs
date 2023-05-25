@@ -6,7 +6,7 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-class ShowsLogic
+public class ShowsLogic
 {
     private List<ShowModel> _shows;
     public static string Lines = "--------------------------------";
@@ -63,24 +63,6 @@ class ShowsLogic
             }
         }
         return emptyOrNot;
-
-    }
-
-    public static List<ShowModel> ShowsByDate(string date)
-    {
-        List<ShowModel> shows = new List<ShowModel>();
-        shows = ShowsAccess.LoadAll();
-        List<ShowModel> showsondate = new List<ShowModel>();
-        foreach (ShowModel show in shows)
-        {
-
-            if (show.Date == date)
-            {
-                showsondate.Add(show);
-
-            }
-        }
-        return showsondate;
 
     }
 
@@ -143,8 +125,47 @@ class ShowsLogic
     }
     public static List<ShowModel> AllCurrentShows()
     {
+        // List<ShowModel> Shows = ShowsAccess.LoadAll();
+        // foreach (ShowModel show in Shows)
+        // {
+        //     Console.WriteLine("--------------------------------");
+        //     Console.WriteLine($"Show ID: {show.Id}");
+        //     Console.WriteLine($"Room: {show.RoomId}");
+        //     Console.WriteLine($"Film: {show.FilmId}");
+        //     Console.WriteLine("--------------------------------");
+        // }
         List<ShowModel> Shows = ShowsAccess.LoadAll();
         return Shows;
+    }
+    public static List<ShowModel> ShowsByDate(string date)
+    {
+        List<ShowModel> shows = new List<ShowModel>();
+        shows = ShowsAccess.LoadAll();
+        List<ShowModel> showsondate = new List<ShowModel>();
+        foreach (ShowModel show in shows)
+        {
+
+            if (show.Date == date)
+            {
+                showsondate.Add(show);
+
+            }
+        }
+        return showsondate;
+
+    }
+
+    public static void AllCurrShows()
+    {
+        List<ShowModel> Shows = ShowsAccess.LoadAll();
+        foreach (ShowModel show in Shows)
+        {
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine($"Show ID: {show.Id}");
+            Console.WriteLine($"Room: {show.RoomId}");
+            Console.WriteLine($"Film: {show.FilmId}");
+            Console.WriteLine("--------------------------------");
+        }
     }
 }
 

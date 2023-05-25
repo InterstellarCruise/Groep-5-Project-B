@@ -5,7 +5,7 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-class BarLogic
+public class BarLogic
 {
     private List<BarModel> _bar;
 
@@ -24,11 +24,15 @@ class BarLogic
     {
         //Find if there is already an model with the same id
         int index = _bar.FindIndex(s => s.Id == acc.Id);
-
-        if (index != -1)
-        {
-            //update existing model
-            _bar[index] = acc;
+        //Find if there is already an model with the same accountid
+        int add = _bar.FindIndex(s => s.Accountid == acc.Accountid);
+        int add2 = _bar.FindIndex(s => s.Start_Time == acc.Start_Time);
+        if (add != -1 & add2 != -1 )
+        {   
+           var adjust = _bar.Find(x => x.Accountid == acc.Accountid && x.Start_Time == acc.Start_Time);
+           acc.Amount = acc.Amount;
+            _bar.RemoveAll(x => x.Accountid == acc.Accountid);
+            _bar.Add(acc);
         }
         else
         {
@@ -36,6 +40,46 @@ class BarLogic
             _bar.Add(acc);
         }
         BarAccess.WriteAll(_bar);
+    }
+
+    public static List<BarModel> BarReservationsByAccount(int id)
+    {
+        List<BarModel> reservations = BarAccess.LoadAll();
+        List<BarModel> MyReservations = new List<BarModel>();
+        foreach (BarModel reservation in reservations)
+        {
+
+            if (reservation.Accountid == id)
+            {
+                MyReservations.Add(reservation);
+            }
+        }
+        return MyReservations;
 
     }
-}
+    public BarModel GetById(int id)
+    {
+        return _bar.Find(i => i.Id == id);
+    }
+    public void DeleteReservation(ReservationModel reservation,ShowModel show)
+    {
+        BarModel z = _bar.Find(x => x.Accountid == reservation.Accountid && x.Start_Time == show.Time);
+        BarModel newest = z;
+        var numeral = reservation.Ressedchairs.Count();
+        string stringy = $"{z.Amount}";
+        int stringer = Convert.ToInt32(stringy);
+        if(stringer - numeral<=0)
+        {
+            newest.Amount = 0;
+            _bar.RemoveAll(x => x.Accountid == reservation.Accountid);
+            _bar.Add(newest);
+        }
+        else{
+        newest.Amount = (stringer - numeral);
+        _bar.RemoveAll(x => x.Accountid == reservation.Accountid);
+        _bar.Add(newest);
+        }
+        BarAccess.WriteAll(_bar);
+    }
+    }
+
