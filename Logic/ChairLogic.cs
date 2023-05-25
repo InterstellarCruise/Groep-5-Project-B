@@ -9,7 +9,7 @@ public class ChairLogic
 {
 
 
-    private List<ChairModel> _chairs;
+    private static List<ChairModel> _chairs;
     public ChairLogic()
     {
         _chairs = ChairsAccess.LoadAll();
@@ -102,6 +102,13 @@ public class ChairLogic
             Reservation.RemoveTotal(chair.Rank);
         }
 
+    }
+    public static void DeleteChair(int chairid)
+    {
+        var currchair = _chairs.FirstOrDefault(i => i.Id == chairid);
+        _chairs.Remove(currchair);
+        ChairsAccess.WriteAll(_chairs);
+        _chairs = ChairsAccess.LoadAll();
     }
 
 }
