@@ -130,6 +130,94 @@ public class AdminReservations
 
             }
         }
+        ShowsLogic showsLogic = new ShowsLogic();
+        ShowModel currentshow = showLogic.GetById(id);
+        int optionsperline = 0;
+        int curpos = 0;
+        int roomid = currentshow.RoomId;
+        switch (roomid)
+        {
+            case 1:
+                curpos = 2;
+                optionsperline = 12;
+                break;
+            case 2:
+                curpos = 1;
+                optionsperline = 18;
+                break;
+            case 3:
+                curpos = 5;
+                optionsperline = 30;
+                break;
+        }
+
+
+        ChairLogic chairlogic = new ChairLogic();
+        List<ChairModel> options = chairlogic.GetByRoomId(id);
+        Console.Clear();
+        Console.SetCursorPosition(0, 0);
+        const int startX = 5;
+        const int startY = 10;
+        int optionsPerLine = optionsperline;
+        const int spacingPerLine = 4;
+        int origRow = Console.CursorTop;
+        int origCol = Console.CursorLeft;
+
+        int currentSelection = curpos;
+        for (int i = 0; i < options.Count; i++)
+        {
+            Console.SetCursorPosition(startX + (i % optionsPerLine) * spacingPerLine, startY + i / optionsPerLine);
+
+            if (i == currentSelection)
+            {
+
+                if (!options[currentSelection].Available)
+                {
+
+                    if (options[currentSelection].takeseat)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                    }
+                }
+
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            else
+            {
+                if (options[i].Rank == 1)
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                else if (options[i].Rank == 2)
+                    Console.ForegroundColor = ConsoleColor.Green;
+                else if (options[i].Rank == 3)
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                else
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                if (!options[i].Available)
+                {
+
+                    if (options[i].takeseat)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                }
+            }
+
+            Console.Write(ChairLogic.RowNumber(options[i]));
+
+            Console.ResetColor();
+            
+        }
         Console.WriteLine($"The amount of seats occupied in this rank is {rankChair.Count}");
         int miliseconds = 2000;
         Thread.Sleep(miliseconds);
