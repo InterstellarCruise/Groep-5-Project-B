@@ -35,24 +35,45 @@ public static class AddFilms
         }
         Console.Clear();
         Console.WriteLine("Type the length of the movie like (Hour.Minutes): ");
-        double Length = Convert.ToDouble(Console.ReadLine());
-        Console.Clear();
+        string Length = Console.ReadLine();
+        string[] parts = Length.Split('.');
+        int i1 = int.Parse(parts[0]);
+        int i2 = int.Parse(parts[1]);
+        if (i2 < 0 || i2 > 59)
+        {
+            Console.WriteLine("Invalid minutes.");
+            int millisecondsmin = 1500;
+            Thread.Sleep(millisecondsmin);
+            Console.Clear();
+            FilmInput();
+        }
+        double hourperc = Convert.ToDouble(i2) / 60;
+        double length = i1 + hourperc;
+        // Console.Clear();
         Console.WriteLine("Type a genre of the movie: ");
         bool genrecheck = false;
         while (!genrecheck)
         {
             string _genre = Console.ReadLine();
             Genres.Add(_genre);
-            Console.WriteLine("Do you want to add another genre? Yes or No");
+            Console.WriteLine("Do you want to add another genre? Y / N");
             string YN = Console.ReadLine();
-            if (YN == "No")
+            if (YN.ToUpper() == "N")
             {
                 genrecheck = true;
             }
+            else
+            {
+                Console.WriteLine("The name of the other genre:");
+            }
         }
         Console.Clear();
-        FilmModel film = new FilmModel(ID, Name, Description, AgeLimit, Length, Genres);
+        Console.WriteLine(Name + " added to database");
+        int milliseconds = 1500;
+        Thread.Sleep(milliseconds);
+        Console.Clear();
+        FilmModel film = new FilmModel(ID, Name, Description, AgeLimit, length, Genres);
         FilmsAccess.Add(film);
+        Menu.Start();
     }
-
 }
