@@ -127,7 +127,7 @@ public class CheckOut
             }
             
         }
-        if(places>=1)
+        if(places>=_chairs.Count())
         {
             Console.WriteLine($"there are {places} left. you can make a bar reservation do you wish to make one y/n");
             string? answer = Console.ReadLine().ToLower();
@@ -140,6 +140,8 @@ public class CheckOut
             }
             else
             {
+                Console.WriteLine("there are not enough seats at the bar to ccomodate you're party.");
+                Thread.Sleep(3000);
                 _answer = "no";
             }
         
