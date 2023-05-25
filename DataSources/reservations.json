@@ -17,5 +17,15 @@
       16
     ],
     "amount": 25
+  },
+  {
+    "id": 3,
+    "showid": 1,
+    "accountid": 3,
+    "ressedchairs": [
+      41,
+      42
+    ],
+    "amount": 22
   }
 ]
