@@ -56,7 +56,7 @@ public class AccountsLogic
         return CurrentAccount;
     }
 
-    public void NewAcc(string email, string password, string fullname)
+    public bool NewAcc(string email, string password, string fullname)
     {
         var account = _accounts.FirstOrDefault(a => a.EmailAddress == email);
         if (account == null)
@@ -64,10 +64,11 @@ public class AccountsLogic
             int index = _accounts.Count + 1;
             AccountModel newacc = new AccountModel(index, email, password, fullname);
             UpdateList(newacc);
+            return true;
         }
         else
         {
-            UserLogin.DuplicateEmail(email);
+            return false;
         }
 
     }
