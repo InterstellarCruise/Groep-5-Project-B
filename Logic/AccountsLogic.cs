@@ -58,6 +58,7 @@ public class AccountsLogic
 
     public bool NewAcc(string email, string password, string fullname)
     {
+        _accounts = AccountsAccess.LoadAll();
         var account = _accounts.FirstOrDefault(a => a.EmailAddress == email);
         if (account == null)
         {
