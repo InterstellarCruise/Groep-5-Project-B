@@ -54,11 +54,15 @@ public class ReservationDetail
         ShowsLogic showlogic = new ShowsLogic();
         BarLogic Barlogic = new BarLogic();
         reslogic.DeleteReservation(reservation);
-        foreach(BarModel bar in BarLogic.BarReservationsByAccount(reservation.Accountid))
-        {
-            if(bar.Start_Time == (showlogic.GetById(reservation.Showid).Time))
+        foreach( var reserv in Barlogic.allbarseat){
+            if(reservation.Id == reserv.Reservationid ){
+            foreach(BarModel bar in BarLogic.BarReservationsByAccount(reservation.Accountid))
             {
-                Barlogic.DeleteReservation(reservation,showlogic.GetById(reservation.Showid));
+                if(bar.Start_Time == (showlogic.GetById(reservation.Showid).Time))
+                {
+                    Barlogic.DeleteReservation(reservation,showlogic.GetById(reservation.Showid));
+                }
+            }
             }
         }
         Console.WriteLine("Reservation successfully canceled");

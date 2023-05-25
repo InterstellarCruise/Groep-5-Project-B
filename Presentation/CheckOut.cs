@@ -133,7 +133,7 @@ public class CheckOut
             string? answer = Console.ReadLine().ToLower();
             if(answer == "y" || answer == "yes")
             {
-                var new_bar = new BarModel(number ,date ,account_id,Time,_chairs.Count());
+                var new_bar = new BarModel(number ,date ,account_id,reservations.Count(),Time,_chairs.Count());
                 barLogic.UpdateList(new_bar);
                 _answer = "yes";
 

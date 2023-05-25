@@ -18,6 +18,7 @@ public class BarLogic
     {
         _bar = BarAccess.LoadAll();
     }
+    public List<BarModel> allbarseat = BarAccess.LoadAll();
 
 
     public void UpdateList(BarModel acc)
@@ -30,7 +31,7 @@ public class BarLogic
         if (add != -1 & add2 != -1 )
         {   
            var adjust = _bar.Find(x => x.Accountid == acc.Accountid && x.Start_Time == acc.Start_Time);
-           acc.Amount = acc.Amount;
+           acc.Amount = acc.Amount-adjust.Amount;
             _bar.RemoveAll(x => x.Accountid == acc.Accountid);
             _bar.Add(acc);
         }
@@ -63,7 +64,7 @@ public class BarLogic
     }
     public void DeleteReservation(ReservationModel reservation,ShowModel show)
     {
-        BarModel z = _bar.Find(x => x.Accountid == reservation.Accountid && x.Start_Time == show.Time);
+        BarModel z = _bar.Find(x => x.Accountid == reservation.Accountid && x.Start_Time == show.Time&& x.Reservationid == reservation.Id );
         BarModel newest = z;
         var numeral = reservation.Ressedchairs.Count();
         string stringy = $"{z.Amount}";
