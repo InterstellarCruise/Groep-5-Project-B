@@ -51,7 +51,16 @@ public class ReservationDetail
     {
         Console.Clear();
         ReservationsLogic reslogic = new ReservationsLogic();
+        ShowsLogic showlogic = new ShowsLogic();
+        BarLogic Barlogic = new BarLogic();
         reslogic.DeleteReservation(reservation);
+        foreach(BarModel bar in BarLogic.BarReservationsByAccount(reservation.Accountid))
+        {
+            if(bar.Start_Time == (showlogic.GetById(reservation.Showid).Time))
+            {
+                Barlogic.DeleteReservation(reservation,showlogic.GetById(reservation.Showid));
+            }
+        }
         Console.WriteLine("Reservation successfully canceled");
         Thread.Sleep(3000);
         AccountPage.start();

@@ -64,7 +64,7 @@ public class CheckOut
         Console.WriteLine("Transaction Receipt from Shinema");
         Console.WriteLine("------------------------------");
         Console.WriteLine($"Movie: {film.Name}");
-        Console.WriteLine($"Number of Chairs: {_selecchairs} ");
+        Console.WriteLine($"Number of Chairs: {_chairs.Count()} ");
         Console.WriteLine($"Room: {_show.RoomId}");
         Console.WriteLine($"Total: {_amount} EUR");
         Console.WriteLine($"barseat(s) {_answer}");
@@ -99,10 +99,10 @@ public class CheckOut
         int account_id = UserLogin.CurrentAccount.Id;
         List<ReservationModel> reservations = ReservationsAccess.LoadAll();
         List<BarModel> barreservations = BarAccess.LoadAll();
-        int places = 40;
+        int? places = 40;
         int number = 1;
         foreach(BarModel l in barreservations)
-        {
+        {   List<BarModel> barreservationss = BarAccess.LoadAll();
             if(l == null)
             {
                 places = 40;
@@ -119,7 +119,9 @@ public class CheckOut
 
             if(hours>=0 & hours<=2 | hourz >=0 & hourz<=2)
             {
-                places = places - 1;
+                if(l.Amount > 0){
+                places = places - l.Amount;
+                }
             }
             }
             }
@@ -127,9 +129,9 @@ public class CheckOut
         }
         if(places>=1)
         {
-            Console.WriteLine("you can make a bar reservation do you wish to make one y/n");
+            Console.WriteLine($"there are {places} left. you can make a bar reservation do you wish to make one y/n");
             string? answer = Console.ReadLine().ToLower();
-            if(answer == "y" )
+            if(answer == "y" || answer == "yes")
             {
                 var new_bar = new BarModel(number ,date ,account_id,Time,_chairs.Count());
                 barLogic.UpdateList(new_bar);

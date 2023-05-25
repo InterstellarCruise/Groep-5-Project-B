@@ -14,9 +14,9 @@ public class BarModel
     public string Start_Time { get; set; }
 
     [JsonPropertyName("amount")]
-    public int Amount { get; set; }
+    public Nullable<int> Amount { get; set; }
 
-    public BarModel(int id, string date, int accountid, string start_time, int amount)
+    public BarModel(int id, string date, int accountid, string start_time, int? amount)
     {
         Id = id;
         Date = date;
