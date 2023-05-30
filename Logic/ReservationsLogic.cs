@@ -114,6 +114,7 @@ public class ReservationsLogic
 
     }
 
+
     public static double IncomeRank(int id, int rank)
     {
         List<ReservationModel> Reservation = ReservationsAccess.LoadAll();

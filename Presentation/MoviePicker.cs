@@ -172,12 +172,12 @@ static class MoviePicker
         AccountsLogic acc = new AccountsLogic();
         bool exists = acc.NewAcc(email, password, fullname);
         if (!exists) DuplicateEmailRegister(email);
+        acc.NewAcc(email, password, fullname);
         Console.WriteLine("Succesfully registered");
         Thread.Sleep(1000);
         Console.Clear();
         movielogin();
-        
-        
+
     }
     public static void DuplicateEmailRegister(string email)
     {
