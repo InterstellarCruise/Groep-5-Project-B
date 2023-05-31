@@ -75,6 +75,14 @@ public class FilmsLogic
             }
         }
     }
+
+    public static void AddFilm(int ID, string Name, string Description, int AgeLimit, double length, List<string> Genres)
+    {
+        FilmModel film = new FilmModel(ID, Name, Description, AgeLimit, length, Genres);
+        FilmsAccess.Add(film);
+    }
+
+
     public static void AllCurrentFilms()
     {
         List<FilmModel> Films = FilmsAccess.LoadAll();
@@ -85,7 +93,7 @@ public class FilmsLogic
             Console.WriteLine($"Film Title: {film.Name} \n");
             Console.WriteLine("--------------------------------");
         }
-        
+
     }
 }
 

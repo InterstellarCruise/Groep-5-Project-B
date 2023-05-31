@@ -156,6 +156,7 @@ public static class AddShows
                 Console.Clear();
                 TimeInput(inputdate, ID, MovieId, RoomId);
             }
+
             if (hm.Length != 2)
             {
                 Console.WriteLine("Input is not a valid time, please try again.");
@@ -164,25 +165,11 @@ public static class AddShows
                 Console.Clear();
                 TimeInput(inputdate, ID, MovieId, RoomId);
             }
+
             if (showsondate.Count > 0)
             {
-                foreach (ShowModel loopedshow in showsondate)
-                {
-                    FilmsLogic filmsLogic = new FilmsLogic();
-                    FilmModel Film = filmsLogic.GetById(loopedshow.FilmId);
-
-                    double filmLengthInHours = Convert.ToDouble(Film.Length);
-                    TimeSpan filmLength = TimeSpan.FromHours(filmLengthInHours);
-
-                    TimeSpan timeSpan = TimeSpan.Parse(loopedshow.Time);
-                    TimeSpan endTime = timeSpan.Add(filmLength);
-                    TimeSpan parsedtime = TimeSpan.Parse(time);
-
-                    if (parsedtime >= timeSpan && parsedtime <= endTime)
-                    {
-                        roomcheck = false;
-                    }
-                }
+                roomcheck = RoomsLogic.AvailableCheck(showsondate, time);
+                //New LogicLayer function
             }
 
             if (roomcheck is false)
@@ -193,10 +180,13 @@ public static class AddShows
                 Console.Clear();
                 TimeInput(inputdate, ID, MovieId, RoomId);
             }
-            else if (hm[0] >= 0 && hm[0] <= 23 && hm[1] >= 0 && hm[1] <= 59 && roomcheck == true)
+
+            else if (RoomsLogic.ValidTime(hm, roomcheck) == true)
             {
-                timecheck = true;
+                timecheck = RoomsLogic.ValidTime(hm, roomcheck);
+                //New LogicLayer function
             }
+
             else
             {
                 Console.WriteLine("Input is not a valid time, please try again.");
@@ -218,8 +208,8 @@ public static class AddShows
         int milliseconds = 1500;
         Thread.Sleep(milliseconds);
         Console.Clear();
-        ShowModel show = new ShowModel(ID, MovieId + 1, RoomId, inputdate, time);
-        ShowsAccess.Add(show);
+        ShowsLogic.AddShow(ID, MovieID + 1, RoomId, inputdate, time);
+        //New LogicLayer function
         Menu.Start();
     }
 

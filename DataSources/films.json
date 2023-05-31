@@ -74,5 +74,15 @@
     "genres": [
       "Horror"
     ]
+  },
+  {
+    "id": 8,
+    "name": "IdkTest",
+    "description": "This is a test movie",
+    "ageLimit": 0,
+    "length": 2.5,
+    "genres": [
+      "Horror"
+    ]
   }
 ]
