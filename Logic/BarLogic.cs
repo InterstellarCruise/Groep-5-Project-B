@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Globalization;
 
 
 //This class is not static so later on we can use inheritance and interfaces
@@ -21,25 +22,28 @@ public class BarLogic
     public List<BarModel> allbarseat = BarAccess.LoadAll();
 
 
-    public void UpdateList(BarModel acc)
+    public void UpdateList(string date,string Time, int chairs)
+
     {
+        List<ReservationModel> reservations = ReservationsAccess.LoadAll();
+        ReservationsLogic rlogic = new ReservationsLogic();
+        ShowsLogic sowlogic = new ShowsLogic();
+        int resrvenumber = reservations.Count();
+        int account_id = UserLogin.CurrentAccount.Id;
+        ReservationModel start = rlogic.GetById(resrvenumber);
+        int indexen = _bar.Count + 1;
+        var start_time = sowlogic.GetById(start.Showid);
+        BarModel acc = new BarModel(indexen,date,account_id,resrvenumber,start_time.Time,start.Ressedchairs.Count());
+
         //Find if there is already an model with the same id
         int index = _bar.FindIndex(s => s.Id == acc.Id);
         //Find if there is already an model with the same accountid
-        int add = _bar.FindIndex(s => s.Accountid == acc.Accountid);
-        int add2 = _bar.FindIndex(s => s.Start_Time == acc.Start_Time);
-        if (add != -1 & add2 != -1 )
-        {   
-           var adjust = _bar.Find(x => x.Accountid == acc.Accountid && x.Start_Time == acc.Start_Time);
-           acc.Amount = acc.Amount-adjust.Amount;
-            _bar.RemoveAll(x => x.Accountid == acc.Accountid);
-            _bar.Add(acc);
-        }
-        else
-        {
+        
+       
+    
+        
             //add new model
-            _bar.Add(acc);
-        }
+        _bar.Add(acc);
         BarAccess.WriteAll(_bar);
     }
 
@@ -81,6 +85,45 @@ public class BarLogic
         _bar.Add(newest);
         }
         BarAccess.WriteAll(_bar);
+    }
+
+
+    public int? timecheck(string Time,string date,double lenght)
+    {
+        int account_id = UserLogin.CurrentAccount.Id;
+        List<ReservationModel> reservations = ReservationsAccess.LoadAll();
+        List<BarModel> barreservations = BarAccess.LoadAll();
+        FilmsLogic filmsLogic = new FilmsLogic();
+        ShowsLogic showsLogic = new ShowsLogic();
+        ReservationsLogic reservationsLogic = new ReservationsLogic();
+        int? places = 40;
+        int number = 1;
+        foreach(BarModel l in barreservations)
+        {   List<BarModel> barreservationss = BarAccess.LoadAll();
+            if(l.Date!=null){
+            
+            IFormatProvider provider = CultureInfo.InvariantCulture;
+            number = number + 1;
+            DateTime current_time = DateTime.ParseExact(Time, "HH:mm",provider);
+            DateTime time = DateTime.ParseExact(l.Start_Time, "HH:mm",provider);
+            TimeSpan span = current_time.Subtract (time);
+            ////span lenght of movie by l 
+            var nameshow = reservationsLogic.GetById(l.Reservationid);
+            var nameshow2 = showsLogic.GetById(nameshow.Showid);
+            var nameshow3 = filmsLogic.GetById(nameshow2.FilmId);
+            var spans = span.Hours - nameshow3.Length + lenght;
+
+            if(spans>=0 & spans<=lenght)
+            {
+                if(l.Amount > 0){
+                places = places - l.Amount;
+                }
+            }
+            }
+            
+            
+        }
+        return places;
     }
     }
 

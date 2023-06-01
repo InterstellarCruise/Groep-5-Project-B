@@ -81,71 +81,31 @@ public class CheckOut
 
     static public void barplace(ShowModel show)
     {
-    
-        ///try{
+
         string date = show.Date;
         string Time =show.Time;
-        //}
-        ///catch(NullReferenceException){
-            //var date = "2023-03-15";
-            //string Time = "11:00";
-        //}
-        ///if(date == null)
-        //{
-           // string date = "2023-03-15";
-           // string Time = "11:00";
-        //}
-
-        int account_id = UserLogin.CurrentAccount.Id;
-        List<ReservationModel> reservations = ReservationsAccess.LoadAll();
-        List<BarModel> barreservations = BarAccess.LoadAll();
-        int? places = 40;
-        int number = 1;
-        foreach(BarModel l in barreservations)
-        {   List<BarModel> barreservationss = BarAccess.LoadAll();
-            if(l == null)
-            {
-                places = 40;
-            }
-            else{
-            if(l.Start_Time!=null){
-            IFormatProvider provider = CultureInfo.InvariantCulture;
-            number = number + 1;
-            DateTime current_time = DateTime.ParseExact(Time, "HH:mm",provider);
-            DateTime time = DateTime.ParseExact(l.Start_Time, "HH:mm",provider);
-            var hours = (current_time - time).TotalHours;
-        
-            var hourz = (time - current_time ).TotalHours;
-
-            if(hours>=0 & hours<=2 | hourz >=0 & hourz<=2)
-            {
-                if(l.Amount > 0){
-                places = places - l.Amount;
-                }
-            }
-            }
-            }
-            
-        }
+        var len = filmLogic.GetById(show.FilmId);
+        var places = barLogic.timecheck(Time,date,len.Length);
         if(places>=_chairs.Count())
         {
             Console.WriteLine($"there are {places} left. you can make a bar reservation do you wish to make one y/n");
             string? answer = Console.ReadLine().ToLower();
             if(answer == "y" || answer == "yes")
             {
-                var new_bar = new BarModel(number ,date ,account_id,reservations.Count(),Time,_chairs.Count());
-                barLogic.UpdateList(new_bar);
+                
+                barLogic.UpdateList(date,Time,_chairs.Count());
                 _answer = "yes";
 
             }
-            else
+        }
+        else
             {
                 Console.WriteLine("there are not enough seats at the bar to ccomodate you're party.");
                 Thread.Sleep(3000);
                 _answer = "no";
             }
         
-        }
+        
         
     }
     
