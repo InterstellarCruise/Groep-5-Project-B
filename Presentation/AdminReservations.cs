@@ -84,7 +84,7 @@ public class AdminReservations
     {
 
         Console.Clear();
-        List<ReservationModel> reservation = reservationLogic.GetByShowIdList(ListOfReservationsShow.Id);
+        var reservation = reservationLogic.GetByShowIdList(ListOfReservationsShow.Id);
         ChairLogic chairsLogic = new ChairLogic();
         foreach(var res in reservation)
         {

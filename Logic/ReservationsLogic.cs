@@ -92,10 +92,9 @@ public class ReservationsLogic
         ReservationsAccess.WriteAll(_reservations);
     }
 
-    public List<ReservationModel> GetByShowIdList(int id)
+    public IEnumerable<ReservationModel> GetByShowIdList(int id)
     {
-        List<ReservationModel> reservation = new List<ReservationModel>();
-        reservation.Add(_reservations.Find(i => i.Showid == id));
+        var reservation = _reservations.Where(i => i.Showid == id);
         return reservation;
         
     }
