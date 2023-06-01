@@ -37,7 +37,6 @@ public class AdminReservations
 
 
         List<MenuItem> items = new List<MenuItem>();
-        items.Add(new MenuItem(CurrentShow, null));
         items.Add(new MenuItem("Reservations per show", ListOfShows));
         items.Add(new MenuItem("Occupied seats per show", OccupiedSeatsShow));
         // items.Add(new MenuItem("Occupied seats per rank", OccupiedSeatsRank));
@@ -86,39 +85,23 @@ public class AdminReservations
         Console.Clear();
         var reservation = reservationLogic.GetByShowIdList(ListOfReservationsShow.Id);
         ChairLogic chairsLogic = new ChairLogic();
-        foreach(var res in reservation)
-        {
-            Console.WriteLine(res.Accountid);
-        }
+        foreach (var res in reservation)
 
-        // if (reservation != null)
-        // {
-        //     foreach (var res in reservation)
-        //     {
-        //         List<int> reschair = res.Ressedchairs;
-        //         foreach (var Wholechair in reschair)
-        //         {
-        //             chair = chairsLogic.GetById(Wholechair);
-        //             string colInt = Convert.ToString(chair.Column);
-        //             string chairs = colInt + "-" + chair.Row;
-        //             _allChair.Add(chairs);
-        //         }
-        //         string y = string.Format("Chairs reserved: ({0}).", string.Join(", ", _allChair));
-        //         Console.WriteLine($" Show ID: {res.Showid} \n Reservation ID: {res.Id} \nAccount: {res.Accountid} \nChairs: {y}");
-        //         int milliseconds = 3000;
-        //         Thread.Sleep(milliseconds);
-        //         Console.Clear();
-        //         AdminFeatures.Start();
-        //     }
-        // }
-        // else
-        // {
-        //     Console.WriteLine("No reservations found for this show");
-        //     int milliseconds = 3000;
-        //     Thread.Sleep(milliseconds);
-        //     Console.Clear();
-        //     AdminFeatures.Start();
-        // }
+        {
+            List<int> reschair = res.Ressedchairs;
+            foreach (var Wholechair in reschair)
+            {
+                chair = chairsLogic.GetById(Wholechair);
+                string colInt = Convert.ToString(chair.Column);
+                string chairs = colInt + "-" + chair.Row;
+                _allChair.Add(chairs);
+            }
+            string y = string.Format("Chairs reserved: ({0}).", string.Join(", ", _allChair));
+            Console.WriteLine($" Show ID: {res.Showid} \n Reservation ID: {res.Id} \nAccount: {res.Accountid} \nChairs: {y}");
+            
+        }
+        AdminFeatures.Start();
+
 
 
     }
