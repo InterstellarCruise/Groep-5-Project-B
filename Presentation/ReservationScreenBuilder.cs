@@ -1,4 +1,6 @@
-﻿public class ReservationScreenBuilder
+﻿using System.Reflection.Metadata.Ecma335;
+
+public class ReservationScreenBuilder
 {
     private static bool _running = true;
     private static List<ChairModel> _selectedchairs = new List<ChairModel>();
@@ -7,33 +9,11 @@
     protected static int origCol;
     public static string legendred = "  [BLUE] --> 8.00 EUR";
     public static string legendorange = "  [GREEN] --> 10.00 EUR";
+    private static int currentSelection;
     public static ShowModel show { get; set; }
     public static void MultipleChoice(List<MenuItem> options, int curpos, int optionsperline)
     {
-        if (!CheckOut.BackMenu)
-        {
-            if (_selectedchairs.Count != 0)
-            {
-                foreach (MenuItem item in options)
-                {
-                    foreach (ChairModel chair in _selectedchairs)
-                    {
-                        if (ChairLogic.RowNumber(item.chair) == ChairLogic.RowNumber(chair))
-                        {
-                            item.chair.Available = false;
-                            item.chair.takeseat = true;
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            _selectedchairs.Clear();
-            Reservation.totalprice = 0;
-            CheckOut.BackMenu = false;
-        }
-            
+        options = CheckSelectedChairs(options);
 
         Console.SetCursorPosition(0, 0);
         const int startX = 5;
@@ -42,10 +22,8 @@
         const int spacingPerLine = 4;
         origRow = Console.CursorTop;
         origCol = Console.CursorLeft;
-
-        int currentSelection = curpos;
-
-        ConsoleKey key;
+        currentSelection = curpos;
+        
 
         Console.CursorVisible = false;
 
@@ -109,103 +87,13 @@
                 Console.Write(ChairLogic.RowNumber(options[i].chair));
 
                 Console.ResetColor();
+                
             }
-            key = Console.ReadKey(true).Key;
+            HandleInput(options, optionsPerLine);
 
-            switch (key)
-            {
-                case ConsoleKey.Escape:
-                    Reservation.totalprice = 0;
-                    _selectedchairs.Clear();
-                    MoviePicker.Start();
-                    break;
-                case ConsoleKey.Spacebar:
-                    double amount = Reservation.Total("nothing");
-                    CheckOut.Start(_selectedchairs, amount, show);
-                    break;
-                case ConsoleKey.LeftArrow:
-                    {
-                        try
-                        {
-                            if (options[currentSelection - 1].chair.Row != null)
-                            {
-                                if (currentSelection % optionsPerLine > 0)
-                                    currentSelection--;
-                            }
-                        }
-                        catch (IndexOutOfRangeException) { }
-                        catch (ArgumentOutOfRangeException) { }
-                        break;
-                    }
-                case ConsoleKey.RightArrow:
-                    {
-                        try
-                        {
-                            if (options[currentSelection + 1].chair.Row != null)
-                            {
-                                if (currentSelection % optionsPerLine < optionsPerLine - 1)
-                                    currentSelection++;
-                            }
-                        }
-                        catch (IndexOutOfRangeException) { }
-                        catch (ArgumentOutOfRangeException) { }
-                        break;
-
-                    }
-                case ConsoleKey.UpArrow:
-                    {
-                        try
-                        {
-                            if (options[currentSelection - optionsPerLine].chair.Row != null)
-                                if (currentSelection >= optionsPerLine)
-                                    currentSelection -= optionsPerLine;
-                        }
-                        catch (IndexOutOfRangeException) { }
-                        catch (ArgumentOutOfRangeException) { }
-                        break;
-                    }
-                case ConsoleKey.DownArrow:
-                    {
-                        try
-                        {
-                            if (options[currentSelection + optionsPerLine].chair.Row != null)
-                            {
-                                if (currentSelection + optionsPerLine < options.Count)
-                                    currentSelection += optionsPerLine;
-                            }
-                        }
-                        catch (ArgumentOutOfRangeException) { }
-                        catch (IndexOutOfRangeException) { }
-                        break;
-                    }
-                case ConsoleKey.Enter:
-                    {
-                        if (options[currentSelection].chair.Row != null)
-                        {
-                            if (options[currentSelection].chair.Available && !options[currentSelection].chair.takeseat)
-                            {
-                                options[currentSelection].Execute();
-                                if (!_selectedchairs.Contains(options[currentSelection].chair))
-                                {
-                                    options[currentSelection].Execute();
-                                    _selectedchairs.Add(options[currentSelection].chair);
-                                    ChairLogic.TakeSeat(options[currentSelection].chair);
-                                }
-                            }
-                            else
-                            {
-                                _selectedchairs.Remove(options[currentSelection].chair);
-                                ChairLogic.RemoveSeat(options[currentSelection].chair);
-
-                            }
-                            
-                            
-                        }
-                        break;
-                    }
-            }
         }
     }
+
     protected static void WriteAt(string s, int x, int y)
     {
         try
@@ -255,6 +143,132 @@
                 WriteAt("+", 101, l);
             else
                 WriteAt("|", 101, l);
+        }
+
+    }
+    private static List<MenuItem> CheckSelectedChairs(List<MenuItem> options)
+    {
+        if (!CheckOut.BackMenu)
+        {
+            if (_selectedchairs.Count != 0)
+            {
+                foreach (MenuItem item in options)
+                {
+                    foreach (ChairModel chair in _selectedchairs)
+                    {
+                        if (ChairLogic.RowNumber(item.chair) == ChairLogic.RowNumber(chair))
+                        {
+                            item.chair.Available = false;
+                            item.chair.takeseat = true;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            _selectedchairs.Clear();
+            Reservation.totalprice = 0;
+            CheckOut.BackMenu = false;
+        }
+        return options;
+    }
+    public static void HandleInput(List<MenuItem> options, int optionsPerLine)
+    {
+        ConsoleKey key;
+        key = Console.ReadKey(true).Key;
+
+        switch (key)
+        {
+            case ConsoleKey.Escape:
+                Reservation.totalprice = 0;
+                _selectedchairs.Clear();
+                MoviePicker.Start();
+                break;
+            case ConsoleKey.Spacebar:
+                double amount = Reservation.Total("nothing");
+                CheckOut.Start(_selectedchairs, amount, show);
+                break;
+            case ConsoleKey.LeftArrow:
+                {
+                    try
+                    {
+                        if (options[currentSelection - 1].chair.Row != null)
+                        {
+                            if (currentSelection % optionsPerLine > 0)
+                                currentSelection--;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                    catch (ArgumentOutOfRangeException) { }
+                    break;
+                }
+            case ConsoleKey.RightArrow:
+                {
+                    try
+                    {
+                        if (options[currentSelection + 1].chair.Row != null)
+                        {
+                            if (currentSelection % optionsPerLine < optionsPerLine - 1)
+                                currentSelection++;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                    catch (ArgumentOutOfRangeException) { }
+                    break;
+
+                }
+            case ConsoleKey.UpArrow:
+                {
+                    try
+                    {
+                        if (options[currentSelection - optionsPerLine].chair.Row != null)
+                            if (currentSelection >= optionsPerLine)
+                                currentSelection -= optionsPerLine;
+                    }
+                    catch (IndexOutOfRangeException) { }
+                    catch (ArgumentOutOfRangeException) { }
+                    break;
+                }
+            case ConsoleKey.DownArrow:
+                {
+                    try
+                    {
+                        if (options[currentSelection + optionsPerLine].chair.Row != null)
+                        {
+                            if (currentSelection + optionsPerLine < options.Count)
+                                currentSelection += optionsPerLine;
+                        }
+                    }
+                    catch (ArgumentOutOfRangeException) { }
+                    catch (IndexOutOfRangeException) { }
+                    break;
+                }
+            case ConsoleKey.Enter:
+                {
+                    if (options[currentSelection].chair.Row != null)
+                    {
+                        if (options[currentSelection].chair.Available && !options[currentSelection].chair.takeseat)
+                        {
+                            options[currentSelection].Execute();
+                            if (!_selectedchairs.Contains(options[currentSelection].chair))
+                            {
+                                options[currentSelection].Execute();
+                                _selectedchairs.Add(options[currentSelection].chair);
+                                ChairLogic.TakeSeat(options[currentSelection].chair);
+                            }
+                        }
+                        else
+                        {
+                            _selectedchairs.Remove(options[currentSelection].chair);
+                            ChairLogic.RemoveSeat(options[currentSelection].chair);
+
+                        }
+
+
+                    }
+                    break;
+                }
         }
 
     }
