@@ -7,7 +7,6 @@ using System.Text.Json;
 //This class is not static so later on we can use inheritance and interfaces
 public class RoomsLogic : BaseLogic<RoomModel>
 {
-    private List<RoomModel> _items;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
