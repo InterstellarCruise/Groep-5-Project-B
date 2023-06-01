@@ -110,6 +110,28 @@ public class ShowsLogic
         return DateTime.TryParseExact(date, "yyyy-mm-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out tempObject);
     }
 
+    public bool ValidShowYear(string date)
+    {
+        string[] dates = date.Split("-");
+        int day = Convert.ToInt32(dates[2]);
+        int month = Convert.ToInt32(dates[1]);
+        int year = Convert.ToInt32(dates[0]);
+        int currentMonth = DateTime.Now.Month;
+        int currentYear = DateTime.Now.Year;
+        int futureYear = currentYear + 5;
+        int currentDay = DateTime.Now.Day;
+
+        if (year < currentYear || year > futureYear || month < currentMonth || day < currentDay)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
+
     public bool ValidShowTime(string time)
     {
         DateTime tempObject;
@@ -125,15 +147,7 @@ public class ShowsLogic
     }
     public static List<ShowModel> AllCurrentShows()
     {
-        // List<ShowModel> Shows = ShowsAccess.LoadAll();
-        // foreach (ShowModel show in Shows)
-        // {
-        //     Console.WriteLine("--------------------------------");
-        //     Console.WriteLine($"Show ID: {show.Id}");
-        //     Console.WriteLine($"Room: {show.RoomId}");
-        //     Console.WriteLine($"Film: {show.FilmId}");
-        //     Console.WriteLine("--------------------------------");
-        // }
+
         List<ShowModel> Shows = ShowsAccess.LoadAll();
         return Shows;
     }
@@ -155,18 +169,7 @@ public class ShowsLogic
 
     }
 
-    public static void AllCurrShows()
-    {
-        List<ShowModel> Shows = ShowsAccess.LoadAll();
-        foreach (ShowModel show in Shows)
-        {
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine($"Show ID: {show.Id}");
-            Console.WriteLine($"Room: {show.RoomId}");
-            Console.WriteLine($"Film: {show.FilmId}");
-            Console.WriteLine("--------------------------------");
-        }
-    }
+
 }
 
 

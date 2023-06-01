@@ -33,7 +33,6 @@ public static class ChangeShows
             items.Add(new MenuItem("Date", EditDate));
             items.Add(new MenuItem("Time", EditTTime));
             items.Add(new MenuItem("Title", EditTitle));
-            items.Add(new MenuItem("Description", EditDescription));
             items.Add(new MenuItem("Age Limit", EditAgeLimit));
             items.Add(new MenuItem("Back", AdminFeatures.Start));
             items.Add(new MenuItem("Main menu", Menu.Start));
@@ -66,8 +65,14 @@ public static class ChangeShows
             Console.WriteLine("This is an invalid date, please fill in a date in the format of year-month-day");
             EditDate();
         }
+        if (showLogic.ValidShowYear(date) == false)
+        {
+            Console.WriteLine("This is an invalid date, please fill in a date with the current date or 5 years in the future");
+            EditDate();
+        }
         else
         {
+            show.Date = date;
             showLogic.UpdateList(show);
             film = filmLogic.GetById(show.Id);
             Console.WriteLine("\nThe date has been updated, here is the new result:\n");
@@ -104,42 +109,51 @@ public static class ChangeShows
 
     public static void EditAgeLimit()
     {
-        Console.WriteLine("\n-------------------------------\nEnter a new age limit");
-        int ageLimit = Convert.ToInt32(Console.ReadLine());
-        if (ageLimit <= 6 || ageLimit >= 18)
-        {
-            Console.WriteLine("This is an incorrect age limit, please put an age limit between 6 and 18 years");
-            EditAgeLimit();
-        }
-        else
-        {
-            film.AgeLimit = ageLimit;
-            filmLogic.UpdateList(film);
-            show = showLogic.GetById(film.Id);
-            Console.WriteLine("\nThe age limit has been updated, here is the new result:\n");
-            ShowInformation();
-            int milliseconds = 3000;
-            Thread.Sleep(milliseconds);
-            Console.Clear();
-            MenuDisplay();
-        }
-    }
+        bool validAge = false;
 
+        {
+            Console.WriteLine("\n-------------------------------\nEnter a new age limit");
+            int ageLimit = 0;
 
-    public static void EditDescription()
-    {
-        Console.WriteLine("\n-------------------------------\nEnter a new description\n");
-        string descrption = Console.ReadLine();
-        film.Description = descrption;
-        filmLogic.UpdateList(film);
-        show = showLogic.GetById(film.Id);
-        Console.WriteLine("\nThe description has been updated, here is the new result:\n");
-        ShowInformation();
-        int milliseconds = 3000;
-        Thread.Sleep(milliseconds);
+            try
+            {
+                ageLimit = Convert.ToInt32(Console.ReadLine());
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("This is an incorrect age limit, please put an age limit between 6 and 18 years");
+                EditAgeLimit();
+            }
+
+            if (ageLimit <= 6 || ageLimit >= 18)
+            {
+                Console.WriteLine("This is an incorrect age limit, please put an age limit between 6 and 18 years");
+                EditAgeLimit();
+            }
+            else
+            {
+                film.AgeLimit = ageLimit;
+                filmLogic.UpdateList(film);
+                show = showLogic.GetById(film.Id);
+                Console.WriteLine("\nThe age limit has been updated, here is the new result:\n");
+                ShowInformation();
+                int milliseconds = 3000;
+                Thread.Sleep(milliseconds);
+                Console.Clear();
+                MenuDisplay();
+            }
+            validAge = true;
+        } while (!validAge) ;
         Console.Clear();
         MenuDisplay();
+
+
+
     }
+
+
+
 
     public static void ShowInformation()
     {
@@ -148,7 +162,7 @@ public static class ChangeShows
         Console.WriteLine($"Time: {show.Time}");
         Console.WriteLine($"Film Title: {film.Name}");
         Console.WriteLine($"Film Description: {film.Description}");
-        Console.WriteLine($"Film AgeLimit: {film.AgeLimit}");
+        Console.WriteLine($"Film Age Limit: {film.AgeLimit}");
         CurrentShow = $"Show ID: {show.Id} \nDate: {show.Date} \nTime: {show.Time} \nFilm Title: {film.Name} \nFilm Description: {film.Description} \nFilm Age Limit: {film.AgeLimit} \n-------------------------------";
 
 

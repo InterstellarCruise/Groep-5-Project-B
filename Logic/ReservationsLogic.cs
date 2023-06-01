@@ -83,7 +83,7 @@ public class ReservationsLogic
     {
         ReservationsLogic reservationLogic = new ReservationsLogic();
         var Reservation = reservationLogic.GetByShowId(id);
-        
+
     }
     public void DeleteReservation(ReservationModel reservation)
     {
@@ -143,14 +143,14 @@ public class ReservationsLogic
                         {
                             double rankAmount = 10;
                             totalAmount += rankAmount;
-                            
+
 
                         }
                         if (rank == 3)
                         {
                             double rankAmount = 8;
                             totalAmount += rankAmount;
-                            
+
 
                         }
                     }
@@ -179,6 +179,13 @@ public class ReservationsLogic
             }
         }
         return totalAmount;
+    }
+
+    public static List<ReservationModel> AllReservation()
+    {
+
+        List<ReservationModel> Reservations = ReservationsAccess.LoadAll();
+        return Reservations;
     }
 
 }
