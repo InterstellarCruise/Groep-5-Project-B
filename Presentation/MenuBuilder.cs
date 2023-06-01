@@ -14,7 +14,7 @@
     {
         while (_running)
         {
-            Console.Clear();
+            if (!Console.IsOutputRedirected) Console.Clear();
             for (int i = 0; i < _items.Count; i++)
             {
                 if (i == selectedIndex)

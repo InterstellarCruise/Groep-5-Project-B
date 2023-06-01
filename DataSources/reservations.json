@@ -8,32 +8,6 @@
       29,
       53
     ],
-    "amount": 35.5
-  },
-  {
-    "id": 2,
-    "showid": 1,
-    "accountid": 3,
-    "ressedchairs": [
-      39,
-      40,
-      52,
-      64
-    ],
-    "amount": 46
-  },
-  {
-    "id": 3,
-    "showid": 1,
-    "accountid": 3,
-    "ressedchairs": [
-      16,
-      17,
-      65,
-      66,
-      78,
-      83
-    ],
-    "amount": 62
+    "amount": 25
   }
 ]

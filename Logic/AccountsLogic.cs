@@ -41,11 +41,13 @@ public class AccountsLogic
 
     public AccountModel GetById(int id)
     {
+        _accounts = AccountsAccess.LoadAll();
         return _accounts.Find(i => i.Id == id);
     }
 
     public AccountModel CheckLogin(string email, string password)
     {
+        _accounts = AccountsAccess.LoadAll();
         if (email == null || password == null)
         {
             return null;
@@ -54,18 +56,20 @@ public class AccountsLogic
         return CurrentAccount;
     }
 
-    public void NewAcc(string email, string password, string fullname)
+    public bool NewAcc(string email, string password, string fullname)
     {
+        _accounts = AccountsAccess.LoadAll();
         var account = _accounts.FirstOrDefault(a => a.EmailAddress == email);
         if (account == null)
         {
             int index = _accounts.Count + 1;
             AccountModel newacc = new AccountModel(index, email, password, fullname);
             UpdateList(newacc);
+            return true;
         }
         else
         {
-            UserLogin.DuplicateEmail(email);
+            return false;
         }
 
     }
@@ -74,6 +78,13 @@ public class AccountsLogic
         var account = _accounts.FirstOrDefault(a => a.EmailAddress == email);
         if (account == null) return false;
         else return true;
+    }
+    public void RemoveAcc(string email)
+    {
+        var account = _accounts.FirstOrDefault(i => i.EmailAddress == email);
+        _accounts.Remove(account);
+        AccountsAccess.WriteAll(_accounts);
+        _accounts = AccountsAccess.LoadAll();
     }
 }
 

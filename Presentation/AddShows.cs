@@ -51,7 +51,7 @@ public static class AddShows
             items.Add(item);
 
         }
-        items.Add(new MenuItem("\nBack", Start));
+        items.Add(new MenuItem("\nBack", Menu.Start));
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();
     }
@@ -130,7 +130,7 @@ public static class AddShows
 
     public static void TimeInput(string inputdate, int ID, int MovieId, int RoomId)
     {
-        Console.WriteLine("Type the time this show will start like (Hour:Minutes): ");
+        Console.WriteLine("Type the time this show will start like (Hour:Minutes) Or B to go back: ");
         int[] hm = new int[0];
         string time;
         bool timecheck = false;
@@ -138,6 +138,10 @@ public static class AddShows
         do
         {
             time = Console.ReadLine();
+            if (time == "b" || time == "B")
+            {
+                DateInput(RoomId);
+            }
             List<ShowModel> showsondate = ShowsLogic.ShowsByDate(inputdate);
             bool roomcheck = true;
             try

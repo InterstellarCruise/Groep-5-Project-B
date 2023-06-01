@@ -53,7 +53,8 @@
         {
 
 
-            Console.Clear();
+            if (!Console.IsOutputRedirected)
+                Console.Clear();
             DisplayInfo();
 
             for (int i = 0; i < options.Count; i++)
