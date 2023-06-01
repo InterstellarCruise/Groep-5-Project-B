@@ -12,14 +12,6 @@ static class Menu
         MenuBuilder menu = new MenuBuilder(Items());
         menu.DisplayMenu();
     }
-    public static void NotImplemented()
-    {
-        Console.WriteLine("This feature is not yet implemented\n");
-        int milliseconds = 3000;
-        Thread.Sleep(milliseconds);
-        Console.Clear();
-        Start();
-    }
     public static void Quit()
     {
         Environment.Exit(0);

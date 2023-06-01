@@ -5,9 +5,8 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-public class BarLogic
+public class BarLogic : BaseLogic<BarModel>
 {
-    private List<BarModel> _bar;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -16,26 +15,26 @@ public class BarLogic
 
     public BarLogic()
     {
-        _bar = BarAccess.LoadAll();
+        _items = BarAccess.LoadAll();
     }
 
 
-    public void UpdateList(BarModel acc)
+    public override void UpdateList(BarModel acc)
     {
         //Find if there is already an model with the same id
-        int index = _bar.FindIndex(s => s.Id == acc.Id);
+        int index = _items.FindIndex(s => s.Id == acc.Id);
 
         if (index != -1)
         {
             //update existing model
-            _bar[index] = acc;
+            _items[index] = acc;
         }
         else
         {
             //add new model
-            _bar.Add(acc);
+            _items.Add(acc);
         }
-        BarAccess.WriteAll(_bar);
+        BarAccess.WriteAll(_items);
 
     }
 }

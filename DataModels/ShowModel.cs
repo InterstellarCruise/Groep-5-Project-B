@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 
 
-public class ShowModel
+public class ShowModel : IModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }

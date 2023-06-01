@@ -6,7 +6,7 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-public class ShowsLogic
+public class ShowsLogic : BaseLogic<ShowModel>
 {
     private List<ShowModel> _shows;
     public static string Lines = "--------------------------------";
@@ -24,7 +24,7 @@ public class ShowsLogic
     }
 
 
-    public void UpdateList(ShowModel show)
+    public override void UpdateList(ShowModel show)
     {
         //Find if there is already an model with the same id
         int index = _shows.FindIndex(s => s.Id == show.Id);
@@ -86,10 +86,10 @@ public class ShowsLogic
 
     }
 
-    public ShowModel GetById(int id)
-    {
-        return _shows.Find(i => i.Id == id);
-    }
+    //public ShowModel GetById(int id)
+    //{
+    //    return _shows.Find(i => i.Id == id);
+    //}
 
     public ShowModel GetByFilmId(int id)
     {

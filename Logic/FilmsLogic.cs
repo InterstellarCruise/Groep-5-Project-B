@@ -5,9 +5,8 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-public class FilmsLogic
+public class FilmsLogic : BaseLogic<FilmModel>
 {
-    private List<FilmModel> _films;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -19,38 +18,38 @@ public class FilmsLogic
 
     public FilmsLogic()
     {
-        _films = FilmsAccess.LoadAll();
+        _items = FilmsAccess.LoadAll();
     }
 
 
-    public void UpdateList(FilmModel film)
+    public override void UpdateList(FilmModel film)
     {
         //Find if there is already an model with the same id
-        int index = _films.FindIndex(s => s.Id == film.Id);
+        int index = _items.FindIndex(s => s.Id == film.Id);
 
         if (index != -1)
         {
             //update existing model
-            _films[index] = film;
+            _items[index] = film;
         }
         else
         {
             //add new model
-            _films.Add(film);
+            _items.Add(film);
         }
-        FilmsAccess.WriteAll(_films);
+        FilmsAccess.WriteAll(_items);
 
     }
 
-    public FilmModel GetById(int id)
-    {
-        return _films.Find(i => i.Id == id);
-    }
+    //public FilmModel GetById(int id)
+    //{
+    //    return _items.Find(i => i.Id == id);
+    //}
     public void DeleteFilm(FilmModel film)
     {
 
-        _films.Remove(film);
-        FilmsAccess.WriteAll(_films);
+        _items.Remove(film);
+        FilmsAccess.WriteAll(_items);
     }
 
     public static int LastID()

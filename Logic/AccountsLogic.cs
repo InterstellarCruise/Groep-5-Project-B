@@ -5,9 +5,8 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-public class AccountsLogic
+public class AccountsLogic :BaseLogic<AccountModel>
 {
-    private List<AccountModel> _accounts;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -16,52 +15,52 @@ public class AccountsLogic
 
     public AccountsLogic()
     {
-        _accounts = AccountsAccess.LoadAll();
+        _items = AccountsAccess.LoadAll();
     }
 
 
-    public void UpdateList(AccountModel acc)
+    public override void UpdateList(AccountModel acc)
     {
         //Find if there is already an model with the same id
-        int index = _accounts.FindIndex(s => s.Id == acc.Id);
+        int index = _items.FindIndex(s => s.Id == acc.Id);
 
         if (index != -1)
         {
             //update existing model
-            _accounts[index] = acc;
+            _items[index] = acc;
         }
         else
         {
             //add new model
-            _accounts.Add(acc);
+            _items.Add(acc);
         }
-        AccountsAccess.WriteAll(_accounts);
+        AccountsAccess.WriteAll(_items);
 
     }
 
-    public AccountModel GetById(int id)
-    {
-        _accounts = AccountsAccess.LoadAll();
-        return _accounts.Find(i => i.Id == id);
-    }
+    //public AccountModel GetById(int id)
+    //{
+    //    _accounts = AccountsAccess.LoadAll();
+    //    return _accounts.Find(i => i.Id == id);
+    //}
 
     public AccountModel CheckLogin(string email, string password)
     {
-        _accounts = AccountsAccess.LoadAll();
+        _items = AccountsAccess.LoadAll();
         if (email == null || password == null)
         {
             return null;
         }
-        CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
+        CurrentAccount = _items.Find(i => i.EmailAddress == email && i.Password == password);
         return CurrentAccount;
     }
 
     public bool NewAcc(string email, string password, string fullname)
     {
-        var account = _accounts.FirstOrDefault(a => a.EmailAddress == email);
+        var account = _items.FirstOrDefault(a => a.EmailAddress == email);
         if (account == null)
         {
-            int index = _accounts.Count + 1;
+            int index = _items.Count + 1;
             AccountModel newacc = new AccountModel(index, email, password, fullname);
             UpdateList(newacc);
             return true;
@@ -74,16 +73,16 @@ public class AccountsLogic
     }
     public bool CheckEmail(string email)
     {
-        var account = _accounts.FirstOrDefault(a => a.EmailAddress == email);
+        var account = _items.FirstOrDefault(a => a.EmailAddress == email);
         if (account == null) return false;
         else return true;
     }
     public void RemoveAcc(string email)
     {
-        var account = _accounts.FirstOrDefault(i => i.EmailAddress == email);
-        _accounts.Remove(account);
-        AccountsAccess.WriteAll(_accounts);
-        _accounts = AccountsAccess.LoadAll();
+        var account = _items.FirstOrDefault(i => i.EmailAddress == email);
+        _items.Remove(account);
+        AccountsAccess.WriteAll(_items);
+        _items = AccountsAccess.LoadAll();
     }
 }
 

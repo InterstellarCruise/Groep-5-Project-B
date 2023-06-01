@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 
 
-public class FilmModel
+public class FilmModel : IModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
