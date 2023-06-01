@@ -66,25 +66,25 @@ public class ShowsLogic
 
     }
 
-    public static ShowModel ChooseShow(List<ShowModel> shows, string movie)
-    {
-        string[] input = movie.Split(' ');
+    // public static ShowModel ChooseShow(List<ShowModel> shows, string movie)
+    // {
+    //     string[] input = movie.Split(' ');
 
 
 
-        //Put the chosen movie into a variable called show.
-        ShowModel show = null;
-        try
-        {
-            show = shows.Find(i => i.RoomId == Convert.ToDouble(input[0]) && i.Time == input[1]);
-        }
-        catch (Exception)
-        {
-            shows = null;
-        }
-        return show;
+    //     //Put the chosen movie into a variable called show.
+    //     ShowModel show = null;
+    //     try
+    //     {
+    //         show = shows.Find(i => i.RoomId == Convert.ToDouble(input[0]) && i.Time == input[1]);
+    //     }
+    //     catch (Exception)
+    //     {
+    //         shows = null;
+    //     }
+    //     return show;
 
-    }
+    // }
 
     public ShowModel GetById(int id)
     {

@@ -66,16 +66,6 @@
     ]
   },
   {
-    "id": 5,
-    "name": "idk",
-    "description": "idk",
-    "ageLimit": 16,
-    "length": 2.5,
-    "genres": [
-      "Horror"
-    ]
-  },
-  {
     "id": 8,
     "name": "IdkTest",
     "description": "This is a test movie",
