@@ -75,16 +75,10 @@ public class FilmsLogic
             }
         }
     }
-    public static void AllCurrentFilms()
+    public static List<FilmModel> AllCurrentFilms()
     {
         List<FilmModel> Films = FilmsAccess.LoadAll();
-        foreach (FilmModel film in Films)
-        {
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine($"Film ID: {film.Id}");
-            Console.WriteLine($"Film Title: {film.Name} \n");
-            Console.WriteLine("--------------------------------");
-        }
+        return Films;
         
     }
 }

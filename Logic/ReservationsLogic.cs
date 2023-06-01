@@ -92,9 +92,20 @@ public class ReservationsLogic
         ReservationsAccess.WriteAll(_reservations);
     }
 
+    public List<ReservationModel> GetByShowIdList(int id)
+    {
+        List<ReservationModel> reservation = new List<ReservationModel>();
+        reservation.Add(_reservations.Find(i => i.Showid == id));
+        return reservation;
+        
+    }
+
     public ReservationModel GetByShowId(int id)
     {
+        
         return _reservations.Find(i => i.Showid == id);
+        
+        
     }
 
     public static double IncomeShow(int id)

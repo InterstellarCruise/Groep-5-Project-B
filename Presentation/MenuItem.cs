@@ -8,6 +8,7 @@
     public ShowModel show { get; set; }
     public ReservationModel reservation { get; set; }
     public bool changeshow = false;
+    public bool ListOfReservations = false;
 
     public FilmModel film { get; set; }
     public bool changefilm = false;

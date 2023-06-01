@@ -4,6 +4,7 @@
     private List<MenuItem> _items = new List<MenuItem>();
     private bool _running = true;
     private bool AdminLogged;
+    
     public MenuBuilder(List<MenuItem> items)
     {
         _items = items;
@@ -65,6 +66,7 @@
                 if (_items[selectedIndex].show != null)
                 {
                     if (_items[selectedIndex].changeshow) ChangeShows.show = _items[selectedIndex].show;
+                    else if (_items[selectedIndex].ListOfReservations) AdminReservations.ListOfReservationsShow = _items[selectedIndex].show;
                     else Reservation.CurrentShow = _items[selectedIndex].show;
 
                 }
