@@ -86,6 +86,11 @@ public class FilmsLogic : BaseLogic<FilmModel>
         }
         
     }
+    public List<FilmModel> GetFilms()
+    {
+        _items = FilmsAccess.LoadAll();
+        return _items;
+    }
 }
 
 

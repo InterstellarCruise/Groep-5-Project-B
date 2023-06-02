@@ -166,6 +166,11 @@ public class ShowsLogic : BaseLogic<ShowModel>
             Console.WriteLine("--------------------------------");
         }
     }
+    public List<ShowModel> GetShows()
+    {
+        _items = ShowsAccess.LoadAll();
+        return _items;
+    }
 }
 
 
