@@ -169,6 +169,12 @@ public class ShowsLogic
 
     }
 
+    public static void AddShow(int ID, int MovieId, int RoomId, string inputdate, string time)
+    {
+        ShowModel show = new ShowModel(ID, MovieId, RoomId, inputdate, time);
+        ShowsAccess.Add(show);
+    }
+
 
 }
 
