@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Bananaboat",
     "description": "Bananaboat adventures",
-    "ageLimit": 17,
+    "ageLimit": 16,
     "length": 2.8,
     "genres": [
       "Action",
