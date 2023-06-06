@@ -100,6 +100,7 @@ public class ShowsLogic : BaseLogic<ShowModel>
 
         _items.Remove(show);
         ShowsAccess.WriteAll(_items);
+        _items = ShowsAccess.LoadAll();
     }
 
     public bool ValidShowDate(string date)

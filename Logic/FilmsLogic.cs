@@ -50,6 +50,7 @@ public class FilmsLogic : BaseLogic<FilmModel>
 
         _items.Remove(film);
         FilmsAccess.WriteAll(_items);
+        _items = FilmsAccess.LoadAll();
     }
 
     public static int LastID()
