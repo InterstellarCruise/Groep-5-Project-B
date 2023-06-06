@@ -84,11 +84,17 @@ public class FilmsLogic : BaseLogic<FilmModel>
     {
         List<FilmModel> Films = FilmsAccess.LoadAll();
         return Films;
-        
+
     }
 
+    public static void AddFilm(int ID, string Name, string Description, int AgeLimit, double length, List<string> Genres)
+    {
+        FilmModel film = new FilmModel(ID, Name, Description, AgeLimit, length, Genres);
+        FilmsAccess.Add(film);
+
+    }
+
+
+
+
 }
-
-
-
-
