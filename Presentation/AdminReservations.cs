@@ -98,9 +98,9 @@ public class AdminReservations
             }
             string y = string.Format("Chairs reserved: ({0}).", string.Join(", ", _allChair));
             Console.WriteLine($" Show ID: {res.Showid} \n Reservation ID: {res.Id} \nAccount: {res.Accountid} \nChairs: {y}");
-            
         }
-        AdminFeatures.Start();
+        
+
 
 
 
