@@ -1,6 +1,5 @@
 public static class UserLogin
 {
-    static private AccountsLogic accountsLogic = new AccountsLogic();
     public static AccountModel CurrentAccount { get; set; }
 
 
@@ -17,6 +16,7 @@ public static class UserLogin
     }
     public static void Dologin()
     {
+        AccountsLogic accountsLogic = new AccountsLogic();
         Console.CursorVisible = true;
         string email = "";
         do
@@ -80,6 +80,7 @@ public static class UserLogin
     }
     public static void Doregister()
     {
+        AccountsLogic accountsLogic = new AccountsLogic();
         Console.CursorVisible = true;
         Console.WriteLine("\nFirst name");
         string fname = Console.ReadLine();
