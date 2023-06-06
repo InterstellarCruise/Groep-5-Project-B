@@ -93,7 +93,7 @@ public class ReservationsLogic : BaseLogic<ReservationModel>
 
     public IEnumerable<ReservationModel> GetByShowIdList(int id)
     {
-        var reservation = _reservations.Where(i => i.Showid == id);
+        var reservation = _items.Where(i => i.Showid == id);
         return reservation;
 
     }
