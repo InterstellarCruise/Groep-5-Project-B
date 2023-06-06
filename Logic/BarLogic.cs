@@ -93,37 +93,51 @@ public class BarLogic
         int account_id = UserLogin.CurrentAccount.Id;
         List<ReservationModel> reservations = ReservationsAccess.LoadAll();
         List<BarModel> barreservations = BarAccess.LoadAll();
+        List<ShowModel> showmodels = ShowsAccess.LoadAll();
+        List<FilmModel> filmmodels = FilmsAccess.LoadAll();
         FilmsLogic filmsLogic = new FilmsLogic();
         ShowsLogic showsLogic = new ShowsLogic();
         ReservationsLogic reservationsLogic = new ReservationsLogic();
         int? places = 40;
         int number = 1;
         foreach(BarModel l in barreservations)
-        {   List<BarModel> barreservationss = BarAccess.LoadAll();
-            if(l.Date!=null){
+        { 
+            if(l.Date!=date)
+            {
             
             IFormatProvider provider = CultureInfo.InvariantCulture;
             number = number + 1;
             DateTime current_time = DateTime.ParseExact(Time, "HH:mm",provider);
             DateTime time = DateTime.ParseExact(l.Start_Time, "HH:mm",provider);
             TimeSpan span = current_time.Subtract (time);
-            ////span lenght of movie by l 
-            var nameshow = reservationsLogic.GetById(l.Reservationid);
-            var nameshow2 = showsLogic.GetById(nameshow.Showid);
-            var nameshow3 = filmsLogic.GetById(nameshow2.FilmId);
-            var spans = span.Hours - nameshow3.Length + lenght;
+            if(reservations.Find(x => x.Id == l.Reservationid) == null){places =places;}
+            else{
+                var first_step = reservations.Find(x => x.Id == l.Reservationid);
+                if(reservations.Find(x => x.Id == l.Reservationid) == null){places =places;}
+                else
+                {
+                    var second_step = showmodels.Find(x => x.Id == first_step.Showid);
+                    if(filmmodels.Find(x => x.Id == second_step.FilmId) == null){places =places;}
+                    else{
+                        var last_step = filmmodels.Find(x => x.Id == second_step.FilmId);
+                        var spans = span.Hours - last_step.Length + lenght;
 
-            if(spans>=0 & spans<=lenght)
-            {
-                if(l.Amount > 0){
-                places = places - l.Amount;
+                        if(spans>=0 & spans<=lenght)
+                        {
+                            if(l.Amount > 0){
+                            places = places - l.Amount;
+                            }
+                        }
+                                    
+                        }
+        
                 }
-            }
-            }
-            
+                }
             
         }
-        return places;
+        
     }
+    return places;
     }
+}
 
