@@ -6,9 +6,8 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-public class ShowsLogic
+public class ShowsLogic : BaseLogic<ShowModel>
 {
-    private List<ShowModel> _shows;
     public static string Lines = "--------------------------------";
     public static Dictionary<string, string> ShowInfo = new Dictionary<string, string> { };
 
@@ -20,26 +19,26 @@ public class ShowsLogic
 
     public ShowsLogic()
     {
-        _shows = ShowsAccess.LoadAll();
+        _items = ShowsAccess.LoadAll();
     }
 
 
-    public void UpdateList(ShowModel show)
+    public override void UpdateList(ShowModel show)
     {
         //Find if there is already an model with the same id
-        int index = _shows.FindIndex(s => s.Id == show.Id);
+        int index = _items.FindIndex(s => s.Id == show.Id);
 
         if (index != -1)
         {
             //update existing model
-            _shows[index] = show;
+            _items[index] = show;
         }
         else
         {
             //add new model
-            _shows.Add(show);
+            _items.Add(show);
         }
-        ShowsAccess.WriteAll(_shows);
+        ShowsAccess.WriteAll(_items);
 
     }
 
@@ -86,21 +85,22 @@ public class ShowsLogic
 
     }
 
-    public ShowModel GetById(int id)
-    {
-        return _shows.Find(i => i.Id == id);
-    }
+    //public ShowModel GetById(int id)
+    //{
+    //    return _shows.Find(i => i.Id == id);
+    //}
 
     public ShowModel GetByFilmId(int id)
     {
-        return _shows.Find(i => i.FilmId == id);
+        return _items.Find(i => i.FilmId == id);
     }
 
     public void DeleteShow(ShowModel show)
     {
 
-        _shows.Remove(show);
-        ShowsAccess.WriteAll(_shows);
+        _items.Remove(show);
+        ShowsAccess.WriteAll(_items);
+        _items = ShowsAccess.LoadAll();
     }
 
     public bool ValidShowDate(string date)
@@ -166,6 +166,11 @@ public class ShowsLogic
             Console.WriteLine($"Film: {show.FilmId}");
             Console.WriteLine("--------------------------------");
         }
+    }
+    public List<ShowModel> GetShows()
+    {
+        _items = ShowsAccess.LoadAll();
+        return _items;
     }
 }
 

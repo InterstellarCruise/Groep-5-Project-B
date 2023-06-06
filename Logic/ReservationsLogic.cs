@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-public class ReservationsLogic
+public class ReservationsLogic : BaseLogic<ReservationModel>
 {
-    private List<ReservationModel> _reservations;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in reservation from anywhere in the program
@@ -13,18 +12,18 @@ public class ReservationsLogic
 
     public ReservationsLogic()
     {
-        _reservations = ReservationsAccess.LoadAll();
+        _items = ReservationsAccess.LoadAll();
     }
 
 
-    public ReservationModel GetById(int id)
-    {
-        return _reservations.Find(i => i.Id == id);
-    }
+    //public ReservationModel GetById(int id)
+    //{
+    //    return _items.Find(i => i.Id == id);
+    //}
     public List<ReservationModel> GetByShowId(int showId, int roomId)
     {
         List<ReservationModel> theReservationModels = new List<ReservationModel>();
-        foreach (var model in _reservations)
+        foreach (var model in _items)
         {
             if (model.Showid == showId)
             {
@@ -41,26 +40,26 @@ public class ReservationsLogic
     }
     public void AddReservation(int showid, int accountid, List<int> chairids, double amount)
     {
-        int id = _reservations.Count() + 1;
+        int id = _items.Count() + 1;
         ReservationModel model = new ReservationModel(id, showid, accountid, chairids, amount);
         UpdateList(model);
     }
-    public void UpdateList(ReservationModel reservation)
+    public override void UpdateList(ReservationModel reservation)
     {
         //Find if there is already an model with the same id
-        int index = _reservations.FindIndex(s => s.Id == reservation.Id);
+        int index = _items.FindIndex(s => s.Id == reservation.Id);
 
         if (index != -1)
         {
             //update existing model
-            _reservations[index] = reservation;
+            _items[index] = reservation;
         }
         else
         {
             //add new model
-            _reservations.Add(reservation);
+            _items.Add(reservation);
         }
-        ReservationsAccess.WriteAll(_reservations);
+        ReservationsAccess.WriteAll(_items);
 
     }
 
@@ -88,13 +87,13 @@ public class ReservationsLogic
     public void DeleteReservation(ReservationModel reservation)
     {
         ReservationModel x = GetById(reservation.Id);
-        _reservations.Remove(x);
-        ReservationsAccess.WriteAll(_reservations);
+        _items.Remove(x);
+        ReservationsAccess.WriteAll(_items);
     }
 
     public ReservationModel GetByShowId(int id)
     {
-        return _reservations.Find(i => i.Showid == id);
+        return _items.Find(i => i.Showid == id);
     }
 
     public static double IncomeShow(int id)
