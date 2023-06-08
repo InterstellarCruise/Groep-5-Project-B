@@ -399,5 +399,4 @@ FodyWeavers.xsd
 obj/Debug/net6.0/Project.assets.cache
 obj/Debug/net6.0/Project.assets.cache
 bin/Debug/net6.0/Project.dll
-bin/Debug/net6.0/Project.dll
-*.dll
+
