@@ -67,6 +67,10 @@
                 {
                     if (_items[selectedIndex].changeshow) ChangeShows.show = _items[selectedIndex].show;
                     else if (_items[selectedIndex].ListOfReservations) AdminReservations.ListOfReservationsShow = _items[selectedIndex].show;
+                    else if (_items[selectedIndex].SeatShow) AdminReservations.SeatShows = _items[selectedIndex].show;
+                    else if (_items[selectedIndex].SeatRank) AdminReservations.SeatRanks = _items[selectedIndex].chair;
+                     else if (_items[selectedIndex].IncomePerShow) AdminIncome.IncomePerShows = _items[selectedIndex].chair;
+
                     else Reservation.CurrentShow = _items[selectedIndex].show;
 
                 }

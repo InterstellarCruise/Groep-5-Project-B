@@ -15,6 +15,8 @@ public class AdminReservations
     }
     private static string CurrentShow = "";
     public static ShowModel ListOfReservationsShow;
+    public static ShowModel SeatShows;
+    public static ChairModel SeatRanks;
     static FilmsLogic filmLogic = new FilmsLogic();
     private static FilmModel _film = new FilmModel(0, null, null, 0, 0, null);
 
@@ -39,7 +41,7 @@ public class AdminReservations
         List<MenuItem> items = new List<MenuItem>();
         items.Add(new MenuItem("Reservations per show", ListOfShows));
         items.Add(new MenuItem("Occupied seats per show", OccupiedSeatsShow));
-        // items.Add(new MenuItem("Occupied seats per rank", OccupiedSeatsRank));
+        items.Add(new MenuItem("Occupied seats per rank", OccupiedSeatsRank));
         items.Add(new MenuItem("Back", Menu.Start));
         items.Add(new MenuItem("Quit", Menu.Quit));
         MenuBuilder menu = new MenuBuilder(items);
@@ -99,10 +101,10 @@ public class AdminReservations
             string y = string.Format("Chairs reserved: ({0}).", string.Join(", ", _allChair));
             Console.WriteLine($" Show ID: {res.Showid} \n Reservation ID: {res.Id} \nAccount: {res.Accountid} \nChairs: {y}");
         }
-        
-
-
-
+        int miliseconds = 2000;
+        Thread.Sleep(miliseconds);
+        Console.Clear();
+        AdminFeatures.Start();
 
     }
 
@@ -116,9 +118,9 @@ public class AdminReservations
         {
             FilmsLogic filmlogic = new FilmsLogic();
             FilmModel film1 = filmlogic.GetById(show.FilmId);
-            MenuItem item = new MenuItem($"--------------------------------\nShow ID: {show.Id}\nRoom: {show.RoomId}\nFilm: {film1.Name}", Display);
+            MenuItem item = new MenuItem($"--------------------------------\nShow ID: {show.Id}\nRoom: {show.RoomId}\nFilm: {film1.Name}", SeatShow);
             item.show = show;
-            item.changeshow = true;
+            item.SeatShow = true;
             items.Add(item);
         }
         MenuItem lastshow = items.Last();
@@ -126,77 +128,82 @@ public class AdminReservations
         items.Add(new MenuItem("Back", AdminFeatures.Start));
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();
-        SeatShow(show.Id);
+        
     }
 
-    // public static void OccupiedSeatsRank()
-    // {
-    //     Console.WriteLine("These are all the current shows");
-    //     ShowsLogic.AllCurrShows();
-    //     Console.WriteLine("Enter the ID of the show you want to view \n-------------------------------");
-    //     int id = Convert.ToInt32(Console.ReadLine());
-    //     show = showLogic.GetById(id);
-    //     Console.WriteLine("Please enter a rank you want to see(1-3)");
-    //     int rank = Convert.ToInt32(Console.ReadLine());
-    //     if (show == null)
-    //     {
-    //         Console.WriteLine("There is no film with this ID");
-    //         int miliseconds = 2000;
-    //         Thread.Sleep(miliseconds);
-    //         Console.Clear();
-    //         AdminFeatures.Start();
-    //     }
-    //     SeatRank(id, rank);
-    // }
+    public static void OccupiedSeatsRank()
+    {
+        Console.Clear();
+        Console.WriteLine("These are all the current shows");
+        List<ShowModel> shows = ShowsLogic.AllCurrentShows();
+        List<MenuItem> items = new List<MenuItem>();
+        foreach (ShowModel show in shows)
+        {
+            FilmsLogic filmlogic = new FilmsLogic();
+            FilmModel film1 = filmlogic.GetById(show.FilmId);
+            MenuItem item = new MenuItem($"--------------------------------\nShow ID: {show.Id}\nRoom: {show.RoomId}\nFilm: {film1.Name}", SeatRank);
+            item.show = show;
+            item.SeatRank = true;
+            items.Add(item);
+        }
+        MenuItem lastshow = items.Last();
+        lastshow.DisplayText = lastshow.DisplayText + "\n--------------------------------\n";
+        items.Add(new MenuItem("Back", AdminFeatures.Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
+    }
 
-    // public static void SeatRank(int id, int rank)
-    // {
+    public static void SeatRank()
+    {
 
-    //     List<ReservationModel> Reservation = ReservationsLogic.AllReservation();
-    //     List<int> chairs = new List<int>();
-    //     List<int> rankChair = new List<int>();
-    //     foreach (ReservationModel res in Reservation)
-    //     {
-    //         if (id == res.Showid)
-    //         {
-    //             chairs = res.Ressedchairs;
-    //             ChairLogic chairLogic = new ChairLogic();
-    //             foreach (var chairid in chairs)
-    //             {
-    //                 var chair = chairLogic.GetById(chairid);
+        List<ReservationModel> Reservation = ReservationsLogic.AllReservation();
+        int id = SeatShows.Id;
+        int rank = SeatRanks.Rank;
+        List<int> chairs = new List<int>();
+        List<int> rankChair = new List<int>();
+        foreach (ReservationModel res in Reservation)
+        {
+            if (id == res.Showid)
+            {
+                chairs = res.Ressedchairs;
+                ChairLogic chairLogic = new ChairLogic();
+                foreach (var chairid in chairs)
+                {
+                    var chair = chairLogic.GetById(chairid);
 
-    //                 if (chair.Rank == rank)
-    //                 {
-    //                     if (rank == 1)
-    //                     {
-    //                         rankChair.Add(chair.Id);
-    //                     }
-    //                     if (rank == 2)
-    //                     {
+                    if (chair.Rank == rank)
+                    {
+                        if (rank == 1)
+                        {
+                            rankChair.Add(chair.Id);
+                        }
+                        if (rank == 2)
+                        {
 
-    //                         rankChair.Add(chair.Id);
+                            rankChair.Add(chair.Id);
 
-    //                     }
-    //                     if (rank == 3)
-    //                     {
-    //                         rankChair.Add(chair.Id);
+                        }
+                        if (rank == 3)
+                        {
+                            rankChair.Add(chair.Id);
 
-    //                     }
-    //                 }
-    //             }
+                        }
+                    }
+                }
 
-    //         }
-    //     }
-    //     Console.WriteLine($"The amount of seats occupied in this rank is {rankChair.Count}");
-    //     int miliseconds = 2000;
-    //     Thread.Sleep(miliseconds);
-    //     Console.Clear();
-    //     AdminFeatures.Start();
-    // }
+            }
+        }
+        Console.WriteLine($"The amount of seats occupied in this rank is {rankChair.Count}");
+        int miliseconds = 2000;
+        Thread.Sleep(miliseconds);
+        Console.Clear();
+        AdminFeatures.Start();
+    }
 
-    public static void SeatShow(int id)
+    public static void SeatShow()
     {
         List<int> chairs = new List<int>();
+        int id = SeatShows.Id;
         List<ReservationModel> Reservation = ReservationsLogic.AllReservation();
         foreach (ReservationModel res in Reservation)
         {
