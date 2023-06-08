@@ -72,8 +72,9 @@ public static class AddFilms
         int milliseconds = 1500;
         Thread.Sleep(milliseconds);
         Console.Clear();
-        FilmModel film = new FilmModel(ID, Name, Description, AgeLimit, length, Genres);
-        FilmsAccess.Add(film);
+
+        FilmsLogic.AddFilm(ID, Name, Description, AgeLimit, length, Genres);
+        //New LogicLayer function
         Menu.Start();
     }
 }

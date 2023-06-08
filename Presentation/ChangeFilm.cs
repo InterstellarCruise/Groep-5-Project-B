@@ -58,25 +58,43 @@ public static class ChangeFilm
 
     public static void EditAgeLimit()
     {
-        Console.WriteLine("\n-------------------------------\nEnter a new age limit");
-        int ageLimit = Convert.ToInt32(Console.ReadLine());
-        if (ageLimit <= 6 || ageLimit >= 18)
+        bool validAge = false;
+
         {
-            Console.WriteLine("This is an incorrect age limit, please put an age limit between 6 and 18 years");
-            EditAgeLimit();
-        }
-        else
-        {
-            film.AgeLimit = ageLimit;
-            filmLogic.UpdateList(film);
-            film = filmLogic.GetById(film.Id);
-            Console.WriteLine("\nThe age limit has been updated, here is the new result:\n");
-            ShowInformation();
-            int milliseconds = 3000;
-            Thread.Sleep(milliseconds);
-            Console.Clear();
-            MenuDisplay();
-        }
+            Console.WriteLine("\n-------------------------------\nEnter a new age limit");
+            int ageLimit = 0;
+
+            try
+            {
+                ageLimit = Convert.ToInt32(Console.ReadLine());
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("This is an incorrect age limit, please put an age limit between 6 and 18 years");
+                EditAgeLimit();
+            }
+
+            if (ageLimit <= 6 || ageLimit >= 18)
+            {
+                Console.WriteLine("This is an incorrect age limit, please put an age limit between 6 and 18 years");
+                EditAgeLimit();
+            }
+            else
+            {
+                film.AgeLimit = ageLimit;
+                filmLogic.UpdateList(film);
+                Console.WriteLine("\nThe age limit has been updated, here is the new result:\n");
+                ShowInformation();
+                int milliseconds = 3000;
+                Thread.Sleep(milliseconds);
+                Console.Clear();
+                MenuDisplay();
+            }
+            validAge = true;
+        } while (!validAge) ;
+        Console.Clear();
+        MenuDisplay();
     }
 
     public static void EditLength()

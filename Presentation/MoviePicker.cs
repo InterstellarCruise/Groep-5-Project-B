@@ -20,11 +20,8 @@ static class MoviePicker
             room = Convert.ToInt32(data[0]);
         }
 
-
-
-
-        ShowsLogic filmsLogic = new ShowsLogic();
-        List<ShowModel> shows = ShowsAccess.LoadAll();
+        ShowsLogic showlogic = new ShowsLogic();
+        List<ShowModel> shows = showlogic.GetShows();
 
 
         foreach (ShowModel show in shows)
@@ -33,9 +30,9 @@ static class MoviePicker
 
                 List<MenuItem> items = new List<MenuItem>();
                 MenuBuilder menu = new MenuBuilder(items);
-                FilmsLogic filmsLogic_picker = new FilmsLogic();
-                List<FilmModel> films = FilmsAccess.LoadAll();
-                var film = filmsLogic_picker.GetById(show.FilmId);
+                FilmsLogic films_logic = new FilmsLogic();
+                List<FilmModel> films = films_logic.GetFilms();
+                var film = films_logic.GetById(show.FilmId);
                 CurrentMovie = new MenuItem($"-----------------------------\nMovie name: {film.Name} \nDescription: {film.Description} \nAge limit: {film.AgeLimit}\nfilm duration: {film.Length} \n-----------------------------", null);
                 items.Add(CurrentMovie);
                 CurrentShow = show;
@@ -172,12 +169,12 @@ static class MoviePicker
         AccountsLogic acc = new AccountsLogic();
         bool exists = acc.NewAcc(email, password, fullname);
         if (!exists) DuplicateEmailRegister(email);
+        acc.NewAcc(email, password, fullname);
         Console.WriteLine("Succesfully registered");
         Thread.Sleep(1000);
         Console.Clear();
         movielogin();
-        
-        
+
     }
     public static void DuplicateEmailRegister(string email)
     {

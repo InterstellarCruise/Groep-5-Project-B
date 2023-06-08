@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 obj/Debug/net6.0/Project.assets.cache
 obj/Debug/net6.0/Project.assets.cache
+bin/Debug/net6.0/Project.dll

@@ -23,7 +23,6 @@ public class Reservation
         }
 
     }
-    public static void Nothing() { }
     public static double Total(int rank)
     {
         switch (rank)
@@ -63,13 +62,6 @@ public class Reservation
         return totalprice;
     }
     public static void Print() { }
-    public static void Continue()
-    {
-        Console.Clear();
-        Console.WriteLine("To be continued");
-        Thread.Sleep(2000);
-        Environment.Exit(0);
-    }
     public static void RoomOne()
     {
         List<MenuItem> items = new List<MenuItem>();

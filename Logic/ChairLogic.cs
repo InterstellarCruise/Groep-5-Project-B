@@ -5,49 +5,48 @@ using System.Text.Json;
 
 
 
-public class ChairLogic
+public class ChairLogic : BaseLogic<ChairModel>
 {
 
 
-    private List<ChairModel> _chairs;
     public ChairLogic()
     {
-        _chairs = ChairsAccess.LoadAll();
+        _items = ChairsAccess.LoadAll();
 
-        ChairsAccess.WriteAll(_chairs);
+        ChairsAccess.WriteAll(_items);
     }
 
-    public void UpdateList(ChairModel c)
+    public override void UpdateList(ChairModel c)
     {
         //Find if there is already an model with the same id
-        int index = _chairs.FindIndex(s => s.Id == c.Id);
+        int index = _items.FindIndex(s => s.Id == c.Id);
 
         if (index != -1)
         {
             //update existing model
-            _chairs[index] = c;
+            _items[index] = c;
         }
         else
         {
             //add new model
-            _chairs.Add(c);
+            _items.Add(c);
         }
-        ChairsAccess.WriteAll(_chairs);
+        ChairsAccess.WriteAll(_items);
 
     }
-    public ChairModel GetById(int id)
-    {
-        return _chairs.Find(i => i.Id == id);
-    }
+    //public ChairModel GetById(int id)
+    //{
+    //    return _items.Find(i => i.Id == id);
+    //}
 
     public ChairModel GetByCol(int id)
     {
-        return _chairs.Find(i => i.Id == id);
+        return _items.Find(i => i.Id == id);
     }
     public List<ChairModel> GetByRoomId(int roomId)
     {
         List<ChairModel> roomschairs = new List<ChairModel>();
-        foreach(ChairModel c in _chairs)
+        foreach(ChairModel c in _items)
         {
             if (c.Roomid == roomId)
             {
@@ -102,6 +101,13 @@ public class ChairLogic
             Reservation.RemoveTotal(chair.Rank);
         }
 
+    }
+    public static void DeleteChair(int chairid)
+    {
+        var currchair = _items.FirstOrDefault(i => i.Id == chairid);
+        _items.Remove(currchair);
+        ChairsAccess.WriteAll(_items);
+        _items = ChairsAccess.LoadAll();
     }
 
 }

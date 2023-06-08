@@ -39,7 +39,48 @@ public class RoomsLogic
         RoomsAccess.WriteAll(_rooms);
 
     }
+    public void ValidRoom(string index)
+    {
 
+    }
+
+    public static bool AvailableCheck(List<ShowModel> showsondate, string time)
+    {
+        foreach (ShowModel loopedshow in showsondate)
+        {
+            FilmsLogic filmsLogic = new FilmsLogic();
+            FilmModel Film = filmsLogic.GetById(loopedshow.FilmId);
+
+            double filmLengthInHours = Convert.ToDouble(Film.Length);
+            TimeSpan filmLength = TimeSpan.FromHours(filmLengthInHours);
+
+            TimeSpan timeSpan = TimeSpan.Parse(loopedshow.Time);
+            TimeSpan endTime = timeSpan.Add(filmLength);
+            TimeSpan parsedtime = TimeSpan.Parse(time);
+
+            if (parsedtime >= timeSpan && parsedtime <= endTime)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static bool ValidTime(int[] hm, bool roomcheck)
+    {
+        if (hm[0] >= 0 && hm[0] <= 23 && hm[1] >= 0 && hm[1] <= 59 && roomcheck == true)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static void AddShow(int ID, int MovieId, int RoomId, string inputdate, string time)
+    {
+        ShowModel show = new ShowModel(ID, MovieId, RoomId, inputdate, time);
+        ShowsAccess.Add(show);
+    }
     public RoomModel GetById(int id)
     {
         return _rooms.Find(i => i.Id == id);

@@ -6,9 +6,8 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-public class ShowsLogic
+public class ShowsLogic : BaseLogic<ShowModel>
 {
-    private List<ShowModel> _shows;
     public static string Lines = "--------------------------------";
     public static Dictionary<string, string> ShowInfo = new Dictionary<string, string> { };
 
@@ -20,26 +19,26 @@ public class ShowsLogic
 
     public ShowsLogic()
     {
-        _shows = ShowsAccess.LoadAll();
+        _items = ShowsAccess.LoadAll();
     }
 
 
-    public void UpdateList(ShowModel show)
+    public override void UpdateList(ShowModel show)
     {
         //Find if there is already an model with the same id
-        int index = _shows.FindIndex(s => s.Id == show.Id);
+        int index = _items.FindIndex(s => s.Id == show.Id);
 
         if (index != -1)
         {
             //update existing model
-            _shows[index] = show;
+            _items[index] = show;
         }
         else
         {
             //add new model
-            _shows.Add(show);
+            _items.Add(show);
         }
-        ShowsAccess.WriteAll(_shows);
+        ShowsAccess.WriteAll(_items);
 
     }
 
@@ -86,21 +85,26 @@ public class ShowsLogic
 
     }
 
-    public ShowModel GetById(int id)
-    {
-        return _shows.Find(i => i.Id == id);
-    }
+    //public ShowModel GetById(int id)
+    //{
+    //    return _items.Find(i => i.Id == id);
+    //}
 
     public ShowModel GetByFilmId(int id)
     {
-        return _shows.Find(i => i.FilmId == id);
+        return _items.Find(i => i.FilmId == id);
     }
-
+    public List<ShowModel> GetShows()
+    {
+        _items = ShowsAccess.LoadAll();
+        return _items;
+    }
+    
     public void DeleteShow(ShowModel show)
     {
 
-        _shows.Remove(show);
-        ShowsAccess.WriteAll(_shows);
+        _items.Remove(show);
+        ShowsAccess.WriteAll(_items);
     }
 
     public bool ValidShowDate(string date)
@@ -108,6 +112,28 @@ public class ShowsLogic
         DateTime tempObject;
 
         return DateTime.TryParseExact(date, "yyyy-mm-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out tempObject);
+    }
+
+    public bool ValidShowYear(string date)
+    {
+        string[] dates = date.Split("-");
+        int day = Convert.ToInt32(dates[2]);
+        int month = Convert.ToInt32(dates[1]);
+        int year = Convert.ToInt32(dates[0]);
+        int currentMonth = DateTime.Now.Month;
+        int currentYear = DateTime.Now.Year;
+        int futureYear = currentYear + 5;
+        int currentDay = DateTime.Now.Day;
+
+        if (year < currentYear || year > futureYear || month < currentMonth || day < currentDay)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
     }
 
     public bool ValidShowTime(string time)
@@ -125,15 +151,7 @@ public class ShowsLogic
     }
     public static List<ShowModel> AllCurrentShows()
     {
-        // List<ShowModel> Shows = ShowsAccess.LoadAll();
-        // foreach (ShowModel show in Shows)
-        // {
-        //     Console.WriteLine("--------------------------------");
-        //     Console.WriteLine($"Show ID: {show.Id}");
-        //     Console.WriteLine($"Room: {show.RoomId}");
-        //     Console.WriteLine($"Film: {show.FilmId}");
-        //     Console.WriteLine("--------------------------------");
-        // }
+
         List<ShowModel> Shows = ShowsAccess.LoadAll();
         return Shows;
     }
@@ -155,18 +173,13 @@ public class ShowsLogic
 
     }
 
-    public static void AllCurrShows()
+    public static void AddShow(int ID, int MovieId, int RoomId, string inputdate, string time)
     {
-        List<ShowModel> Shows = ShowsAccess.LoadAll();
-        foreach (ShowModel show in Shows)
-        {
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine($"Show ID: {show.Id}");
-            Console.WriteLine($"Room: {show.RoomId}");
-            Console.WriteLine($"Film: {show.FilmId}");
-            Console.WriteLine("--------------------------------");
-        }
+        ShowModel show = new ShowModel(ID, MovieId, RoomId, inputdate, time);
+        ShowsAccess.Add(show);
     }
+
+
 }
 
 

@@ -5,9 +5,8 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-public class BarLogic
+public class BarLogic : BaseLogic<BarModel>
 {
-    private List<BarModel> _bar;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -16,30 +15,26 @@ public class BarLogic
 
     public BarLogic()
     {
-        _bar = BarAccess.LoadAll();
+        _items = BarAccess.LoadAll();
     }
 
 
-    public void UpdateList(BarModel acc)
+    public override void UpdateList(BarModel acc)
     {
-        //Find if there is already an model with the same id
-        int index = _bar.FindIndex(s => s.Id == acc.Id);
-        //Find if there is already an model with the same accountid
-        int add = _bar.FindIndex(s => s.Accountid == acc.Accountid);
-        int add2 = _bar.FindIndex(s => s.Start_Time == acc.Start_Time);
-        if (add != -1 & add2 != -1 )
-        {   
-           var adjust = _bar.Find(x => x.Accountid == acc.Accountid && x.Start_Time == acc.Start_Time);
-           acc.Amount = acc.Amount;
-            _bar.RemoveAll(x => x.Accountid == acc.Accountid);
-            _bar.Add(acc);
+
+        int index = _items.FindIndex(s => s.Id == acc.Id);
+
+        if (index != -1)
+        {
+            //update existing model
+            _items[index] = acc;
         }
         else
         {
             //add new model
-            _bar.Add(acc);
+            _items.Add(acc);
         }
-        BarAccess.WriteAll(_bar);
+        BarAccess.WriteAll(_items);
     }
 
     public static List<BarModel> BarReservationsByAccount(int id)
@@ -59,11 +54,11 @@ public class BarLogic
     }
     public BarModel GetById(int id)
     {
-        return _bar.Find(i => i.Id == id);
+        return _items.Find(i => i.Id == id);
     }
     public void DeleteReservation(ReservationModel reservation,ShowModel show)
     {
-        BarModel z = _bar.Find(x => x.Accountid == reservation.Accountid && x.Start_Time == show.Time);
+        BarModel z = _items.Find(x => x.Accountid == reservation.Accountid && x.Start_Time == show.Time);
         BarModel newest = z;
         var numeral = reservation.Ressedchairs.Count();
         string stringy = $"{z.Amount}";
@@ -71,15 +66,15 @@ public class BarLogic
         if(stringer - numeral<=0)
         {
             newest.Amount = 0;
-            _bar.RemoveAll(x => x.Accountid == reservation.Accountid);
-            _bar.Add(newest);
+            _items.RemoveAll(x => x.Accountid == reservation.Accountid);
+            _items.Add(newest);
         }
         else{
         newest.Amount = (stringer - numeral);
-        _bar.RemoveAll(x => x.Accountid == reservation.Accountid);
-        _bar.Add(newest);
+        _items.RemoveAll(x => x.Accountid == reservation.Accountid);
+        _items.Add(newest);
         }
-        BarAccess.WriteAll(_bar);
+        BarAccess.WriteAll(_items);
     }
     }
 

@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-public class ReservationModel
+public class ReservationModel : IModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
