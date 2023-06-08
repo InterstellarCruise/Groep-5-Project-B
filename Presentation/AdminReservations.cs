@@ -199,7 +199,7 @@ public class AdminReservations
         int rank = Convert.ToInt32(Console.ReadLine());
         int rankChairs = ChairLogic.OccupiedSeats(id, rank);
         Console.WriteLine($"The amount of seats occupied in this rank is {rankChairs}");
-        int miliseconds = 100000;
+        int miliseconds = 2000;
         Thread.Sleep(miliseconds);
         Console.Clear();
         AdminFeatures.Start();
