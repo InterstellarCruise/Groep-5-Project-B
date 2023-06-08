@@ -103,9 +103,6 @@ public class BarLogic
         List<BarModel> barreservations = BarAccess.LoadAll();
         List<ShowModel> showmodels = ShowsAccess.LoadAll();
         List<FilmModel> filmmodels = FilmsAccess.LoadAll();
-        FilmsLogic filmsLogic = new FilmsLogic();
-        ShowsLogic showsLogic = new ShowsLogic();
-        ReservationsLogic reservationsLogic = new ReservationsLogic();
         int? places = 40;
         int number = 1;
         foreach(BarModel l in barreservations)
