@@ -14,6 +14,7 @@
     public bool SeatRank = false;
     
     public bool IncomePerShow = false;
+    public bool IncomePerRank = false;
 
     public FilmModel film { get; set; }
     public bool changefilm = false;

@@ -104,4 +104,44 @@ public class ChairLogic
 
     }
 
+    public static int OccupiedSeats(int id, int rank)
+    {
+        List<ReservationModel> Reservation = ReservationsLogic.AllReservation();
+        List<int> chairs = new List<int>();
+        List<int> rankChair = new List<int>();
+        foreach (ReservationModel res in Reservation)
+        {
+            if (id == res.Showid)
+            {
+                chairs = res.Ressedchairs;
+                ChairLogic chairLogic = new ChairLogic();
+                foreach (var chairid in chairs)
+                {
+                    var chair = chairLogic.GetById(chairid);
+
+                    if (chair.Rank == rank)
+                    {
+                        if (rank == 1)
+                        {
+                            rankChair.Add(chair.Id);
+                        }
+                        if (rank == 2)
+                        {
+
+                            rankChair.Add(chair.Id);
+
+                        }
+                        if (rank == 3)
+                        {
+                            rankChair.Add(chair.Id);
+
+                        }
+                    }
+                }
+
+            }
+        }
+        return rankChair.Count;
+    }
+
 }

@@ -16,7 +16,7 @@ public class AdminReservations
     private static string CurrentShow = "";
     public static ShowModel ListOfReservationsShow;
     public static ShowModel SeatShows;
-    public static ChairModel SeatRanks;
+    public static ShowModel SeatRanks;
     static FilmsLogic filmLogic = new FilmsLogic();
     private static FilmModel _film = new FilmModel(0, null, null, 0, 0, null);
 
@@ -155,45 +155,11 @@ public class AdminReservations
 
     public static void SeatRank()
     {
-
-        List<ReservationModel> Reservation = ReservationsLogic.AllReservation();
-        int id = SeatShows.Id;
-        int rank = SeatRanks.Rank;
-        List<int> chairs = new List<int>();
-        List<int> rankChair = new List<int>();
-        foreach (ReservationModel res in Reservation)
-        {
-            if (id == res.Showid)
-            {
-                chairs = res.Ressedchairs;
-                ChairLogic chairLogic = new ChairLogic();
-                foreach (var chairid in chairs)
-                {
-                    var chair = chairLogic.GetById(chairid);
-
-                    if (chair.Rank == rank)
-                    {
-                        if (rank == 1)
-                        {
-                            rankChair.Add(chair.Id);
-                        }
-                        if (rank == 2)
-                        {
-
-                            rankChair.Add(chair.Id);
-
-                        }
-                        if (rank == 3)
-                        {
-                            rankChair.Add(chair.Id);
-
-                        }
-                    }
-                }
-
-            }
-        }
-        Console.WriteLine($"The amount of seats occupied in this rank is {rankChair.Count}");
+        int id = SeatRanks.Id;
+        Console.WriteLine("What rank would you want to see?");
+        int rank = Convert.ToInt32(Console.ReadLine());
+        int rankChairs = ChairLogic.OccupiedSeats(id, rank);
+        Console.WriteLine($"The amount of seats occupied in this rank is {rankChairs}");
         int miliseconds = 2000;
         Thread.Sleep(miliseconds);
         Console.Clear();
