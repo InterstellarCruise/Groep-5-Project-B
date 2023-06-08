@@ -36,15 +36,23 @@ public class BarLogic
         BarModel acc = new BarModel(indexen,date,account_id,resrvenumber,start_time.Time,start.Ressedchairs.Count());
 
         //Find if there is already an model with the same id
-        int index = _bar.FindIndex(s => s.Id == acc.Id);
+        int index = _bar.FindIndex(s => s.Accountid == acc.Accountid&& s.Date== acc.Date&& s.Start_Time == s.Start_Time );
         //Find if there is already an model with the same accountid
-        
-       
-    
+
+        if (index != -1)
+        {
+            //update existing model
+            acc.Id = _bar[index].Id;
+            _bar[index] = acc;
+            BarAccess.WriteAll(_bar);
+        }
+        else
+        {
         
             //add new model
         _bar.Add(acc);
         BarAccess.WriteAll(_bar);
+        }
     }
 
     public static List<BarModel> BarReservationsByAccount(int id)
@@ -110,7 +118,7 @@ public class BarLogic
             DateTime current_time = DateTime.ParseExact(Time, "HH:mm",provider);
             DateTime time = DateTime.ParseExact(l.Start_Time, "HH:mm",provider);
             TimeSpan span = current_time.Subtract (time);
-            if(reservations.Find(x => x.Id == l.Reservationid) == null){places =places;}
+            if(reservations.Find(x => x.Id == l.Reservationid) == null){places = places;}
             else{
                 var first_step = reservations.Find(x => x.Id == l.Reservationid);
                 if(reservations.Find(x => x.Id == l.Reservationid) == null)
