@@ -128,7 +128,7 @@ public class AdminReservations
         items.Add(new MenuItem("Back", AdminFeatures.Start));
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();
-        
+
     }
 
     public static void OccupiedSeatsRank()
@@ -156,6 +156,45 @@ public class AdminReservations
     public static void SeatRank()
     {
         int id = SeatRanks.Id;
+        ShowsLogic showsLogic = new ShowsLogic();
+        ShowModel currentshow = showsLogic.GetById(id);
+        int optionsperline = 0;
+        int curpos = 0;
+        int roomid = currentshow.RoomId;
+        switch (roomid)
+        {
+            case 1:
+                curpos = 2;
+                optionsperline = 12;
+                break;
+            case 2:
+                curpos = 1;
+                optionsperline = 18;
+                break;
+            case 3:
+                curpos = 5;
+                optionsperline = 30;
+                break;
+        }
+
+
+        ChairLogic chairlogic = new ChairLogic();
+        List<ChairModel> options = chairlogic.GetByRoomId(currentshow.RoomId);
+        Reservation.CurrentShow = currentshow;
+        List<ChairModel> ressedchairs = Reservation.GetReservations(currentshow.RoomId);
+        foreach (ChairModel chair in options)
+        {
+            foreach (ChairModel ressedchair in ressedchairs)
+            {
+                if (ChairLogic.RowNumber(ressedchair) == ChairLogic.RowNumber(chair))
+                {
+                    chair.Available = false;
+                }
+
+            }
+        }
+        Console.Clear();
+        RoomMap(options, curpos, optionsperline);
         Console.WriteLine("What rank would you want to see?");
         int rank = Convert.ToInt32(Console.ReadLine());
         int rankChairs = ChairLogic.OccupiedSeats(id, rank);
@@ -168,20 +207,130 @@ public class AdminReservations
 
     public static void SeatShow()
     {
-        List<int> chairs = new List<int>();
         int id = SeatShows.Id;
-        List<ReservationModel> Reservation = ReservationsLogic.AllReservation();
-        foreach (ReservationModel res in Reservation)
+        List<int> chairs = new List<int>();
+        List<ReservationModel> Reservationmodel = ReservationsAccess.LoadAll();
+        foreach (ReservationModel res in Reservationmodel)
         {
             if (id == res.Showid)
             {
-                chairs = res.Ressedchairs;
+                List<int> reservedchairs = res.Ressedchairs;
+                foreach (int chairid in reservedchairs)
+                {
+                    chairs.Add(chairid);
+                }
             }
         }
+        ShowsLogic showsLogic = new ShowsLogic();
+        ShowModel currentshow = showLogic.GetById(id);
+        int optionsperline = 0;
+        int curpos = 0;
+        int roomid = currentshow.RoomId;
+        switch (roomid)
+        {
+            case 1:
+                curpos = 2;
+                optionsperline = 12;
+                break;
+            case 2:
+                curpos = 1;
+                optionsperline = 18;
+                break;
+            case 3:
+                curpos = 5;
+                optionsperline = 30;
+                break;
+        }
+
+
+        ChairLogic chairlogic = new ChairLogic();
+        List<ChairModel> options = chairlogic.GetByRoomId(currentshow.RoomId);
+        Reservation.CurrentShow = currentshow;
+        List<ChairModel> ressedchairs = Reservation.GetReservations(currentshow.RoomId);
+        foreach (ChairModel chair in options)
+        {
+            foreach (ChairModel ressedchair in ressedchairs)
+            {
+                if (ChairLogic.RowNumber(ressedchair) == ChairLogic.RowNumber(chair))
+                {
+                    chair.Available = false;
+                }
+
+            }
+        }
+        Console.Clear();
+        RoomMap(options, curpos, optionsperline);
         Console.WriteLine($"The amount of seats occupied in this show is {chairs.Count}");
-        int miliseconds = 2000;
+        int miliseconds = 5000;
         Thread.Sleep(miliseconds);
         Console.Clear();
         AdminFeatures.Start();
+    }
+
+    public static void RoomMap(List<ChairModel> options, int curpos, int optionsperline)
+    {
+        Console.SetCursorPosition(0, 0);
+        const int startX = 5;
+        const int startY = 0;
+        int optionsPerLine = optionsperline;
+        const int spacingPerLine = 4;
+
+        int currentSelection = curpos;
+        for (int i = 0; i < options.Count; i++)
+        {
+            Console.SetCursorPosition(startX + (i % optionsPerLine) * spacingPerLine, startY + i / optionsPerLine);
+
+            if (i == currentSelection)
+            {
+                if (options[i].Rank == 1)
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                else if (options[i].Rank == 2)
+                    Console.ForegroundColor = ConsoleColor.Green;
+                else if (options[i].Rank == 3)
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                else
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                if (!options[i].Available)
+                {
+
+                    if (options[i].takeseat)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                }
+            }
+            else
+            {
+                if (options[i].Rank == 1)
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                else if (options[i].Rank == 2)
+                    Console.ForegroundColor = ConsoleColor.Green;
+                else if (options[i].Rank == 3)
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                else
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                if (!options[i].Available)
+                {
+
+                    if (options[i].takeseat)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                }
+            }
+
+            Console.WriteLine(ChairLogic.RowNumber(options[i]));
+
+            Console.ResetColor();
+        }
+        Console.WriteLine();
     }
 }
