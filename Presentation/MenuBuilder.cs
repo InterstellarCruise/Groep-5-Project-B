@@ -4,6 +4,7 @@
     private List<MenuItem> _items = new List<MenuItem>();
     private bool _running = true;
     private bool AdminLogged;
+    
     public MenuBuilder(List<MenuItem> items)
     {
         _items = items;
@@ -65,6 +66,12 @@
                 if (_items[selectedIndex].show != null)
                 {
                     if (_items[selectedIndex].changeshow) ChangeShows.show = _items[selectedIndex].show;
+                    else if (_items[selectedIndex].ListOfReservations) AdminReservations.ListOfReservationsShow = _items[selectedIndex].show;
+                    else if (_items[selectedIndex].SeatShow) AdminReservations.SeatShows = _items[selectedIndex].show;
+                    else if (_items[selectedIndex].SeatRank) AdminReservations.SeatRanks = _items[selectedIndex].show;
+                    else if (_items[selectedIndex].IncomePerRank) AdminIncome.IncomeRanks = _items[selectedIndex].show;
+                    else if (_items[selectedIndex].IncomePerShow) AdminIncome.IncomePerShows = _items[selectedIndex].show;
+
                     else Reservation.CurrentShow = _items[selectedIndex].show;
 
                 }

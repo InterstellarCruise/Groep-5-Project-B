@@ -52,6 +52,11 @@ public class FilmsLogic : BaseLogic<FilmModel>
         FilmsAccess.WriteAll(_items);
         _items = FilmsAccess.LoadAll();
     }
+    public List<FilmModel> GetFilms()
+    {
+        _items = FilmsAccess.LoadAll();
+        return _items;
+    }
 
     public static int LastID()
     {
@@ -75,25 +80,21 @@ public class FilmsLogic : BaseLogic<FilmModel>
             }
         }
     }
-    public static void AllCurrentFilms()
-    {
-        List<FilmModel> Films = FilmsAccess.LoadAll();
-        foreach (FilmModel film in Films)
-        {
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine($"Film ID: {film.Id}");
-            Console.WriteLine($"Film Title: {film.Name} \n");
-            Console.WriteLine("--------------------------------");
-        }
-        
-    }
-    public List<FilmModel> GetFilms()
+    public static List<FilmModel> AllCurrentFilms()
     {
         _items = FilmsAccess.LoadAll();
         return _items;
+
     }
+
+    public static void AddFilm(int ID, string Name, string Description, int AgeLimit, double length, List<string> Genres)
+    {
+        FilmModel film = new FilmModel(ID, Name, Description, AgeLimit, length, Genres);
+        FilmsAccess.Add(film);
+
+    }
+
+
+
+
 }
-
-
-
-

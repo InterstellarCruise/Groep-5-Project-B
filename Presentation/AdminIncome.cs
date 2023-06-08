@@ -9,7 +9,9 @@ public static class AdminIncome
         get { return _reservation; }
         set { _reservation = value; }
     }
-
+    public static ShowModel IncomePerShows;
+    public static ShowModel IncomeRanks;
+    
     private static ShowModel _show = new ShowModel(0, 0, 0, null, null);
     private static FilmModel _film = new FilmModel(0, null, null, 0, 0, null);
     private static string CurrentShow = "";
@@ -40,27 +42,42 @@ public static class AdminIncome
         menu.DisplayMenu();
     }
 
+    public static void ShowInformation()
+    {
+        Console.WriteLine($"Show ID: {show.Id}");
+        Console.WriteLine($"Room: {show.RoomId}");
+        Console.WriteLine($"Film Title: {film.Name}");
+        CurrentShow = $"Show ID: {show.Id} \nRoom: {show.RoomId} \nFilm Title: {film.Name} \n-------------------------------";
+
+
+    }
     public static void ChooseShow()
     {
+       
+        Console.Clear();
         Console.WriteLine("These are all the current shows");
-        ShowsLogic.AllCurrShows();
-        Console.WriteLine("Enter the ID of the show you want to view \n-------------------------------");
-        int id = Convert.ToInt32(Console.ReadLine());
-        show = showLogic.GetById(id);
-        if (show == null)
+        List<ShowModel> shows = ShowsLogic.AllCurrentShows();
+        List<MenuItem> items = new List<MenuItem>();
+        foreach (ShowModel show in shows)
         {
-            Console.WriteLine("There is no show with this ID");
-            int miliseconds = 2000;
-            Thread.Sleep(miliseconds);
-            Console.Clear();
-            AdminFeatures.Start();
+            FilmsLogic filmlogic = new FilmsLogic();
+            FilmModel film1 = filmlogic.GetById(show.FilmId);
+            MenuItem item = new MenuItem($"--------------------------------\nShow ID: {show.Id}\nRoom: {show.RoomId}\nFilm: {film1.Name}", IncomePerShow);
+            item.show = show;
+            item.IncomePerShow = true;
+            items.Add(item);
         }
-        IncomePerShow(id);
+        MenuItem lastshow = items.Last();
+        lastshow.DisplayText = lastshow.DisplayText + "\n--------------------------------\n";
+        items.Add(new MenuItem("Back", AdminFeatures.Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
 
     }
 
-    public static void IncomePerShow(int id)
-    {
+    public static void IncomePerShow()
+    {   
+        int id = IncomePerShows.Id;
         show = showLogic.GetById(id);
         reservation = reservationLogic.GetByShowId(show.Id);
         double total = ReservationsLogic.IncomeShow(reservation.Id);
@@ -74,18 +91,31 @@ public static class AdminIncome
 
     public static void ChooseSR()
     {
+        Console.Clear();
         Console.WriteLine("These are all the current shows");
-        ShowsLogic.AllCurrShows();
-        Console.WriteLine("Enter the ID of the show you want to view \n-------------------------------");
-        int id = Convert.ToInt32(Console.ReadLine());
-        show = showLogic.GetById(id);
-        Console.WriteLine("Please enter a rank you want to see the income of (1-3)");
-        int rank = Convert.ToInt32(Console.ReadLine());
-        IncomePerRank(id, rank);
+        List<ShowModel> shows = ShowsLogic.AllCurrentShows();
+        List<MenuItem> items = new List<MenuItem>();
+        foreach (ShowModel show in shows)
+        {
+            FilmsLogic filmlogic = new FilmsLogic();
+            FilmModel film1 = filmlogic.GetById(show.FilmId);
+            MenuItem item = new MenuItem($"--------------------------------\nShow ID: {show.Id}\nRoom: {show.RoomId}\nFilm: {film1.Name}", IncomePerRank);
+            item.show = show;
+            item.IncomePerRank = true;
+            items.Add(item);
+        }
+        MenuItem lastshow = items.Last();
+        lastshow.DisplayText = lastshow.DisplayText + "\n--------------------------------\n";
+        items.Add(new MenuItem("Back", AdminFeatures.Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
     }
 
-    public static void IncomePerRank(int id, int rank)
+    public static void IncomePerRank()
     {
+        int id = IncomeRanks.Id;
+        Console.WriteLine("Please choose a rank between 1 and 3");
+        int rank = Convert.ToInt32(Console.ReadLine());
         show = showLogic.GetById(id);
         reservation = reservationLogic.GetByShowId(show.Id);
         double total = ReservationsLogic.IncomeRank(reservation.Id, rank);
@@ -101,12 +131,12 @@ public static class AdminIncome
         Console.WriteLine("Choose a date");
         double totalAmount = 0;
         string date = Console.ReadLine();
-        List<ShowModel> Shows = ShowsAccess.LoadAll();
+        List<ShowModel> Shows = ShowsLogic.AllCurrentShows();
         foreach (ShowModel show in Shows)
         {
             if (date.Equals(show.Date) == true)
             {
-                List<ReservationModel> Reservation = ReservationsAccess.LoadAll();
+                List<ReservationModel> Reservation = ReservationsLogic.AllReservation();
                 foreach (ReservationModel res in Reservation)
                 {
 

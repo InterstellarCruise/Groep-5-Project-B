@@ -91,6 +91,12 @@ public class ReservationsLogic : BaseLogic<ReservationModel>
         ReservationsAccess.WriteAll(_items);
     }
 
+    public IEnumerable<ReservationModel> GetByShowIdList(int id)
+    {
+        var reservation = _items.Where(i => i.Showid == id);
+        return reservation;
+
+    }
     public ReservationModel GetByShowId(int id)
     {
         return _items.Find(i => i.Showid == id);
@@ -98,9 +104,8 @@ public class ReservationsLogic : BaseLogic<ReservationModel>
 
     public static double IncomeShow(int id)
     {
-        List<ReservationModel> Reservation = ReservationsAccess.LoadAll();
         double totalAmount = 0;
-        foreach (ReservationModel res in Reservation)
+        foreach (ReservationModel res in _items)
         {
             if (id == res.Showid)
             {
@@ -179,6 +184,12 @@ public class ReservationsLogic : BaseLogic<ReservationModel>
             }
         }
         return totalAmount;
+    }
+    public static List<ReservationModel> AllReservation()
+    {
+
+        List<ReservationModel> Reservations = ReservationsAccess.LoadAll();
+        return Reservations;
     }
 
 }

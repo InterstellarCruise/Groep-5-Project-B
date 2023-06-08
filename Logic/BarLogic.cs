@@ -102,7 +102,7 @@ public class BarLogic
         int number = 1;
         foreach(BarModel l in barreservations)
         { 
-            if(l.Date!=date)
+            if(l.Date==date)
             {
             
             IFormatProvider provider = CultureInfo.InvariantCulture;
@@ -113,14 +113,16 @@ public class BarLogic
             if(reservations.Find(x => x.Id == l.Reservationid) == null){places =places;}
             else{
                 var first_step = reservations.Find(x => x.Id == l.Reservationid);
-                if(reservations.Find(x => x.Id == l.Reservationid) == null){places =places;}
+                if(reservations.Find(x => x.Id == l.Reservationid) == null)
+                    {places = places;}
                 else
                 {
                     var second_step = showmodels.Find(x => x.Id == first_step.Showid);
-                    if(filmmodels.Find(x => x.Id == second_step.FilmId) == null){places =places;}
+                    if(filmmodels.Find(x => x.Id == second_step.FilmId) == null)
+                        {places =places;}
                     else{
                         var last_step = filmmodels.Find(x => x.Id == second_step.FilmId);
-                        var spans = span.Hours - last_step.Length + lenght;
+                        double spans = span.Hours - last_step.Length + lenght;
 
                         if(spans>=0 & spans<=lenght)
                         {
