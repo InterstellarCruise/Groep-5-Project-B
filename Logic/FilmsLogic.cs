@@ -82,8 +82,8 @@ public class FilmsLogic : BaseLogic<FilmModel>
     }
     public static List<FilmModel> AllCurrentFilms()
     {
-        List<FilmModel> Films = FilmsAccess.LoadAll();
-        return Films;
+        _items = FilmsAccess.LoadAll();
+        return _items;
 
     }
 

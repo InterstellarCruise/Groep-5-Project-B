@@ -104,9 +104,8 @@ public class ReservationsLogic : BaseLogic<ReservationModel>
 
     public static double IncomeShow(int id)
     {
-        List<ReservationModel> Reservation = ReservationsAccess.LoadAll();
         double totalAmount = 0;
-        foreach (ReservationModel res in Reservation)
+        foreach (ReservationModel res in _items)
         {
             if (id == res.Showid)
             {
