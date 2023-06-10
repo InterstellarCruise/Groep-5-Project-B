@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "id": 1,
     "showid": 1,
@@ -9,5 +9,79 @@
       53
     ],
     "amount": 25
+  },
+  {
+    "id": 2,
+    "showid": 2,
+    "accountid": 1,
+    "ressedchairs": [
+      607,
+      608
+    ],
+    "amount": 24
+  },
+  {
+    "id": 3,
+    "showid": 2,
+    "accountid": 1,
+    "ressedchairs": [
+      607,
+      608,
+      550,
+      551
+    ],
+    "amount": 20
+  },
+  {
+    "id": 4,
+    "showid": 2,
+    "accountid": 1,
+    "ressedchairs": [
+      607,
+      608,
+      550,
+      551,
+      756,
+      726
+    ],
+    "amount": 22
+  },
+  {
+    "id": 5,
+    "showid": 3,
+    "accountid": 1,
+    "ressedchairs": [
+      607,
+      608,
+      550,
+      551,
+      756,
+      726,
+      188,
+      189
+    ],
+    "amount": 24
+  },
+  {
+    "id": 6,
+    "showid": 2,
+    "accountid": 1,
+    "ressedchairs": [
+      667,
+      668
+    ],
+    "amount": 22
+  },
+  {
+    "id": 7,
+    "showid": 5,
+    "accountid": 1,
+    "ressedchairs": [
+      667,
+      668,
+      27,
+      28
+    ],
+    "amount": 24
   }
 ]

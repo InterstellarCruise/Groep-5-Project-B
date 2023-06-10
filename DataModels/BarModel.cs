@@ -10,17 +10,20 @@ public class BarModel : IModel
     [JsonPropertyName("accountid")]
     public int Accountid { get; set; }
 
+    [JsonPropertyName("reservationid")]
+    public int Reservationid { get; set; }
     [JsonPropertyName("start_time")]
     public string Start_Time { get; set; }
 
     [JsonPropertyName("amount")]
     public Nullable<int> Amount { get; set; }
 
-    public BarModel(int id, string date, int accountid, string start_time, int? amount)
+    public BarModel(int id, string date, int accountid,int reservationid, string start_time, int? amount)
     {
         Id = id;
         Date = date;
         Accountid = accountid;
+        Reservationid = reservationid;
         Start_Time = start_time;
         Amount = amount;
     }
