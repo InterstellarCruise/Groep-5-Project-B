@@ -1,10 +1,17 @@
+using System.Text.RegularExpressions;
 public static class AddFilms
 {
     static FilmsLogic filmlogic = new FilmsLogic();
     private static string _warning = "WARNING\nThis may have grave consequences.\nAre you sure you want to proceed with this action?\n";
     private static string _option = "Do you want to add a show or film?";
     public static List<FilmModel> Films = filmlogic.GetFilms();
+    public static string Name = "";
+    public static string Description = "";
+    public static int AgeLimit = 0;
 
+    public static double length = 0;
+    public static List<string> Genres = new List<string>();
+    public static int ID = 0;
     public static void Start()
     {
         List<MenuItem> items = new List<MenuItem>();
@@ -14,33 +21,56 @@ public static class AddFilms
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();
     }
-    public static void FilmInput()
+
+    public static void NameInput()
     {
-        List<string> Genres = new List<string>();
         Console.Clear();
         int LastID = FilmsLogic.LastID();
-        int ID = LastID += 1;
+        ID = LastID += 1;
         Console.WriteLine("Type the name of the movie: ");
-        string Name = Console.ReadLine();
+        Name = Console.ReadLine();
         Console.Clear();
+        DescrInput();
+    }
+
+    public static void DescrInput()
+    {
         Console.WriteLine("Type the description of the movie: ");
-        string Description = Console.ReadLine();
+        Description = Console.ReadLine();
         Console.Clear();
+        AgeLimitInput();
+    }
+
+    public static void AgeLimitInput()
+    {
         Console.WriteLine("Type the age-limit of the movie (If no age-limit leave empty)");
         string Limit = Console.ReadLine();
-        int AgeLimit;
-        if (Convert.ToInt32(Limit) < 1 || Convert.ToInt32(Limit) > 18)
-        {
-            AgeLimit = 0;
-        }
+        // int AgeLimit;
 
         if (!int.TryParse(Limit, out AgeLimit))
         {
             AgeLimit = 0;
         }
+        else if (Convert.ToInt32(Limit) < 7 || Convert.ToInt32(Limit) > 18)
+        {
+            AgeLimit = 0;
+        }
         Console.Clear();
+        TimeInput();
+    }
+
+
+
+    public static void TimeInput()
+    {
         Console.WriteLine("Type the length of the movie like (Hour.Minutes): ");
         string Length = Console.ReadLine();
+        Regex regex = new Regex(@"^\d+\.\d{1,2}$");
+        if (!regex.IsMatch(Length))
+        {
+            Console.WriteLine("Invalid time format. Please use the format 'h.mm' with at least one digit after the dot.");
+            TimeInput();
+        }
         string[] parts = Length.Split('.');
         int i1 = int.Parse(parts[0]);
         int i2 = int.Parse(parts[1]);
@@ -50,11 +80,24 @@ public static class AddFilms
             int millisecondsmin = 1500;
             Thread.Sleep(millisecondsmin);
             Console.Clear();
-            FilmInput();
+            TimeInput();
+        }
+        if (i1 > 4)
+        {
+            Console.WriteLine("Invalid hours.");
+            int millisecondsmin = 1500;
+            Thread.Sleep(millisecondsmin);
+            Console.Clear();
+            TimeInput();
         }
         double hourperc = Convert.ToDouble(i2) / 60;
-        double length = i1 + hourperc;
-        // Console.Clear();
+        length = i1 + hourperc;
+        Console.Clear();
+        GenreInput();
+    }
+
+    public static void GenreInput()
+    {
         Console.WriteLine("Type a genre of the movie: ");
         bool genrecheck = false;
         while (!genrecheck)
@@ -71,8 +114,14 @@ public static class AddFilms
             {
                 Console.WriteLine("The name of the other genre:");
             }
+            Console.Clear();
         }
-        Console.Clear();
+        Add();
+
+    }
+
+    public static void Add()
+    {
         Console.WriteLine(Name + " added to database");
         int milliseconds = 1500;
         Thread.Sleep(milliseconds);
@@ -82,4 +131,5 @@ public static class AddFilms
         //New LogicLayer function
         Menu.Start();
     }
+
 }

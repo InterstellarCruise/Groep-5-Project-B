@@ -30,7 +30,7 @@ public static class AddShows
         List<MenuItem> items = new List<MenuItem>();
         items.Add(new MenuItem(_option, null));
         items.Add(new MenuItem("Show", AddShow));
-        items.Add(new MenuItem("Film", AddFilms.FilmInput));
+        items.Add(new MenuItem("Film", AddFilms.NameInput));
         MenuBuilder menu = new MenuBuilder(items);
         menu.DisplayMenu();
     }

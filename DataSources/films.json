@@ -84,5 +84,15 @@
     "genres": [
       "Horror"
     ]
+  },
+  {
+    "id": 9,
+    "name": "asdfg",
+    "description": "asdf",
+    "ageLimit": 0,
+    "length": 2.5,
+    "genres": [
+      "asdf"
+    ]
   }
 ]
