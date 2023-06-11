@@ -67,6 +67,7 @@
                 {
                     if (_items[selectedIndex].changeshow) ChangeShows.show = _items[selectedIndex].show;
                     else if (_items[selectedIndex].ListOfReservations) AdminReservations.ListOfReservationsShow = _items[selectedIndex].show;
+                    else if (_items[selectedIndex].changefilm) ChangeFilm.film = _items[selectedIndex].film;
                     else if (_items[selectedIndex].SeatShow) AdminReservations.SeatShows = _items[selectedIndex].show;
                     else if (_items[selectedIndex].SeatRank) AdminReservations.SeatRanks = _items[selectedIndex].show;
                     else if (_items[selectedIndex].IncomePerRank) AdminIncome.IncomeRanks = _items[selectedIndex].show;

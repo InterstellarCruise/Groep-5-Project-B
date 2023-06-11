@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "id": 1,
     "showid": 1,
@@ -83,5 +83,16 @@
       28
     ],
     "amount": 24
+  },
+  {
+    "id": 8,
+    "showid": 1,
+    "accountid": 8,
+    "ressedchairs": [
+      39,
+      51,
+      63
+    ],
+    "amount": 36
   }
 ]

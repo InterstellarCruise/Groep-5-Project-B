@@ -140,7 +140,7 @@ public static class ChangeFilm
         Console.WriteLine($"Film ID: {film.Id}");
         Console.WriteLine($"Film Title: {film.Name}");
         Console.WriteLine($"Film Description: {film.Description}");
-        Console.WriteLine($"Film AgeLimit: {film.AgeLimit}");
+        Console.WriteLine($"Film Age Limit: {film.AgeLimit}");
         Console.WriteLine($"Length: {film.Length}");
         CurrentFilm = $"Film ID: {film.Id}  \nFilm Title: {film.Name} \nFilm Description: {film.Description} \nFilm Age Limit: {film.AgeLimit} \nLength: {film.Length}\n-------------------------------";
 
@@ -150,19 +150,22 @@ public static class ChangeFilm
     {
         Console.Clear();
         Console.WriteLine("These are all the current films");
-        FilmsLogic.AllCurrentFilms();
-        Console.WriteLine("Enter the ID of the film you want to view \n-------------------------------");
-        int id = Convert.ToInt32(Console.ReadLine());
-        film = filmLogic.GetById(id);
-        if (film == null)
+        List<FilmModel> films = FilmsLogic.AllCurrentFilms();
+        List<MenuItem> items = new List<MenuItem>();
+        foreach (FilmModel film in films)
         {
-            Console.WriteLine("There is no film with this ID");
-            int miliseconds = 2000;
-            Thread.Sleep(miliseconds);
-            Console.Clear();
-            AdminFeatures.Start();
+            ShowsLogic showsLogic = new ShowsLogic();
+            ShowModel show1 = showsLogic.GetByFilmId(film.Id);
+            MenuItem item = new MenuItem($"--------------------------------\nFilm ID: {film.Id}\nTitle: {film.Name}\nDescription: {film.Description}\nAge Limit: {film.AgeLimit}\nFilm Length: {film.Length}", MenuDisplay);
+            item.film = film;
+            item.ChangeFilm = true;
+            items.Add(item);
         }
-
+        MenuItem lastfilm = items.Last();
+        lastfilm.DisplayText = lastfilm.DisplayText + "\n--------------------------------\n";
+        items.Add(new MenuItem("Back", AdminFeatures.Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
     }
 }
 

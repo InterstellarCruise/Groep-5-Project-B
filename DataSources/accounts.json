@@ -28,5 +28,23 @@
     "emailAddress": "diana@gmail.com",
     "password": "123",
     "fullName": "Diana F"
+  },
+  {
+    "id": 6,
+    "emailAddress": "test@g.com",
+    "password": "Test1234!",
+    "fullName": "Test Test"
+  },
+  {
+    "id": 7,
+    "emailAddress": "test1@g.com",
+    "password": "Test12!",
+    "fullName": "Test Test"
+  },
+  {
+    "id": 8,
+    "emailAddress": "test@",
+    "password": "123",
+    "fullName": "Test Test"
   }
 ]
