@@ -29,6 +29,11 @@ public static class AddFilms
         Console.WriteLine("Type the age-limit of the movie (If no age-limit leave empty)");
         string Limit = Console.ReadLine();
         int AgeLimit;
+        if (Convert.ToInt32(Limit) < 1 || Convert.ToInt32(Limit) > 18)
+        {
+            AgeLimit = 0;
+        }
+
         if (!int.TryParse(Limit, out AgeLimit))
         {
             AgeLimit = 0;
