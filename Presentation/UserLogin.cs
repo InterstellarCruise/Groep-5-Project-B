@@ -72,7 +72,7 @@ public static class UserLogin
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);
             List<MenuItem> items = new List<MenuItem>();
-            items.Add(new MenuItem("Try aigan", Start));
+            items.Add(new MenuItem("Try again", Start));
             items.Add(new MenuItem("Main menu", Menu.Start));
             MenuBuilder menu = new MenuBuilder(items);
             menu.DisplayMenu();
