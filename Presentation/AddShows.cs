@@ -206,7 +206,9 @@ public static class AddShows
         int milliseconds = 1500;
         Thread.Sleep(milliseconds);
         Console.Clear();
-        ShowsLogic.AddShow(ID, MovieID + 1, RoomId, inputdate, time);
+        ShowModel newshow = new(ID, MovieID, RoomId, inputdate, time);
+        ShowsLogic showlogic = new ShowsLogic();
+        showlogic.UpdateList(newshow);
         //New LogicLayer function
         Menu.Start();
     }

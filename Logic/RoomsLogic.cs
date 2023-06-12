@@ -5,9 +5,8 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-public class RoomsLogic
+public class RoomsLogic : BaseLogic<RoomModel>
 {
-    private List<RoomModel> _rooms;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -17,30 +16,26 @@ public class RoomsLogic
 
     public RoomsLogic()
     {
-        _rooms = RoomsAccess.LoadAll();
+        _items = RoomsAccess.LoadAll();
     }
 
 
-    public void UpdateList(RoomModel room)
+    public override void UpdateList(RoomModel room)
     {
         //Find if there is already an model with the same id
-        int index = _rooms.FindIndex(s => s.Id == room.Id);
+        int index = _items.FindIndex(s => s.Id == room.Id);
 
         if (index != -1)
         {
             //update existing model
-            _rooms[index] = room;
+            _items[index] = room;
         }
         else
         {
             //add new model
-            _rooms.Add(room);
+            _items.Add(room);
         }
-        RoomsAccess.WriteAll(_rooms);
-
-    }
-    public void ValidRoom(string index)
-    {
+        RoomsAccess.WriteAll(_items);
 
     }
 
@@ -83,12 +78,12 @@ public class RoomsLogic
     }
     public RoomModel GetById(int id)
     {
-        return _rooms.Find(i => i.Id == id);
+        return _items.Find(i => i.Id == id);
     }
     public void DeleteRoom(RoomModel room)
     {
 
-        _rooms.Remove(room);
-        RoomsAccess.WriteAll(_rooms);
+        _items.Remove(room);
+        RoomsAccess.WriteAll(_items);
     }
 }
