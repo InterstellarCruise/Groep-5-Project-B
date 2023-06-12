@@ -1,4 +1,5 @@
 ﻿using System.Security.Principal;
+using System.Xml.Linq;
 
 public class AccountInfo
 {
@@ -53,8 +54,8 @@ public class AccountInfo
                 Console.Clear();
             }
         } while (fname.ToLower() == fullname[0].ToLower());
-
-        string Fullname = $"{fname} {fullname[1]}";
+        string fname_after = fname.Substring(0, 1).ToUpper() + fname.Substring(1);
+        string Fullname = $"{fname_after} {fullname[1]}";
         AccountPage.Account.FullName = Fullname;
         accountslogic.UpdateList(AccountPage.Account);
         Console.WriteLine("Successfully changed your first name");
@@ -83,8 +84,8 @@ public class AccountInfo
             }
                 
         } while (lname.ToLower() == fullname[1].ToLower());
-        
-        string Fullname = $"{fullname[0]} {lname}";
+        string lname_after = lname.Substring(0, 1).ToUpper() + lname.Substring(1);
+        string Fullname = $"{fullname[0]} {lname_after}";
         AccountPage.Account.FullName = Fullname;
         accountslogic.UpdateList(AccountPage.Account);
         Console.WriteLine("Successfully changed your last name");
