@@ -135,7 +135,7 @@ static class MoviePicker
         Console.WriteLine("\nFirst name:");
         string fname = Console.ReadLine();
         string fname_after = fname.Substring(0, 1).ToUpper() + fname.Substring(1);
-        Console.WriteLine("Last name::");
+        Console.WriteLine("Last name:");
         string lname = Console.ReadLine();
         string lname_after = lname.Substring(0, 1).ToUpper() + lname.Substring(1);
         string email = "";
