@@ -38,10 +38,22 @@ public class AccountInfo
         Console.Clear();
         Console.CursorVisible = true;
         AccountsLogic accountslogic = new AccountsLogic();
-        string[] fullname = AccountPage.Account.FullName.Split(' ');
-        Console.WriteLine($"First Name: {fullname[0]}\nLast Name: {fullname[1]}\n--------------------------------");
-        Console.WriteLine("Enter a new first name");
-        string fname = Console.ReadLine();
+        string[] fullname;
+        string fname = null;
+        do
+        {
+            fullname = AccountPage.Account.FullName.Split(' ');
+            Console.WriteLine($"First Name: {fullname[0]}\nLast Name: {fullname[1]}\n--------------------------------");
+            Console.WriteLine("Enter a new first name");
+            fname = Console.ReadLine();
+            if (fname.ToLower() == fullname[0].ToLower())
+            {
+                Console.WriteLine("Not a new first name");
+                Thread.Sleep(1500);
+                Console.Clear();
+            }
+        } while (fname.ToLower() == fullname[0].ToLower());
+
         string Fullname = $"{fname} {fullname[1]}";
         AccountPage.Account.FullName = Fullname;
         accountslogic.UpdateList(AccountPage.Account);
