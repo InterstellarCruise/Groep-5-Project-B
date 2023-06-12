@@ -89,7 +89,7 @@ public class AccountInfo
             email2 = "";
             Console.WriteLine("Enter a new Email");
             email1 = Console.ReadLine();
-            Console.WriteLine("Enter new email aigan");
+            Console.WriteLine("Enter new email again");
             email2 = Console.ReadLine();
             if (email1 != email2)
             {
