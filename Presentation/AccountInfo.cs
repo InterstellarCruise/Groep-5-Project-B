@@ -96,11 +96,6 @@ public class AccountInfo
                 Console.WriteLine("Not the same email");
                 Thread.Sleep(3000);
             }
-            if (email1 == AccountPage.Account.EmailAddress)
-            {
-                Console.WriteLine("Not a new email");
-                Thread.Sleep(3000);
-            }
             if (accountsLogic.CheckEmail(email1))
             {
                 Console.WriteLine("An account with that email already exists");
@@ -129,7 +124,7 @@ public class AccountInfo
             pw2 = "";
             Console.WriteLine("Enter a new Password");
             pw1 = Console.ReadLine();
-            Console.WriteLine("Enter new Password aigan");
+            Console.WriteLine("Enter new Password again");
             pw2 = Console.ReadLine();
             if (pw1 != pw2)
             {
