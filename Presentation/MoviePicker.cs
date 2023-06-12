@@ -121,7 +121,7 @@ static class MoviePicker
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);
             List<MenuItem> items = new List<MenuItem>();
-            items.Add(new MenuItem("Try aigan", movielogin));
+            items.Add(new MenuItem("Try again", movielogin));
             items.Add(new MenuItem("Back", DatePicker.showChoose));
             items.Add(new MenuItem("Main menu", Menu.Start));
             MenuBuilder menu = new MenuBuilder(items);
