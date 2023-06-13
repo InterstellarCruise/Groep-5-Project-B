@@ -71,15 +71,10 @@ public class RoomsLogic : BaseLogic<RoomModel>
     }
 
 
-    public static void AddShow(int ID, int MovieId, int RoomId, string inputdate, string time)
-    {
-        ShowModel show = new ShowModel(ID, MovieId, RoomId, inputdate, time);
-        ShowsAccess.Add(show);
-    }
-    public RoomModel GetById(int id)
-    {
-        return _items.Find(i => i.Id == id);
-    }
+    //public RoomModel GetById(int id)
+    //{
+    //    return _items.Find(i => i.Id == id);
+    //}
     public void DeleteRoom(RoomModel room)
     {
 

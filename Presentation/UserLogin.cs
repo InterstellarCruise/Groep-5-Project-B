@@ -55,7 +55,7 @@ public static class UserLogin
         if (acc != null)
         {
             Console.WriteLine("\n-----------------------------\nWelcome back " + acc.FullName);
-            if (acc.FullName == "Admin")
+            if (acc.FullName == "Cinema Admin")
             {
                 Menu.AdminLogged = true;
             }
