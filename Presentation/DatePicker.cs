@@ -18,6 +18,7 @@ static class DatePicker
         }
         static void chooseDate()
         {
+            emptyOrNot = false;
             Console.Clear();
             Console.CursorVisible = true;
             Console.WriteLine("Type a date you want to see the shows from like: year-month-day");
@@ -29,7 +30,7 @@ static class DatePicker
                 Console.Clear();
                 Menu.Start();
             }
-            
+
             //Display every show thats from the given date.
             Console.Clear();
             // Console.WriteLine($"Movies on the date: {date} \n");
@@ -58,7 +59,7 @@ static class DatePicker
         Console.WriteLine($"Movies playing on {Date}\n");
         ShowsLogic.MoviesByDate(Shows, Date, emptyOrNot);
         List<MenuItem> items = new List<MenuItem>();
-        for (int i = 0; i < ShowsLogic.ShowInfo.Count;i++)
+        for (int i = 0; i < ShowsLogic.ShowInfo.Count; i++)
         {
             string showinfo = ShowsLogic.ShowInfo.Keys.ElementAt(i);
 
