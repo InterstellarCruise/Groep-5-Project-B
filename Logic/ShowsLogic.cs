@@ -96,7 +96,6 @@ public class ShowsLogic : BaseLogic<ShowModel>
     }
     public List<ShowModel> GetShows()
     {
-        _items = ShowsAccess.LoadAll();
         return _items;
     }
     
@@ -145,15 +144,13 @@ public class ShowsLogic : BaseLogic<ShowModel>
 
     public static int LastID()
     {
-        List<ShowModel> _shows = ShowsAccess.LoadAll();
-        int ID = _shows.Count;
+        int ID = _items.Count;
         return ID;
     }
     public static List<ShowModel> AllCurrentShows()
     {
 
-        List<ShowModel> Shows = ShowsAccess.LoadAll();
-        return Shows;
+        return _items;
     }
     public static List<ShowModel> ShowsByDate(string date)
     {

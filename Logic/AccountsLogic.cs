@@ -46,7 +46,6 @@ public class AccountsLogic :BaseLogic<AccountModel>
 
     public AccountModel CheckLogin(string email, string password)
     {
-        _items = AccountsAccess.LoadAll();
         if (email == null || password == null)
         {
             return null;

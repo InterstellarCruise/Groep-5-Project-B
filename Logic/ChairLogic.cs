@@ -13,7 +13,6 @@ public class ChairLogic : BaseLogic<ChairModel>
     {
         _items = ChairsAccess.LoadAll();
 
-        ChairsAccess.WriteAll(_items);
     }
 
     public override void UpdateList(ChairModel c)

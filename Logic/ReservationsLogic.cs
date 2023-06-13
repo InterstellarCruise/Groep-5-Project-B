@@ -177,8 +177,7 @@ public class ReservationsLogic : BaseLogic<ReservationModel>
     public static List<ReservationModel> AllReservation()
     {
 
-        List<ReservationModel> Reservations = ReservationsAccess.LoadAll();
-        return Reservations;
+        return _items;
     }
 
 }
