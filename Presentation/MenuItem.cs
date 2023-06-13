@@ -17,7 +17,7 @@
     public bool IncomePerRank = false;
 
     public FilmModel film { get; set; }
-    public bool changefilm = false;
+    public bool ChangeFilm = false;
 
 
     public MenuItem(ChairModel chair1, Action action) : this(ChairLogic.RowNumber(chair1), action) => chair = chair1;

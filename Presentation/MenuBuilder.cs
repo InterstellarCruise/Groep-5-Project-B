@@ -4,7 +4,7 @@
     private List<MenuItem> _items = new List<MenuItem>();
     private bool _running = true;
     private bool AdminLogged;
-    
+
     public MenuBuilder(List<MenuItem> items)
     {
         _items = items;
@@ -38,8 +38,8 @@
                         Console.WriteLine(_items[i].DisplayText);
                         Console.ResetColor();
                     }
-                    
-                    
+
+
                 }
                 else
                 {
@@ -75,6 +75,11 @@
                     else Reservation.CurrentShow = _items[selectedIndex].show;
 
                 }
+                if (_items[selectedIndex].film != null)
+                {
+                    ChangeFilm.film = _items[selectedIndex].film;
+
+                }
                 if (_items[selectedIndex].reservation != null)
                 {
                     ReservationDetail.reservation = _items[selectedIndex].reservation;
@@ -84,9 +89,9 @@
                     _items[selectedIndex].Execute();
                     _running = false;
                 }
-                
-                
-                
+
+
+
             }
         }
     }
