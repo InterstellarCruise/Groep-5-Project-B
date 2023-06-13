@@ -38,12 +38,7 @@ public class ReservationsLogic : BaseLogic<ReservationModel>
         }
         return theReservationModels;
     }
-    public void AddReservation(int showid, int accountid, List<int> chairids, double amount)
-    {
-        int id = _items.Count() + 1;
-        ReservationModel model = new ReservationModel(id, showid, accountid, chairids, amount);
-        UpdateList(model);
-    }
+
     public override void UpdateList(ReservationModel reservation)
     {
         //Find if there is already an model with the same id
@@ -78,12 +73,6 @@ public class ReservationsLogic : BaseLogic<ReservationModel>
         return MyReservations;
     }
 
-    public static void AllCurrentRes(int id)
-    {
-        ReservationsLogic reservationLogic = new ReservationsLogic();
-        var Reservation = reservationLogic.GetByShowId(id);
-        
-    }
     public void DeleteReservation(ReservationModel reservation)
     {
         ReservationModel x = GetById(reservation.Id);

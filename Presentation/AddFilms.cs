@@ -127,7 +127,10 @@ public static class AddFilms
         Thread.Sleep(milliseconds);
         Console.Clear();
 
-        FilmsLogic.AddFilm(ID, Name, Description, AgeLimit, length, Genres);
+        FilmsLogic filmlogic = new FilmsLogic();
+        FilmModel film = new(ID, Name, Description, AgeLimit, length, Genres);
+        filmlogic.UpdateList(film);
+
         //New LogicLayer function
         Menu.Start();
     }

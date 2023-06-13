@@ -59,7 +59,9 @@ public class CheckOut
         AccountModel acc = UserLogin.CurrentAccount;
         ReservationsLogic reservationlogic  = new ReservationsLogic(); 
         film = filmLogic.GetById(_show.FilmId);
-        reservationlogic.AddReservation(_show.Id, acc.Id, _chairs, _amount);
+        var allres = ReservationsLogic.AllReservation();
+        ReservationModel newRes = new(allres.Count + 1, _show.Id, acc.Id, _chairs, _amount);
+        reservationlogic.UpdateList(newRes);
         barplace(_show);
         Console.WriteLine("Transaction Receipt from Shinema");
         Console.WriteLine("------------------------------");
