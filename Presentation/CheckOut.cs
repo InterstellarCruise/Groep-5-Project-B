@@ -36,7 +36,7 @@ public class CheckOut
     public static void Start(List<ChairModel> chairs, double amount, ShowModel show)
     {
         Console.Clear();
-        List<MenuItem> menuItems = new List<MenuItem>();
+        List<MenuItem> menuItems = new List<MenuItem>(); 
         _show = show;
         _amount = amount;
         string selecchairs = "Current selected chairs:";
@@ -98,9 +98,16 @@ public class CheckOut
 
             }
         }
+        if(places<=_chairs.Count())
+        {
+            Console.WriteLine("there are not enough seats at the bar to ccomodate you're party.");
+                Thread.Sleep(3000);
+                _answer = "no";
+
+        }
         else
             {
-                Console.WriteLine("there are not enough seats at the bar to ccomodate you're party.");
+                Console.WriteLine("you have chosen not to reserve at the bar");
                 Thread.Sleep(3000);
                 _answer = "no";
             }

@@ -183,6 +183,3 @@ public class ShowsLogic : BaseLogic<ShowModel>
 }
 
 
-
-
-

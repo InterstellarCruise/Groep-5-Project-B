@@ -8,7 +8,7 @@ using System.Globalization;
 //This class is not static so later on we can use inheritance and interfaces
 public class BarLogic
 {
-    private List<BarModel> _bar;
+    private List<BarModel> _items;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -17,7 +17,7 @@ public class BarLogic
 
     public BarLogic()
     {
-        _bar = BarAccess.LoadAll();
+        _items = BarAccess.LoadAll();
     }
     public List<BarModel> allbarseat = BarAccess.LoadAll();
 
@@ -31,27 +31,27 @@ public class BarLogic
         int resrvenumber = reservations.Count();
         int account_id = UserLogin.CurrentAccount.Id;
         ReservationModel start = rlogic.GetById(resrvenumber);
-        int indexen = _bar.Count + 1;
+        int indexen = _items.Count + 1;
         var start_time = sowlogic.GetById(start.Showid);
         BarModel acc = new BarModel(indexen,date,account_id,resrvenumber,start_time.Time,start.Ressedchairs.Count());
 
         //Find if there is already an model with the same id
-        int index = _bar.FindIndex(s => s.Accountid == acc.Accountid&& s.Date== acc.Date&& s.Start_Time == s.Start_Time );
+        int index = _items.FindIndex(s => s.Accountid == acc.Accountid&& s.Date== acc.Date&& s.Start_Time == s.Start_Time );
         //Find if there is already an model with the same accountid
 
         if (index != -1)
         {
             //update existing model
-            acc.Id = _bar[index].Id;
-            _bar[index] = acc;
-            BarAccess.WriteAll(_bar);
+            acc.Id = _items[index].Id;
+            _items[index] = acc;
+            BarAccess.WriteAll(_items);
         }
         else
         {
         
             //add new model
-        _bar.Add(acc);
-        BarAccess.WriteAll(_bar);
+        _items.Add(acc);
+        BarAccess.WriteAll(_items);
         }
     }
 
@@ -72,11 +72,11 @@ public class BarLogic
     }
     public BarModel GetById(int id)
     {
-        return _bar.Find(i => i.Id == id);
+        return _items.Find(i => i.Id == id);
     }
     public void DeleteReservation(ReservationModel reservation,ShowModel show)
     {
-        BarModel z = _bar.Find(x => x.Accountid == reservation.Accountid && x.Start_Time == show.Time&& x.Reservationid == reservation.Id );
+        BarModel z = _items.Find(x => x.Accountid == reservation.Accountid && x.Start_Time == show.Time&& x.Reservationid == reservation.Id );
         BarModel newest = z;
         var numeral = reservation.Ressedchairs.Count();
         string stringy = $"{z.Amount}";
@@ -84,15 +84,15 @@ public class BarLogic
         if(stringer - numeral<=0)
         {
             newest.Amount = 0;
-            _bar.RemoveAll(x => x.Accountid == reservation.Accountid);
-            _bar.Add(newest);
+            _items.RemoveAll(x => x.Accountid == reservation.Accountid);
+            _items.Add(newest);
         }
         else{
         newest.Amount = (stringer - numeral);
-        _bar.RemoveAll(x => x.Accountid == reservation.Accountid);
-        _bar.Add(newest);
+        _items.RemoveAll(x => x.Accountid == reservation.Accountid);
+        _items.Add(newest);
         }
-        BarAccess.WriteAll(_bar);
+        BarAccess.WriteAll(_items);
     }
 
 
