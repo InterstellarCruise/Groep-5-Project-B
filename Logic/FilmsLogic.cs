@@ -52,11 +52,11 @@ public class FilmsLogic : BaseLogic<FilmModel>
         FilmsAccess.WriteAll(_items);
         _items = FilmsAccess.LoadAll();
     }
-    public List<FilmModel> GetFilms()
-    {
-        _items = FilmsAccess.LoadAll();
-        return _items;
-    }
+    //public List<FilmModel> GetFilms()
+    //{
+    //    _items = FilmsAccess.LoadAll();
+    //    return _items;
+    //}
 
     public static int LastID()
     {
@@ -82,6 +82,7 @@ public class FilmsLogic : BaseLogic<FilmModel>
     }
     public static List<FilmModel> AllCurrentFilms()
     {
+        _items = FilmsAccess.LoadAll();
         return _items;
 
     }

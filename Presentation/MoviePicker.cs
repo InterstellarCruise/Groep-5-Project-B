@@ -21,7 +21,7 @@ static class MoviePicker
         }
 
         ShowsLogic showlogic = new ShowsLogic();
-        List<ShowModel> shows = showlogic.GetShows();
+        List<ShowModel> shows = ShowsLogic.AllCurrentShows();
 
 
         foreach (ShowModel show in shows)
@@ -31,7 +31,7 @@ static class MoviePicker
                 List<MenuItem> items = new List<MenuItem>();
                 MenuBuilder menu = new MenuBuilder(items);
                 FilmsLogic films_logic = new FilmsLogic();
-                List<FilmModel> films = films_logic.GetFilms();
+                List<FilmModel> films = FilmsLogic.AllCurrentFilms();
                 var film = films_logic.GetById(show.FilmId);
                 CurrentMovie = new MenuItem($"-----------------------------\nMovie name: {film.Name} \nDescription: {film.Description} \nAge limit: {film.AgeLimit}\nfilm duration: {film.Length} \n-----------------------------", null);
                 items.Add(CurrentMovie);

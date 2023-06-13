@@ -94,10 +94,7 @@ public class ShowsLogic : BaseLogic<ShowModel>
     {
         return _items.Find(i => i.FilmId == id);
     }
-    public List<ShowModel> GetShows()
-    {
-        return _items;
-    }
+
     
     public void DeleteShow(ShowModel show)
     {
