@@ -166,7 +166,7 @@ public class ReservationsLogic : BaseLogic<ReservationModel>
             if (date == show.Date)
             {
                 int resid = show.Id;
-                var res = reservationsLogic.GetByShowId(resid);
+                var res = reservationsLogic.FindByShowId(resid);
                 double amount = res.Amount;
                 totalAmount += amount;
 
