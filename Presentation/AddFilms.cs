@@ -10,7 +10,7 @@ public static class AddFilms
     public static int AgeLimit = 0;
 
     public static double length = 0;
-    public static List<string> Genres = new List<string>();
+    private static List<string> _genres = new List<string>();
     public static int ID = 0;
     public static void Start()
     {
@@ -103,9 +103,10 @@ public static class AddFilms
         while (!genrecheck)
         {
             string _genre = Console.ReadLine();
-            Genres.Add(_genre);
+            _genres.Add(_genre);
             Console.WriteLine("Do you want to add another genre? Y / N");
             string YN = Console.ReadLine();
+            Console.Clear();
             if (YN.ToUpper() == "N")
             {
                 genrecheck = true;
@@ -114,7 +115,6 @@ public static class AddFilms
             {
                 Console.WriteLine("The name of the other genre:");
             }
-            Console.Clear();
         }
         Add();
 
@@ -128,7 +128,7 @@ public static class AddFilms
         Console.Clear();
 
         FilmsLogic filmlogic = new FilmsLogic();
-        FilmModel film = new(ID, Name, Description, AgeLimit, length, Genres);
+        FilmModel film = new(ID, Name, Description, AgeLimit, length, _genres);
         filmlogic.UpdateList(film);
 
         //New LogicLayer function
