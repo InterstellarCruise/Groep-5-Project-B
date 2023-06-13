@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "id": 1,
     "showid": 1,
@@ -81,6 +81,45 @@
       668,
       27,
       28
+    ],
+    "amount": 24
+  },
+  {
+    "id": 8,
+    "showid": 1,
+    "accountid": 3,
+    "ressedchairs": [
+      3,
+      16
+    ],
+    "amount": 24
+  },
+  {
+    "id": 9,
+    "showid": 1,
+    "accountid": 3,
+    "ressedchairs": [
+      39
+    ],
+    "amount": 12
+  },
+  {
+    "id": 10,
+    "showid": 1,
+    "accountid": 3,
+    "ressedchairs": [
+      63,
+      75
+    ],
+    "amount": 24
+  },
+  {
+    "id": 11,
+    "showid": 1,
+    "accountid": 3,
+    "ressedchairs": [
+      111,
+      123
     ],
     "amount": 24
   }

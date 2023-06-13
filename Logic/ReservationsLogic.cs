@@ -86,7 +86,7 @@ public class ReservationsLogic : BaseLogic<ReservationModel>
         return reservation;
 
     }
-    public ReservationModel GetByShowId(int id)
+    public ReservationModel FindByShowId(int id)
     {
         return _items.Find(i => i.Showid == id);
     }

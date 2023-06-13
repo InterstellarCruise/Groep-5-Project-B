@@ -80,7 +80,7 @@ public static class AdminIncome
     {   
         int id = IncomePerShows.Id;
         show = showLogic.GetById(id);
-        reservation = reservationLogic.GetByShowId(show.Id);
+        reservation = reservationLogic.FindByShowId(show.Id);
         double total = ReservationsLogic.IncomeShow(reservation.Id);
         Console.WriteLine($"The total income of this show is {total} EUR");
         int miliseconds = 2000;
@@ -119,7 +119,7 @@ public static class AdminIncome
         Console.WriteLine("Please choose a rank between 1 and 3");
         int rank = Convert.ToInt32(Console.ReadLine());
         show = showLogic.GetById(id);
-        reservation = reservationLogic.GetByShowId(show.Id);
+        reservation = reservationLogic.FindByShowId(show.Id);
         double total = ReservationsLogic.IncomeRank(reservation.Id, rank);
         Console.WriteLine($"The total income of this rank is {total} EUR");
         int miliseconds = 2000;
