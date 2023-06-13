@@ -111,6 +111,7 @@ public class ChairLogic : BaseLogic<ChairModel>
 
     public static int OccupiedSeats(int id, int rank)
     {
+        ReservationsLogic reslogic = new ReservationsLogic();
         List<ReservationModel> Reservation = ReservationsLogic.AllReservation();
         List<int> chairs = new List<int>();
         List<int> rankChair = new List<int>();

@@ -4,6 +4,8 @@ public static class RemoveShows
     static FilmsLogic filmLogic = new FilmsLogic();
     private static string _warning = "WARNING\nThis may have grave consequences.\nAre you sure you want to proceed with this action?\n";
     private static string _option = "Do you want to delete a show or film?";
+    public static FilmModel currentFilm;
+    public static ShowModel currentShow;
     public static void Start()
     {
         List<MenuItem> items = new List<MenuItem>();
@@ -26,25 +28,52 @@ public static class RemoveShows
     public static void DeleteShow()
     {
         Console.WriteLine("These are all the current shows");
-        ShowsLogic.AllCurrentShows();
-        Console.WriteLine("Enter show id you want to delete");
-        int id = Convert.ToInt32(Console.ReadLine());
-        ShowModel show = showLogic.GetById(id);
-        showLogic.DeleteShow(show);
+        ShowsLogic showslogic = new ShowsLogic();
+        var shows = ShowsLogic.AllCurrentShows();
+        List<MenuItem> items = new List<MenuItem>();
+        foreach (ShowModel entry in shows)
+        {
+            FilmsLogic filmlogic = new FilmsLogic();
+            FilmModel film1 = filmlogic.GetById(entry.FilmId);
+            MenuItem item = new MenuItem($"--------------------------------\nShow ID: {entry.Id}\nRoom: {entry.RoomId}\nFilm: {film1.Name}", DeleteShowEntry);
+            item.show = entry;
+            item.RemoveShow = true;
+            items.Add(item);
+        }
+        items.Add(new MenuItem("\nBack", AdminFeatures.Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
+    }
+    public static void DeleteFilm()
+    {
+        Console.WriteLine("These are all the current films");
+        var films = FilmsLogic.AllCurrentFilms();
+        List<MenuItem> items = new List<MenuItem>();
+        foreach (FilmModel entry in films)
+        {
+            ShowsLogic showsLogic = new ShowsLogic();
+            ShowModel entryshow = showsLogic.GetByFilmId(entry.Id);
+            MenuItem item = new MenuItem($"--------------------------------\nFilm ID: {entry.Id}\nTitle: {entry.Name}\nDescription: {entry.Description}\nAge Limit{entry.AgeLimit}\nLength: {entry.Length}",DeleteShowAndFilm );
+            item.film = entry;
+            items.Add(item);
+        }
+        items.Add(new MenuItem("\nBack", AdminFeatures.Start));
+        MenuBuilder menu = new MenuBuilder(items);
+        menu.DisplayMenu();
+
+    }
+    private static void DeleteShowEntry()
+    {
+        showLogic.DeleteShow(currentShow);
         Console.WriteLine("The show has been removed");
         int miliseconds = 3000;
         Thread.Sleep(miliseconds);
         AdminFeatures.Start();
     }
-    public static void DeleteFilm()
+    private static void DeleteShowAndFilm()
     {
-        Console.WriteLine("These are all the current films");
-        FilmsLogic.AllCurrentFilms();
-        Console.WriteLine("Enter film id you want to delete");
-        int id = Convert.ToInt32(Console.ReadLine());
-        FilmModel film = filmLogic.GetById(id);
-        ShowModel show = showLogic.GetByFilmId(id);
-        filmLogic.DeleteFilm(film);
+        ShowModel show = showLogic.GetByFilmId(currentFilm.Id);
+        filmLogic.DeleteFilm(currentFilm);
         showLogic.DeleteShow(show);
         Console.WriteLine("The film and the shows that were displaying this film have been removed");
         int miliseconds = 3000;

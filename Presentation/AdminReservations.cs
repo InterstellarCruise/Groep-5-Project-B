@@ -62,6 +62,7 @@ public class AdminReservations
     {
         Console.Clear();
         Console.WriteLine("These are all the current shows");
+        ShowsLogic showlogic = new ShowsLogic();
         List<ShowModel> shows = ShowsLogic.AllCurrentShows();
         List<MenuItem> items = new List<MenuItem>();
         foreach (ShowModel show in shows)
@@ -112,6 +113,7 @@ public class AdminReservations
     {
         Console.Clear();
         Console.WriteLine("These are all the current shows");
+        ShowsLogic showslogic = new ShowsLogic();
         List<ShowModel> shows = ShowsLogic.AllCurrentShows();
         List<MenuItem> items = new List<MenuItem>();
         foreach (ShowModel show in shows)
@@ -135,6 +137,7 @@ public class AdminReservations
     {
         Console.Clear();
         Console.WriteLine("These are all the current shows");
+        ShowsLogic showslogic = new ShowsLogic();
         List<ShowModel> shows = ShowsLogic.AllCurrentShows();
         List<MenuItem> items = new List<MenuItem>();
         foreach (ShowModel show in shows)
