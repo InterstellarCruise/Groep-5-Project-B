@@ -18,6 +18,7 @@
 
     public FilmModel film { get; set; }
     public bool ChangeFilm = false;
+    public bool RemoveShow = false;
 
 
     public MenuItem(ChairModel chair1, Action action) : this(ChairLogic.RowNumber(chair1), action) => chair = chair1;

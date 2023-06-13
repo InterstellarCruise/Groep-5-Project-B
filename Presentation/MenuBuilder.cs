@@ -71,6 +71,7 @@
                     else if (_items[selectedIndex].SeatRank) AdminReservations.SeatRanks = _items[selectedIndex].show;
                     else if (_items[selectedIndex].IncomePerRank) AdminIncome.IncomeRanks = _items[selectedIndex].show;
                     else if (_items[selectedIndex].IncomePerShow) AdminIncome.IncomePerShows = _items[selectedIndex].show;
+                    else if (_items[selectedIndex].RemoveShow) RemoveShows.currentShow = _items[selectedIndex].show;
 
                     else Reservation.CurrentShow = _items[selectedIndex].show;
 
@@ -78,6 +79,7 @@
                 if (_items[selectedIndex].film != null)
                 {
                     ChangeFilm.film = _items[selectedIndex].film;
+                    RemoveShows.currentFilm = _items[selectedIndex].film;
 
                 }
                 if (_items[selectedIndex].reservation != null)

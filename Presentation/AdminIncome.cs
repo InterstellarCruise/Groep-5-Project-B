@@ -56,6 +56,7 @@ public static class AdminIncome
        
         Console.Clear();
         Console.WriteLine("These are all the current shows");
+        ShowsLogic showslogic = new ShowsLogic();
         List<ShowModel> shows = ShowsLogic.AllCurrentShows();
         List<MenuItem> items = new List<MenuItem>();
         foreach (ShowModel show in shows)
@@ -93,6 +94,7 @@ public static class AdminIncome
     {
         Console.Clear();
         Console.WriteLine("These are all the current shows");
+        ShowsLogic showslogic = new ShowsLogic();
         List<ShowModel> shows = ShowsLogic.AllCurrentShows();
         List<MenuItem> items = new List<MenuItem>();
         foreach (ShowModel show in shows)
@@ -131,6 +133,8 @@ public static class AdminIncome
         Console.WriteLine("Choose a date");
         double totalAmount = 0;
         string date = Console.ReadLine();
+        ShowsLogic showslogic = new ShowsLogic();
+        ReservationsLogic reslogic = new ReservationsLogic();
         List<ShowModel> Shows = ShowsLogic.AllCurrentShows();
         foreach (ShowModel show in Shows)
         {
