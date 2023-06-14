@@ -1,6 +1,5 @@
 static class DatePicker
 {
-    public static List<ShowModel> Shows = ShowsAccess.LoadAll();
     public static bool emptyOrNot = false;
     public static string Date = "";
     static public void Start()
@@ -18,6 +17,8 @@ static class DatePicker
         }
         static void chooseDate()
         {
+            ShowsLogic showlogic = new ShowsLogic();
+            List<ShowModel> Shows = ShowsLogic.AllCurrentShows();
             emptyOrNot = false;
             Console.Clear();
             Console.CursorVisible = true;
@@ -54,6 +55,8 @@ static class DatePicker
     }
     public static void showChoose()
     {
+        ShowsLogic showlogic = new ShowsLogic();
+        List<ShowModel> Shows = ShowsLogic.AllCurrentShows();
         Console.Clear();
         Console.CursorVisible = false;
         Console.WriteLine($"Movies playing on {Date}\n");
