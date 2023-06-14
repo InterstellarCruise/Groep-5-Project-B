@@ -129,6 +129,19 @@ public class BarLogic : BaseLogic<BarModel>
             
             IFormatProvider provider = CultureInfo.InvariantCulture;
             number = number + 1;
+            var splits = Time.Split(":");
+            if(splits[1].Count()==1 )
+            {
+                Time = Time + "0";
+            }
+            if(splits[1].Count()==0 )
+            {
+                Time = Time + "00";
+            }
+            if(Time.Count()<2 || Time.Count()>5)
+            {
+                return 40;
+            }
             DateTime current_time = DateTime.ParseExact(Time, "H:mm",provider);
             DateTime time = DateTime.ParseExact(l.Start_Time, "H:mm",provider);
             TimeSpan span = current_time.Subtract (time);
