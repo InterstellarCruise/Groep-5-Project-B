@@ -118,6 +118,11 @@ public static class AdminIncome
         int id = IncomeRanks.Id;
         Console.WriteLine("Please choose a rank between 1 and 3");
         int rank = Convert.ToInt32(Console.ReadLine());
+        if(rank < 1 || rank > 3)
+        {
+            Console.WriteLine("This is not a rank, please choose between 1 and 3");
+            IncomePerRank();
+        }
         show = showLogic.GetById(id);
         reservation = reservationLogic.FindByShowId(show.Id);
         double total = ReservationsLogic.IncomeRank(reservation.Id, rank);
