@@ -150,27 +150,46 @@ public static class AdminIncome
         ShowsLogic showslogic = new ShowsLogic();
         ReservationsLogic reslogic = new ReservationsLogic();
         List<ShowModel> Shows = ShowsLogic.AllCurrentShows();
-        foreach (ShowModel show in Shows)
+        if (showLogic.ValidShowDate(date) == false)
         {
-            if (date.Equals(show.Date) == true)
+            Console.WriteLine("This is an invalid date, please fill in a date in the format of year-month-day");
+            ChooseDate();
+        }
+        else
+        {
+            foreach (ShowModel show in Shows)
             {
-                List<ReservationModel> Reservation = ReservationsLogic.AllReservation();
-                foreach (ReservationModel res in Reservation)
+                if (date.Equals(show.Date) == true)
                 {
 
-                    var id = reservationLogic.GetById(res.Id);
-                    double amount = id.Amount;
-                    totalAmount += amount;
+                    List<ReservationModel> Reservation = ReservationsLogic.AllReservation();
+                    foreach (ReservationModel res in Reservation)
+                    {
+
+                        var id = reservationLogic.GetById(res.Id);
+                        double amount = id.Amount;
+                        totalAmount += amount;
+
+                    }
+                    Console.WriteLine($"The total income of this date is {totalAmount} EUR");
+                    int miliseconds = 2000;
+                    Thread.Sleep(miliseconds);
+                    Console.Clear();
+                    AdminFeatures.Start();
 
                 }
-                Console.WriteLine($"The total income of this date is {totalAmount} EUR");
-                int miliseconds = 2000;
-                Thread.Sleep(miliseconds);
-                Console.Clear();
-                AdminFeatures.Start();
+                else
+                {
+                    Console.WriteLine("No shows found with this date");
+                    int miliseconds = 2000;
+                    Thread.Sleep(miliseconds);
+                    Console.Clear();
+                    AdminFeatures.Start();
+
+                }
 
             }
-
         }
+
     }
 }
