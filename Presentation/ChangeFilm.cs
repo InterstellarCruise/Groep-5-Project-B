@@ -75,7 +75,7 @@ public static class ChangeFilm
                 EditAgeLimit();
             }
 
-            if (ageLimit <= 6 || ageLimit >= 18)
+            if (ageLimit < 6 || ageLimit > 18)
             {
                 Console.WriteLine("This is an incorrect age limit, please put an age limit between 6 and 18 years");
                 EditAgeLimit();
