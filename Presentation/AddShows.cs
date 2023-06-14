@@ -12,7 +12,6 @@ public static class AddShows
     static FilmsLogic filmLogic = new FilmsLogic();
     private static string _warning = "WARNING\nThis may have grave consequences.\nAre you sure you want to proceed with this action?\n";
     private static string _option = "Do you want to add a show or film?";
-    public static List<FilmModel> Films = FilmsLogic.AllCurrentFilms();
 
     public static void Start()
     {
@@ -39,6 +38,8 @@ public static class AddShows
     public static void AddShow()
     {
         Console.Clear();
+        FilmsLogic filmslogic = new FilmsLogic();
+        List<FilmModel> Films = FilmsLogic.AllCurrentFilms();
         Console.WriteLine($"Select the movie that plays on this show:\n");
         FilmsLogic.AllFilms(Films);
         List<MenuItem> items = new List<MenuItem>();

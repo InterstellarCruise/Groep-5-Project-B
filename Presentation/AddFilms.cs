@@ -4,7 +4,6 @@ public static class AddFilms
     static FilmsLogic filmlogic = new FilmsLogic();
     private static string _warning = "WARNING\nThis may have grave consequences.\nAre you sure you want to proceed with this action?\n";
     private static string _option = "Do you want to add a show or film?";
-    public static List<FilmModel> Films = FilmsLogic.AllCurrentFilms();
     public static string Name = "";
     public static string Description = "";
     public static int AgeLimit = 0;
