@@ -200,6 +200,11 @@ public class AdminReservations
         RoomMap(options, curpos, optionsperline);
         Console.WriteLine("What rank would you want to see?");
         int rank = Convert.ToInt32(Console.ReadLine());
+        if(rank < 1 || rank > 3)
+        {
+            Console.WriteLine("This is not a rank, please choose between 1 and 3");
+            SeatRank();
+        }
         int rankChairs = ChairLogic.OccupiedSeats(id, rank);
         Console.WriteLine($"The amount of seats occupied in this rank is {rankChairs}");
         int miliseconds = 2000;
