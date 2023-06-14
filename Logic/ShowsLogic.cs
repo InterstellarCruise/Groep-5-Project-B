@@ -44,6 +44,7 @@ public class ShowsLogic : BaseLogic<ShowModel>
 
     public static bool MoviesByDate(List<ShowModel> shows, string date, bool emptyOrNot)
     {
+        ShowInfo.Clear();
         foreach (ShowModel show in shows)
         {
 
