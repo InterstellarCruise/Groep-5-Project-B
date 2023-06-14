@@ -129,8 +129,8 @@ public class BarLogic : BaseLogic<BarModel>
             
             IFormatProvider provider = CultureInfo.InvariantCulture;
             number = number + 1;
-            DateTime current_time = DateTime.ParseExact(Time, "HH:mm",provider);
-            DateTime time = DateTime.ParseExact(l.Start_Time, "HH:mm",provider);
+            DateTime current_time = DateTime.ParseExact(Time, "H:mm",provider);
+            DateTime time = DateTime.ParseExact(l.Start_Time, "H:mm",provider);
             TimeSpan span = current_time.Subtract (time);
             if(reservations.Find(x => x.Id == l.Reservationid) == null){places = places;}
             else{
