@@ -86,11 +86,16 @@
                 {
                     ReservationDetail.reservation = _items[selectedIndex].reservation;
                 }
+                if (_items[selectedIndex].MovieId != null)
+                {
+                    AddShows.MovieId = _items[selectedIndex].MovieId;
+                }
                 if (_items[selectedIndex].Action != null)
                 {
                     _items[selectedIndex].Execute();
                     _running = false;
                 }
+
 
 
 
