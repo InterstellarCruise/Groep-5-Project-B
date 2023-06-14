@@ -105,7 +105,11 @@ public static class AddShows
                 Console.Clear();
                 DateInput(RoomId);
             }
-            if (date >= DateTime.Now && date?.Year <= DateTime.Now.Year + 5)
+            DateTime currentDate = DateTime.Now.Date;
+
+            if (date.Value.Year >= currentDate.Year &&
+                date.Value.Month >= currentDate.Month &&
+                date.Value.Day >= currentDate.Day)
             {
                 validyear = true;
             }
