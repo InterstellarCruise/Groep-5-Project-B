@@ -108,9 +108,8 @@ public static class AddShows
             }
 
             DateTime currentDate = DateTime.Now.Date;
-            if (date.Value.Year >= currentDate.Year &&
-                date.Value.Month >= currentDate.Month &&
-                date.Value.Day >= currentDate.Day)
+            if (date?.Date >= DateTime.Now.Date && date?.Year <= DateTime.Now.Year + 5)
+
             {
                 validyear = true;
             }
