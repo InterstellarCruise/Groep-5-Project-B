@@ -27,11 +27,12 @@ public class BarLogic : BaseLogic<BarModel>
         List<ReservationModel> reservations = ReservationsAccess.LoadAll();
         ReservationsLogic rlogic = new ReservationsLogic();
         ShowsLogic sowlogic = new ShowsLogic();
+        var accersor = ShowsAccess.LoadAll();
         int resrvenumber = reservations.Count();
         int account_id = UserLogin.CurrentAccount.Id;
         ReservationModel start = rlogic.GetById(resrvenumber);
         int indexen = _items.Count + 1;
-        var start_time = sowlogic.GetById(start.Showid);
+        ShowModel start_time = accersor.Find(x=>x.Id == start.Showid);
         BarModel acc = new BarModel(indexen,date,account_id,resrvenumber,start_time.Time,start.Ressedchairs.Count());
 
         //Find if there is already an model with the same id
