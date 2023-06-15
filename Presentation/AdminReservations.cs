@@ -216,8 +216,9 @@ public class AdminReservations
     public static void SeatShow()
     {
         int id = SeatShows.Id;
-        List<int> chairs = new List<int>();
-        List<ReservationModel> Reservationmodel = ReservationsAccess.LoadAll();
+        List<ChairModel> chairs = new List<ChairModel>();
+        ReservationsLogic reslogic = new ReservationsLogic();
+        List<ReservationModel> Reservationmodel = ReservationsLogic.AllReservation();
         foreach (ReservationModel res in Reservationmodel)
         {
             if (id == res.Showid)
@@ -225,7 +226,9 @@ public class AdminReservations
                 List<int> reservedchairs = res.Ressedchairs;
                 foreach (int chairid in reservedchairs)
                 {
-                    chairs.Add(chairid);
+                    ChairLogic chairLogic = new ChairLogic();
+                    var tempchair = chairLogic.GetById(chairid);
+                    chairs.Add(tempchair);
                 }
             }
         }
@@ -254,12 +257,11 @@ public class AdminReservations
         ChairLogic chairlogic = new ChairLogic();
         List<ChairModel> options = chairlogic.GetByRoomId(currentshow.RoomId);
         Reservation.CurrentShow = currentshow;
-        List<ChairModel> ressedchairs = Reservation.GetReservations(currentshow.RoomId);
         foreach (ChairModel chair in options)
         {
-            foreach (ChairModel ressedchair in ressedchairs)
+            foreach (ChairModel ressedchair in chairs)
             {
-                if (ChairLogic.RowNumber(ressedchair) == ChairLogic.RowNumber(chair))
+                if (chair.Id == ressedchair.Id)
                 {
                     chair.Available = false;
                 }

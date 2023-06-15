@@ -107,7 +107,6 @@ public static class AddShows
                 DateInput(RoomId);
             }
 
-            DateTime currentDate = DateTime.Now.Date;
             if (date?.Date >= DateTime.Now.Date && date?.Year <= DateTime.Now.Year + 5)
 
             {
