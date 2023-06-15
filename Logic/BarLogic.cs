@@ -31,7 +31,8 @@ public class BarLogic : BaseLogic<BarModel>
         int resrvenumber = reservations.Count();
         int account_id = UserLogin.CurrentAccount.Id;
         ReservationModel start = rlogic.GetById(resrvenumber);
-        int indexen = _items.Count + 1;
+        var items = BarAccess.LoadAll()
+        int indexen = items.Count + 1;
         ShowModel start_time = accersor.Find(x=>x.Id == start.Showid);
         BarModel acc = new BarModel(indexen,date,account_id,resrvenumber,start_time.Time,start.Ressedchairs.Count());
 
