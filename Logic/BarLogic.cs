@@ -115,7 +115,6 @@ public class BarLogic : BaseLogic<BarModel>
 
     public int? timecheck(string Time,string date,double lenght)
     {
-        int account_id = UserLogin.CurrentAccount.Id;
         List<ReservationModel> reservations = ReservationsAccess.LoadAll();
         List<BarModel> barreservations = BarAccess.LoadAll();
         List<ShowModel> showmodels = ShowsAccess.LoadAll();
