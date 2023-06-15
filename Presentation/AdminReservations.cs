@@ -88,20 +88,28 @@ public class AdminReservations
         Console.Clear();
         var reservation = reservationLogic.GetByShowIdList(ListOfReservationsShow.Id);
         ChairLogic chairsLogic = new ChairLogic();
-        foreach (var res in reservation)
-
+        if (reservation.Count() > 0)
         {
-            List<int> reschair = res.Ressedchairs;
-            foreach (var Wholechair in reschair)
+            foreach (var res in reservation)
+
             {
-                chair = chairsLogic.GetById(Wholechair);
-                string colInt = Convert.ToString(chair.Column);
-                string chairs = colInt + "-" + chair.Row;
-                _allChair.Add(chairs);
+                List<int> reschair = res.Ressedchairs;
+                foreach (var Wholechair in reschair)
+                {
+                    chair = chairsLogic.GetById(Wholechair);
+                    string colInt = Convert.ToString(chair.Column);
+                    string chairs = colInt + "-" + chair.Row;
+                    _allChair.Add(chairs);
+                }
+                string y = string.Format("Chairs reserved: ({0}).", string.Join(", ", _allChair));
+                Console.WriteLine($" Show ID: {res.Showid} \n Reservation ID: {res.Id} \nAccount: {res.Accountid} \nChairs: {y}");
             }
-            string y = string.Format("Chairs reserved: ({0}).", string.Join(", ", _allChair));
-            Console.WriteLine($" Show ID: {res.Showid} \n Reservation ID: {res.Id} \nAccount: {res.Accountid} \nChairs: {y}");
         }
+        else
+        {
+            Console.WriteLine("No reservations for this show");
+        }
+        
         int miliseconds = 2000;
         Thread.Sleep(miliseconds);
         Console.Clear();

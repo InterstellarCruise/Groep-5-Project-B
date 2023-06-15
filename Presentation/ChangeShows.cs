@@ -47,7 +47,6 @@ public static class ChangeShows
         string title = Console.ReadLine();
         film.Name = title;
         filmLogic.UpdateList(film);
-        show = showLogic.GetById(film.Id);
         Console.WriteLine("\nThe title has been updated, here is the result:\n");
         ShowInformation();
         int milliseconds = 3000;
@@ -135,7 +134,6 @@ public static class ChangeShows
             {
                 film.AgeLimit = ageLimit;
                 filmLogic.UpdateList(film);
-                show = showLogic.GetById(film.Id);
                 Console.WriteLine("\nThe age limit has been updated, here is the new result:\n");
                 ShowInformation();
                 int milliseconds = 3000;
