@@ -159,7 +159,7 @@ public class BarLogic : BaseLogic<BarModel>
                         var last_step = filmmodels.Find(x => x.Id == second_step.FilmId);
                         double spans = span.Hours - last_step.Length + lenght;
 
-                        if(spans>=0 & spans<=lenght)
+                        if(spans>=0 & spans<=2)
                         {
                             if(l.Amount > 0){
                             places = places - l.Amount;
