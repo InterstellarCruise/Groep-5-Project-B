@@ -99,17 +99,25 @@ public class CheckOut
                 _answer = "yes";
 
             }
-        }
-        else
+            else
             {
-                Console.WriteLine("there are not enough seats at the bar to ccomodate you're party.");
+                Console.WriteLine("you have chosen not to reserve at the bar");
                 Thread.Sleep(3000);
                 _answer = "no";
             }
+        }
+        if(places<=_chairs.Count())
+        {
+            Console.WriteLine("there are not enough seats at the bar to acomodate you're party.");
+                Thread.Sleep(3000);
+                _answer = "no";
+
         
         
         
     }
     
+    }
 }
+
 
