@@ -104,7 +104,7 @@ public class ShowsLogic : BaseLogic<ShowModel>
         int futureYear = currentYear + 5;
         int currentDay = DateTime.Now.Day;
 
-        if (year < currentYear || year > futureYear || month < currentMonth || day < currentDay)
+        if (year < currentYear || year > futureYear)
         {
             return false;
         }
